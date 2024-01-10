@@ -6,16 +6,27 @@ import CVPreview from "./components/CVPreview";
 
 function App() {
   const [personalDetails, setPersonalDetails] = useState({
-    name: "JONHATAN JACOB HIGUERA CAMACHO",
+    name: "JONHATAN HIGUERA",
     email: "jonhatan.higuera@gmail.com",
     phone: "33-1707-9174",
     extras: {},
   });
   const [education, setEducation] = useState([
     {
-      schoolName: "CUCEI",
-      fieldOfStudy: "Ingeniería Informática",
-      date: "33-1707-9174",
+      id: crypto.randomUUID(),
+      title: "UNIVERSITY OF GUADALAJARA (CUCEI)",
+      subtitle: "Degree in Computer Science (Ingeniería Informática)",
+      date: "02/2021 - Present",
+      description: "",
+      bullets: ["GPA: 98 / 100", "Exp. Graduation Date: 06/2024"],
+    },
+    {
+      id: crypto.randomUUID(),
+      title: "CENTRO DE ENSEÑANZA TÉCNICA INDUSTRIAL",
+      subtitle: "Degree in Software Development",
+      date: "08/2016 - 06/2020",
+      description: "",
+      bullets: ["GPA: 92 / 100"],
     },
   ]);
   const [skills, setSkills] = useState([
