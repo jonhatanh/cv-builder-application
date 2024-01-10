@@ -1,17 +1,46 @@
 function CVSection({ title, sectionData }) {
+  function getListElement(text, key) {
+    const content = getLiContent(text);
+    return (
+      <li className="marker:text-xs" key={key}>
+        {content}
+      </li>
+    );
+  }
+
+  function getLiContent(text) {
+    const linkRegex = /\[(.*?)\]\((.*?)\)/g;
+    const parts = text.split(linkRegex);
+
+    return parts.map((part, index) => {
+      if (index % 3 === 1) {
+        // This is the link text
+        return (
+          <a className="underline" key={index} href={parts[index + 1]}>
+            {part}
+          </a>
+        );
+      } else if (index % 3 === 0) {
+        // This is the normal text
+        return <span key={index}>{part}</span>;
+      } else {
+        // This is the link URL, skip it
+        return null;
+      }
+    });
+  }
+
   const sectionList = sectionData.map((section) => {
     return (
       <div className="mb-2" key={section.id}>
-        <div className="flex justify-between">
+        <div className="-mb-1 flex justify-between">
           <h5 className="text-md font-bold">{section.title}</h5>
           <p className="text-sm font-bold">{section.date}</p>
         </div>
         <h6 className="text-sm font-bold">{section.subtitle}</h6>
-        <p>{section.description}</p>
+        <p className="my-1 text-sm">{section.description}</p>
         <ul className="ml-7 list-disc text-sm">
-          {section.bullets.map((bullet, index) => (
-            <li key={index}>{bullet}</li>
-          ))}
+          {section.bullets.map((bullet, index) => getListElement(bullet, index))}
         </ul>
       </div>
     );
@@ -19,7 +48,7 @@ function CVSection({ title, sectionData }) {
 
   return (
     <>
-      <div className="h-[2px] w-full bg-black"></div>
+      <div className="h-[1px] w-full bg-black shadow-sm shadow-slate-200"></div>
       <h4 className="text-center text-lg font-bold">{title}</h4>
       {sectionList}
     </>

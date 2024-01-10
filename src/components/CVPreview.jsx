@@ -1,6 +1,6 @@
 import CVSection from "./CVSection";
 
-function CVPreview({ personalDetails, education, skills }) {
+function CVPreview({ personalDetails, education, experience, skills }) {
 
   const skillsList = skills.map((skill, index)=> {
           if(index === skills.length - 1) {
@@ -15,7 +15,7 @@ function CVPreview({ personalDetails, education, skills }) {
         })
 
   return (
-    <div className="flex flex-col gap-3 border-2 border-slate-400">
+    <div className="flex flex-col gap-3 border-2 border-slate-400 max-w-[700px]">
       <div>
         <h3 className="text-center text-3xl font-bold mb-1">{personalDetails.name}</h3>
         <div className="flex justify-center gap-3 mb-3">
@@ -30,6 +30,7 @@ function CVPreview({ personalDetails, education, skills }) {
         {skillsList}
         </ul>
       </div>
+      <CVSection title="PROFESSIONAL EXPERIENCE" sectionData={experience}></CVSection>
       <CVSection title="EDUCATION" sectionData={education}></CVSection>
 
     </div>

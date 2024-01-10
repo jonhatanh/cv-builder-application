@@ -29,6 +29,23 @@ function App() {
       bullets: ["GPA: 92 / 100"],
     },
   ]);
+
+  const [experience, setExperience] = useState([
+    {
+      id: crypto.randomUUID(),
+      title: "CUCEI",
+      subtitle: "Full Stack Developer Intern",
+      date: "02/2023 - Present",
+      description:
+        "Acquired valuable teamwork skills through SCRUM methodology, successfully contributed to largescale projects, and demonstrated effective collaboration using Git.",
+      bullets: [
+        `Performed maintenance and developed new features for existing projects using the TALL stack (Tailwind, Alpine, Laravel, Livewire).`,
+        `Created a landing page for an internal project and the [Eventos CUCEI](https://eventos.cucei.udg.mx/) website.`,
+        `Extensively utilized the Laravel framework, gaining knowledge of MVC, routing, middlewares, sessions, authentication, authorization, email sending, file storage,migrations, seeders, Eloquent ORM, factories, and testing.`,
+        `Implemented feature tests in existing projects to ensure the proper functionality of routes and components.`,
+      ],
+    },
+  ]);
   const [skills, setSkills] = useState([
     "HTML ",
     "CSS ",
@@ -58,7 +75,12 @@ function App() {
         data={personalDetails}
         handleChange={handlePersonalDetails}
       ></PersonalDetails>
-      <CVPreview personalDetails={personalDetails} education={education} skills={skills}></CVPreview>
+      <CVPreview
+        personalDetails={personalDetails}
+        education={education}
+        experience={experience}
+        skills={skills}
+      ></CVPreview>
     </div>
   );
 }
