@@ -1,5 +1,4 @@
 function FormItem({ type = "text", value, handleChange, name, labelText }) {
-  console.log(name, labelText, value);
   return (
     <div className="flex flex-col">
       <label htmlFor={name} className="text-lg font-semibold">

@@ -2,9 +2,9 @@ import FormItem from "./FormItem";
 
 function PersonalDetails({ data, handleChange }) {
   return (
-    <div className="border-2 border-red-500 p-2">
+    <div className="border-2 border-sky-300 p-2 rounded-md">
       <h3 className="mb-2 text-xl font-bold">Personal Details</h3>
-      <form>
+      <form className="flex flex-col gap-3">
         <FormItem
           labelText="Full Name"
           value={data.name}
@@ -25,7 +25,7 @@ function PersonalDetails({ data, handleChange }) {
           name="phone"
           handleChange={handleChange}
         ></FormItem>
-        <div className="flex flex-col">
+        <div className="flex flex-col p-2">
           <label htmlFor="phone">Extras: </label>
           <div className="flex gap-3">
             <input type="text" placeholder="Social Media Name..." />

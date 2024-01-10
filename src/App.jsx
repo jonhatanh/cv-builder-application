@@ -6,11 +6,35 @@ import CVPreview from "./components/CVPreview";
 
 function App() {
   const [personalDetails, setPersonalDetails] = useState({
-    name: "Jhony",
-    email: "",
-    phone: "",
+    name: "JONHATAN JACOB HIGUERA CAMACHO",
+    email: "jonhatan.higuera@gmail.com",
+    phone: "33-1707-9174",
     extras: {},
   });
+  const [education, setEducation] = useState([
+    {
+      schoolName: "CUCEI",
+      fieldOfStudy: "Ingeniería Informática",
+      date: "33-1707-9174",
+    },
+  ]);
+  const [skills, setSkills] = useState([
+    "HTML ",
+    "CSS ",
+    "JavaScript ",
+    "React ",
+    "AlpineJS ",
+    "Livewire ",
+    "SASS ",
+    "Tailwind ",
+    "NodeJS ",
+    "PHP ",
+    "Laravel ",
+    "MySQL ",
+    "Pest ",
+    "OOP ",
+    "Git",
+  ]);
 
   function handlePersonalDetails(property, value) {
     const newDetails = { ...personalDetails, [property]: value };
@@ -23,7 +47,7 @@ function App() {
         data={personalDetails}
         handleChange={handlePersonalDetails}
       ></PersonalDetails>
-      <CVPreview personalDetails={personalDetails}></CVPreview>
+      <CVPreview personalDetails={personalDetails} education={education} skills={skills}></CVPreview>
     </div>
   );
 }
