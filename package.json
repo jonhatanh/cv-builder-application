@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "format": "npx prettier --write ./src/",
+    "format": "npx prettier --write ./src/ --plugin=prettier-plugin-tailwindcss",
     "preview": "vite preview"
   },
   "dependencies": {

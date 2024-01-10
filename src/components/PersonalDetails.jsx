@@ -1,38 +1,30 @@
+import FormItem from "./FormItem";
+
 function PersonalDetails({ data, handleChange }) {
   return (
-    <div className="border-2 border-red-500">
-      <h3 className="text-xl font-bold">Personal Details</h3>
+    <div className="border-2 border-red-500 p-2">
+      <h3 className="mb-2 text-xl font-bold">Personal Details</h3>
       <form>
-        <div className="flex flex-col">
-          <label htmlFor="name">Full Name</label>
-          <input
-            type="text"
-            value={data.name}
-            onChange={(e) => handleChange("name", e.target.value)}
-            name="name"
-            className="rounded-md border-2 border-black"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="email">Email: </label>
-          <input
-            type="email"
-            value={data.email}
-            onChange={(e) => handleChange("email", e.target.value)}
-            name="email"
-            className="rounded-md border-2 border-black"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="phone">Phone number: </label>
-          <input
-            type="tel"
-            value={data.phone}
-            onChange={(e) => handleChange("phone", e.target.value)}
-            name="phone"
-            className="rounded-md border-2 border-black"
-          />
-        </div>
+        <FormItem
+          labelText="Full Name"
+          value={data.name}
+          name="name"
+          handleChange={handleChange}
+        ></FormItem>
+        <FormItem
+          labelText="Email"
+          type="email"
+          value={data.email}
+          name="email"
+          handleChange={handleChange}
+        ></FormItem>
+        <FormItem
+          labelText="Phone number"
+          type="tel"
+          value={data.phone}
+          name="phone"
+          handleChange={handleChange}
+        ></FormItem>
         <div className="flex flex-col">
           <label htmlFor="phone">Extras: </label>
           <div className="flex gap-3">
