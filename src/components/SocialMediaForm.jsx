@@ -1,5 +1,22 @@
 import { useState } from "react";
 import FormItem from "./FormItem";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLinkedin, faGithub, faYoutube } from "@fortawesome/free-brands-svg-icons";
+
+const icons = [
+  {
+    name: "LinkedIn",
+    icon: faLinkedin,
+  },
+  {
+    name: "GitHub",
+    icon: faGithub,
+  },
+  {
+    name: "YouTube",
+    icon: faYoutube,
+  },
+];
 
 function PersonalExtras() {
   const [socialMedia, setSocialMedia] = useState({
@@ -30,17 +47,18 @@ function PersonalExtras() {
           placeHolder="URL..."
           // handleChange={handleChange}
         ></FormItem>
-        <div className="flex justify-between w-full">
-          <label htmlFor="icon" className="text-lg font-semibold">
-            Icon
-          </label>
-          <select name="icon" id="icon">
-            <option value="0">😃</option>
-            <option value="1">🍉</option>
-            <option value="2">✔</option>
-            <option value="3">🍿</option>
-          </select>
-        </div>
+        <fieldset className="border-2 border-slate-500 w-full flex justify-around items-center pb-2">
+          <legend className="mx-2 px-2">Icon</legend>
+          {icons.map(({ name, icon }) => (
+            <div key={name} className="flex gap-2">
+              <input type="radio" id={name} name="icon" />
+              <label htmlFor={name}>
+                <FontAwesomeIcon icon={icon} className="mr-1" />
+                {name}
+              </label>
+            </div>
+          ))}
+        </fieldset>
         <button className="block flex-1" type="button">
           Add
         </button>
