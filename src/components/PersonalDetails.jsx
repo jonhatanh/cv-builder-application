@@ -1,8 +1,9 @@
 import FormItem from "./FormItem";
+import SocialMediaForm from "./SocialMediaForm";
 
-function PersonalDetails({ data, handleChange }) {
+function PersonalDetails({ data, socialMedia, handleChange }) {
   return (
-    <div className="border-2 border-sky-300 p-2 rounded-md">
+    <div className="min-w-[400px] flex-1 rounded-md border-2 border-sky-300 p-2 md:min-w-60">
       <h3 className="mb-2 text-xl font-bold">Personal Details</h3>
       <form className="flex flex-col gap-3">
         <FormItem
@@ -25,20 +26,7 @@ function PersonalDetails({ data, handleChange }) {
           name="phone"
           handleChange={handleChange}
         ></FormItem>
-        <div className="flex flex-col p-2">
-          <label htmlFor="phone">Extras: </label>
-          <div className="flex gap-3">
-            <input type="text" placeholder="Social Media Name..." />
-            <input type="url" placeholder="URL..." />
-            <select name="icon" id="icon">
-              <option value="0">😃</option>
-              <option value="1">🍉</option>
-              <option value="2">✔</option>
-              <option value="3">🍿</option>
-            </select>
-            <button type="button">Add</button>
-          </div>
-        </div>
+        <SocialMediaForm socialMedia={socialMedia}></SocialMediaForm>
       </form>
     </div>
   );

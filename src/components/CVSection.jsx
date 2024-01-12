@@ -33,9 +33,9 @@ function CVSection({ title, sectionData }) {
   const sectionList = sectionData.map((section) => {
     return (
       <div className="mb-2" key={section.id}>
-        <div className="-mb-1 flex justify-between">
+        <div className="-mb-1 flex justify-between gap-2">
           <h5 className="text-md font-bold">{section.title}</h5>
-          <p className="text-sm font-bold">{section.date}</p>
+          <p className="text-sm font-bold text-end">{section.date}</p>
         </div>
         <h6 className="text-sm font-bold">{section.subtitle}</h6>
         <p className="my-1 text-sm">{section.description}</p>

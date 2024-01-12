@@ -8,9 +8,22 @@ function App() {
   const [personalDetails, setPersonalDetails] = useState({
     name: "JONHATAN HIGUERA",
     email: "jonhatan.higuera@gmail.com",
-    phone: "33-1707-9174",
-    extras: {},
+    phone: "33-1707-9174"
   });
+  const [socialMedia, setSocialMedia] = useState([
+    {
+      id: crypto.randomUUID(),
+      name: "LinkedIn",
+      link: "https://www.linkedin.com/in/jonhatan-higuera/",
+      icon: "",
+    },
+    {
+      id: crypto.randomUUID(),
+      name: "GitHub",
+      link: "https://github.com/jonhatanh",
+      icon: "",
+    },
+  ]);
   const [education, setEducation] = useState([
     {
       id: crypto.randomUUID(),
@@ -46,6 +59,18 @@ function App() {
       ],
     },
   ]);
+  const [others, setOthers] = useState([
+    {
+      id: crypto.randomUUID(),
+      title: "FULL STACK WEB DEVELOPMENT BOOTCAMP (BEDU)",
+      subtitle: "",
+      date: "05/2023 - 12/2023",
+      description: "",
+      bullets: [
+        `Acquired a solid understanding of backend concepts and successfully applied them, creating a RESTful API using Node.js and the Express framework.`,
+      ],
+    },
+  ]);
   const [skills, setSkills] = useState([
     "HTML ",
     "CSS ",
@@ -70,9 +95,10 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col gap-5 p-3">
+    <div className="flex flex-col gap-5 p-3 md:flex-row">
       <PersonalDetails
         data={personalDetails}
+        socialMedia={socialMedia}
         handleChange={handlePersonalDetails}
       ></PersonalDetails>
       <CVPreview
@@ -80,6 +106,7 @@ function App() {
         education={education}
         experience={experience}
         skills={skills}
+        others={others}
       ></CVPreview>
     </div>
   );
