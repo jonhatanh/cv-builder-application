@@ -1,5 +1,6 @@
 import FormItem from "./FormItem";
 import SocialMediaForm from "./SocialMediaForm";
+import SocialMediaList from "./SocialMediaList";
 
 function PersonalDetails({ data, socialMedia, handleChange }) {
   return (
@@ -26,8 +27,9 @@ function PersonalDetails({ data, socialMedia, handleChange }) {
           name="phone"
           handleChange={handleChange}
         ></FormItem>
-        <SocialMediaForm socialMedia={socialMedia}></SocialMediaForm>
       </form>
+      <SocialMediaList socialMedia={socialMedia} />
+      <SocialMediaForm socialMedia={socialMedia}></SocialMediaForm>
     </div>
   );
 }

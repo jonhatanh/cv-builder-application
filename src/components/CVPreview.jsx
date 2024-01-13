@@ -1,4 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CVSection from "./CVSection";
+import { faEnvelope, faMobileScreenButton } from "@fortawesome/free-solid-svg-icons";
 
 function CVPreview({ personalDetails, education, experience, skills, others }) {
   const skillsList = skills.map((skill, index) => {
@@ -14,14 +16,20 @@ function CVPreview({ personalDetails, education, experience, skills, others }) {
   });
 
   return (
-    <div className="flex min-w-[400px] max-w-[700px] flex-col gap-3 border-2 border-slate-400 mx-auto">
+    <div className="mx-auto flex min-w-[400px] max-w-[700px] flex-col gap-3 border-2 border-slate-400">
       <div>
         <h3 className="mb-1 text-center text-3xl font-bold">
           {personalDetails.name}
         </h3>
         <div className="mb-3 flex justify-center gap-3">
-          <p>{personalDetails.email}</p>
-          <p>{personalDetails.phone}</p>
+          <p>
+            <FontAwesomeIcon className="mr-1" icon={faEnvelope} />
+            {personalDetails.email}
+          </p>
+          <p>
+            <FontAwesomeIcon className="mr-1" icon={faMobileScreenButton } />
+            {personalDetails.phone}
+          </p>
         </div>
         <div className="h-1 w-full bg-black"></div>
       </div>
