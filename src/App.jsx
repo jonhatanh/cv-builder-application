@@ -15,13 +15,13 @@ function App() {
       id: crypto.randomUUID(),
       name: "LinkedIn",
       link: "https://www.linkedin.com/in/jonhatan-higuera/",
-      icon: "",
+      icon: "LinkedIn",
     },
     {
       id: crypto.randomUUID(),
       name: "GitHub",
       link: "https://github.com/jonhatanh",
-      icon: "",
+      icon: "GitHub",
     },
   ]);
   const [education, setEducation] = useState([
@@ -89,6 +89,10 @@ function App() {
     "Git",
   ]);
 
+  function addSocialMedia(newSocialMedia) {
+    setSocialMedia([...socialMedia, newSocialMedia]);
+  }
+
   function handlePersonalDetails(property, value) {
     const newDetails = { ...personalDetails, [property]: value };
     setPersonalDetails(newDetails);
@@ -100,6 +104,7 @@ function App() {
         data={personalDetails}
         socialMedia={socialMedia}
         handleChange={handlePersonalDetails}
+        addSocialMedia={addSocialMedia}
       ></PersonalDetails>
       <CVPreview
         personalDetails={personalDetails}

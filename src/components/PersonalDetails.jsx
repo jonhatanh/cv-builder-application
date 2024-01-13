@@ -2,7 +2,7 @@ import FormItem from "./FormItem";
 import SocialMediaForm from "./SocialMediaForm";
 import SocialMediaList from "./SocialMediaList";
 
-function PersonalDetails({ data, socialMedia, handleChange }) {
+function PersonalDetails({ data, socialMedia, handleChange, addSocialMedia }) {
   return (
     <div className="min-w-[400px] flex-1 rounded-md border-2 border-sky-300 p-2 md:min-w-60">
       <h3 className="mb-2 text-xl font-bold">Personal Details</h3>
@@ -29,7 +29,7 @@ function PersonalDetails({ data, socialMedia, handleChange }) {
         ></FormItem>
       </form>
       <SocialMediaList socialMedia={socialMedia} />
-      <SocialMediaForm socialMedia={socialMedia}></SocialMediaForm>
+      <SocialMediaForm socialMedia={socialMedia} addSocialMedia={addSocialMedia}></SocialMediaForm>
     </div>
   );
 }
