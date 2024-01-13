@@ -50,6 +50,7 @@ const icons = [
 ];
 
 function SocialMediaForm() {
+  const [openForm, setOpenForm] = useState(false);
   const [socialMedia, setSocialMedia] = useState({
     id: crypto.randomUUID(),
     name: "",
@@ -57,12 +58,16 @@ function SocialMediaForm() {
     icon: "Empty",
   });
 
+  let hiddenDivClass = "flex flex-wrap gap-3 translate";
+  if(openForm) hiddenDivClass += "h-auto";
+  else hiddenDivClass += "h-0 hidden"
+
   return (
     <div className="flex flex-col border-2 border-red-100">
-      <button type="button" htmlFor="dd" className="text-lg font-semibold">
+      <button type="button" htmlFor="dd" className="text-lg font-semibold" onClick={() => setOpenForm(!openForm)}>
         Add Social Media
       </button>
-      <div className="flex flex-wrap gap-3">
+      <div className={hiddenDivClass}>
         <FormItem
           // labelText="Name..."
           value={socialMedia.name}
