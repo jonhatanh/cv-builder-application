@@ -1,17 +1,15 @@
 import { useState } from "react";
 import FormItem from "./FormItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { icons } from "../constants";
+import { icons } from "../helpers";
 
-
-
-function SocialMediaForm({addSocialMedia}) {
+function SocialMediaForm({ addSocialMedia }) {
   const [openForm, setOpenForm] = useState(false);
   const [socialMedia, setSocialMedia] = useState({
     id: crypto.randomUUID(),
     name: "",
     link: "",
-    icon: "Empty",
+    iconName: "Empty",
   });
 
   function handleChange(property, value) {
@@ -28,19 +26,20 @@ function SocialMediaForm({addSocialMedia}) {
       id: socialMedia.id,
       name: "",
       link: "",
-      icon: "Empty",
+      iconName: "Empty",
     });
     setOpenForm(false);
   }
 
-  function handleAddSocialMedia() {
+  function handleFormSubmit(e) {
+    e.preventDefault();
     addSocialMedia(socialMedia);
     setOpenForm(false);
     setSocialMedia({
       id: crypto.randomUUID(),
       name: "",
       link: "",
-      icon: "Empty",
+      iconName: "Empty",
     });
   }
 
@@ -54,13 +53,14 @@ function SocialMediaForm({addSocialMedia}) {
       >
         Add Social Media
       </button>
-      <div className={hiddenDivClass}>
+      <form onSubmit={handleFormSubmit} className={hiddenDivClass}>
         <FormItem
           // labelText="Name..."
           value={socialMedia.name}
           name="name"
           placeHolder="Social Media Name..."
           handleChange={handleChange}
+          required
         ></FormItem>
         <FormItem
           // labelText="Name..."
@@ -75,8 +75,8 @@ function SocialMediaForm({addSocialMedia}) {
           {icons.map(({ name, icon }) => (
             <div key={name} className="flex gap-2">
               <input
-                checked={socialMedia.icon === name}
-                onChange={(e) => handleChange("icon", e.target.value)}
+                checked={socialMedia.iconName === name}
+                onChange={(e) => handleChange("iconName", e.target.value)}
                 type="radio"
                 value={name}
                 name="icon"
@@ -97,12 +97,11 @@ function SocialMediaForm({addSocialMedia}) {
         </button>
         <button
           className="block flex-1 rounded-full border-2 bg-sky-500 font-semibold text-white transition-all ease-in-out hover:bg-sky-700"
-          type="button"
-          onClick={handleAddSocialMedia}
+          type="submit"
         >
           Add
         </button>
-      </div>
+      </form>
     </div>
   );
 }

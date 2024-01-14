@@ -1,8 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CVSection from "./CVSection";
-import { faEnvelope, faMobileScreenButton } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEnvelope,
+  faMobileScreenButton,
+} from "@fortawesome/free-solid-svg-icons";
+import SocialMediaItem from './SocialMediaItem'
+import { getIcon } from "../helpers";
 
-function CVPreview({ personalDetails, education, experience, skills, others }) {
+function CVPreview({
+  personalDetails,
+  socialMedia,
+  education,
+  experience,
+  skills,
+  others,
+}) {
   const skillsList = skills.map((skill, index) => {
     if (index === skills.length - 1) {
       return <li>{skill}</li>;
@@ -21,21 +33,24 @@ function CVPreview({ personalDetails, education, experience, skills, others }) {
         <h3 className="mb-1 text-center text-3xl font-bold">
           {personalDetails.name}
         </h3>
-        <div className="mb-3 flex justify-center gap-3">
+        <div className="mb-3 flex flex-wrap justify-center gap-x-3 gap-y-0">
           <p>
             <FontAwesomeIcon className="mr-1" icon={faEnvelope} />
             {personalDetails.email}
           </p>
           <p>
-            <FontAwesomeIcon className="mr-1" icon={faMobileScreenButton } />
+            <FontAwesomeIcon className="mr-1" icon={faMobileScreenButton} />
             {personalDetails.phone}
           </p>
+          {socialMedia.map((socialItem) => (
+            <SocialMediaItem key={socialItem.id} socialMedia={socialItem} />
+          ))}
         </div>
         <div className="h-1 w-full bg-black"></div>
       </div>
       <div>
         <h4 className="mb-2 text-center text-lg font-bold">SKILLS</h4>
-        <ul className="mx-auto flex max-w-sm flex-wrap justify-center gap-2 align-middle ">
+        <ul className="columnred mx-auto flex max-w-sm flex-wrap justify-center gap-2 align-middle">
           {skillsList}
         </ul>
       </div>

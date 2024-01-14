@@ -15,13 +15,13 @@ function App() {
       id: crypto.randomUUID(),
       name: "LinkedIn",
       link: "https://www.linkedin.com/in/jonhatan-higuera/",
-      icon: "LinkedIn",
+      iconName: "LinkedIn",
     },
     {
       id: crypto.randomUUID(),
       name: "GitHub",
       link: "https://github.com/jonhatanh",
-      icon: "GitHub",
+      iconName: "GitHub",
     },
   ]);
   const [education, setEducation] = useState([
@@ -108,6 +108,7 @@ function App() {
       ></PersonalDetails>
       <CVPreview
         personalDetails={personalDetails}
+        socialMedia={socialMedia}
         education={education}
         experience={experience}
         skills={skills}

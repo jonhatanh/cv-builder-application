@@ -45,3 +45,9 @@ export const icons = [
     icon: faBriefcase,
   },
 ];
+
+export function getIcon(iconName) {
+  if (iconName === "Empty") return null;
+  const { icon } = icons.find((icon) => icon.name === iconName);
+  return icon;
+}
