@@ -1,10 +1,34 @@
+import { useState } from "react";
 import FormItem from "./FormItem";
 import SocialMediaForm from "./SocialMediaForm";
 import SocialMediaList from "./SocialMediaList";
 
-function PersonalDetails({ data, socialMedia, handleChange, addSocialMedia }) {
+function PersonalDetails({
+  data,
+  socialMedia,
+  handleChange,
+  addSocialMedia,
+  updateSocialMedia,
+  deleteSocialMedia,
+}) {
+  const [currentSocialMediaId, setCurrentSocialMediaId] = useState(null); //for updating
+  const [openForm, setOpenForm] = useState(false);
+
+  function changeIsUpdating(isUpdating, socialMediaId) {
+    //if is updating
+    if(isUpdating) {
+      setCurrentSocialMediaId(socialMediaId);
+    } else {
+      setCurrentSocialMediaId(null);
+    }
+  }
+
+  function handleOpenForm(open) {
+    setOpenForm(open);
+  }
+
   return (
-    <div className="min-w-[400px] flex-1 rounded-md border-2 border-sky-300 p-2 md:min-w-60">
+    <div className="rounded-md border-2 border-sky-300 p-2 ">
       <h3 className="mb-2 text-xl font-bold">Personal Details</h3>
       <form className="flex flex-col gap-3">
         <FormItem
@@ -28,8 +52,21 @@ function PersonalDetails({ data, socialMedia, handleChange, addSocialMedia }) {
           handleChange={handleChange}
         ></FormItem>
       </form>
-      <SocialMediaList socialMedia={socialMedia} />
-      <SocialMediaForm socialMedia={socialMedia} addSocialMedia={addSocialMedia}></SocialMediaForm>
+      <SocialMediaList
+        socialMedia={socialMedia}
+        deleteSocialMedia={deleteSocialMedia}
+        changeIsUpdating={changeIsUpdating}
+        handleOpenForm={handleOpenForm}
+      />
+      <SocialMediaForm
+        allSocialMedia={socialMedia}
+        currentSocialMediaId={currentSocialMediaId}
+        addSocialMedia={addSocialMedia}
+        handleOpenForm={handleOpenForm}
+        formIsOpen={openForm}
+        changeIsUpdating={changeIsUpdating}
+        updateSocialMedia={updateSocialMedia}
+      ></SocialMediaForm>
     </div>
   );
 }

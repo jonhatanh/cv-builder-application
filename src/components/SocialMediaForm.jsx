@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormItem from "./FormItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { icons } from "../helpers";
 
-function SocialMediaForm({ addSocialMedia }) {
-  const [openForm, setOpenForm] = useState(false);
+function SocialMediaForm({
+  allSocialMedia,
+  currentSocialMediaId,
+  addSocialMedia,
+  handleOpenForm,
+  formIsOpen,
+  changeIsUpdating,
+  updateSocialMedia,
+}) {
   const [socialMedia, setSocialMedia] = useState({
     id: crypto.randomUUID(),
     name: "",
@@ -12,29 +19,61 @@ function SocialMediaForm({ addSocialMedia }) {
     iconName: "Empty",
   });
 
+  const isUpdating = currentSocialMediaId !== null;
+  const actionWord = isUpdating ? "Update" : "Add";
+
+  useEffect(() => {
+    if (currentSocialMediaId) {
+      const socialMediaToEdit = allSocialMedia.find(
+        (socialMedia) => socialMedia.id === currentSocialMediaId,
+      );
+
+      if (socialMediaToEdit) {
+        // Si socialMediaToEdit existe, actualiza el estado socialMedia con sus valores
+        // setSocialMedia(socialMediaToEdit);
+        setSocialMedia({ ...socialMediaToEdit });
+      }
+    } else {
+      // Si currentSocialMediaId es null, significa que no estás editando, restablece a los valores por defecto
+      setSocialMedia({
+        id: crypto.randomUUID(),
+        name: "",
+        link: "",
+        iconName: "Empty",
+      });
+    }
+  }, [currentSocialMediaId, allSocialMedia]);
+
   function handleChange(property, value) {
     const newSocialMedia = { ...socialMedia, [property]: value };
     setSocialMedia(newSocialMedia);
   }
 
   let hiddenDivClass = "flex flex-wrap gap-3 translate";
-  if (openForm) hiddenDivClass += "h-auto";
+  if (formIsOpen) hiddenDivClass += "h-auto";
   else hiddenDivClass += "h-0 hidden";
 
   function resetSocialMediaForm() {
+    const newId = isUpdating ? crypto.randomUUID() : socialMedia.id;
     setSocialMedia({
-      id: socialMedia.id,
+      id: newId,
       name: "",
       link: "",
       iconName: "Empty",
     });
-    setOpenForm(false);
+    handleOpenForm(false);
+    changeIsUpdating(false);
   }
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    addSocialMedia(socialMedia);
-    setOpenForm(false);
+    if (isUpdating) {
+      updateSocialMedia(currentSocialMediaId, { ...socialMedia });
+      changeIsUpdating(false);
+    } else {
+      addSocialMedia(socialMedia);
+    }
+    handleOpenForm(false);
     setSocialMedia({
       id: crypto.randomUUID(),
       name: "",
@@ -49,9 +88,9 @@ function SocialMediaForm({ addSocialMedia }) {
         type="button"
         htmlFor="dd"
         className="text-lg font-semibold"
-        onClick={() => setOpenForm(!openForm)}
+        onClick={() => handleOpenForm(!formIsOpen)}
       >
-        Add Social Media
+        {actionWord} Social Media
       </button>
       <form onSubmit={handleFormSubmit} className={hiddenDivClass}>
         <FormItem
@@ -79,6 +118,7 @@ function SocialMediaForm({ addSocialMedia }) {
                 onChange={(e) => handleChange("iconName", e.target.value)}
                 type="radio"
                 value={name}
+                id={name}
                 name="icon"
               />
               <label htmlFor={name}>
@@ -99,7 +139,7 @@ function SocialMediaForm({ addSocialMedia }) {
           className="block flex-1 rounded-full border-2 bg-sky-500 font-semibold text-white transition-all ease-in-out hover:bg-sky-700"
           type="submit"
         >
-          Add
+          {actionWord}
         </button>
       </form>
     </div>

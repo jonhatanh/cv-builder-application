@@ -3,12 +3,13 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import PersonalDetails from "./components/PersonalDetails";
 import CVPreview from "./components/CVPreview";
+import Forms from "./components/Forms";
 
 function App() {
   const [personalDetails, setPersonalDetails] = useState({
     name: "JONHATAN HIGUERA",
     email: "jonhatan.higuera@gmail.com",
-    phone: "33-1707-9174"
+    phone: "33-1707-9174",
   });
   const [socialMedia, setSocialMedia] = useState([
     {
@@ -92,6 +93,21 @@ function App() {
   function addSocialMedia(newSocialMedia) {
     setSocialMedia([...socialMedia, newSocialMedia]);
   }
+  function deleteSocialMedia(socialMediaId) {
+    const newSocialMedia = socialMedia.filter(
+      (social) => social.id !== socialMediaId,
+    );
+    setSocialMedia(newSocialMedia);
+  }
+  function updateSocialMedia(socialMediaId, updatedSocialMedia) {
+    const newSocialMedia = socialMedia.map(social => {
+      if(social.id === socialMediaId) {
+        return updatedSocialMedia;
+      }
+      return social;
+    })
+    setSocialMedia(newSocialMedia)
+  }
 
   function handlePersonalDetails(property, value) {
     const newDetails = { ...personalDetails, [property]: value };
@@ -100,12 +116,16 @@ function App() {
 
   return (
     <div className="flex flex-col gap-5 p-3 md:flex-row">
-      <PersonalDetails
-        data={personalDetails}
-        socialMedia={socialMedia}
-        handleChange={handlePersonalDetails}
-        addSocialMedia={addSocialMedia}
-      ></PersonalDetails>
+      <Forms>
+        <PersonalDetails
+          data={personalDetails}
+          socialMedia={socialMedia}
+          handleChange={handlePersonalDetails}
+          addSocialMedia={addSocialMedia}
+          updateSocialMedia={updateSocialMedia}
+          deleteSocialMedia={deleteSocialMedia}
+        ></PersonalDetails>
+      </Forms>
       <CVPreview
         personalDetails={personalDetails}
         socialMedia={socialMedia}
