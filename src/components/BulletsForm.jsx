@@ -6,7 +6,7 @@ import { icons } from "../helpers";
 function BulletsForm({
   allBullets,
   currentBulletId,
-  addBullet,
+  addBullets,
   handleOpenForm,
   formIsOpen,
   changeIsUpdating,
@@ -41,7 +41,7 @@ function BulletsForm({
   }
 
   let hiddenDivClass = "flex flex-wrap gap-3 translate";
-  if (formIsOpen) hiddenDivClass += "h-auto";
+  if (formIsOpen) hiddenDivClass += "h-auto flex flex-col";
   else hiddenDivClass += "h-0 hidden";
 
   function resetBulletsForm() {
@@ -60,7 +60,7 @@ function BulletsForm({
       updateBullet(currentBulletId, {...bullet});
       changeIsUpdating(false);
     } else {
-      addBullet(bullet);
+      addBullets(bullet);
     }
     handleOpenForm(false);
     setBullet({
@@ -82,25 +82,28 @@ function BulletsForm({
       <form onSubmit={handleFormSubmit} className={hiddenDivClass}>
         <FormItem
           // labelText="Name..."
+          textArea
           value={bullet.text}
           name="text"
           placeholder="Bullet Description"
           handleChange={handleChange}
           required
         ></FormItem>
-        <button
-          className="block flex-1 rounded-full border-2 bg-red-500 font-semibold text-white transition-all ease-in-out hover:bg-red-700"
-          type="button"
-          onClick={resetBulletsForm}
-        >
-          Cancel
-        </button>
-        <button
-          className="block flex-1 rounded-full border-2 bg-sky-500 font-semibold text-white transition-all ease-in-out hover:bg-sky-700"
-          type="submit"
-        >
-          {actionWord}
-        </button>
+        <div className="flex flex-wrap gap-3">
+          <button
+            className="block flex-1 rounded-full border-2 bg-red-500 font-semibold text-white transition-all ease-in-out hover:bg-red-700"
+            type="button"
+            onClick={resetBulletsForm}
+          >
+            Cancel
+          </button>
+          <button
+            className="block flex-1 rounded-full border-2 bg-sky-500 font-semibold text-white transition-all ease-in-out hover:bg-sky-700"
+            type="submit"
+          >
+            {actionWord}
+          </button>
+        </div>
       </form>
     </div>
   );

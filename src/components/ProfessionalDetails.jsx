@@ -12,13 +12,9 @@ function ProfessionalDetails({
   handleSectionChange,
   data,
   handleChange,
+  addBullets,
 }) {
-  const [openForm, setOpenForm] = useState(false);
   const [currentItemId, setCurrentItemId] = useState("");
-
-  function handleOpenForm(open) {
-    setOpenForm(open);
-  }
 
   function handleItemChange(itemId) {
     if (itemId === currentItemId) setCurrentItemId("");
@@ -44,6 +40,8 @@ function ProfessionalDetails({
             data={item}
             currentItemId={currentItemId}
             handleItemChange={handleItemChange}
+            handleChange={handleChange}
+            addBullets={addBullets}
           ></SectionItem>
         ))}
       </div>

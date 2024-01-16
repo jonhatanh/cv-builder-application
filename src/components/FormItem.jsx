@@ -5,8 +5,11 @@ function FormItem({
   name,
   labelText = "",
   textArea = false,
+  itemId = undefined,
   ...restProps
 }) {
+
+  
   return (
     <div className="flex flex-1 flex-col">
       <label htmlFor={name} className="text-lg font-semibold">
@@ -16,7 +19,7 @@ function FormItem({
         <textarea
           name={name}
           value={value}
-          onChange={(e) => handleChange(name, e.target.value)}
+          onChange={(e) => handleChange(name, e.target.value, itemId)}
           className="border-black-100 rounded-md border-2 p-1 focus:bg-sky-100"
           {...restProps}
           cols="30"
@@ -27,7 +30,7 @@ function FormItem({
           type={type}
           name={name}
           value={value}
-          onChange={(e) => handleChange(name, e.target.value)}
+          onChange={(e) => handleChange(name, e.target.value, itemId)}
           className="border-black-100 rounded-md border-2 p-1 focus:bg-sky-100"
           {...restProps}
         />

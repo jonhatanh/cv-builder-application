@@ -3,18 +3,22 @@ import BulletsForm from "./BulletsForm";
 import BulletsList from "./BulletsList";
 import FormItem from "./FormItem";
 import { getCollapsableClass } from "../helpers";
-import { faC, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function SectionItem({
   data,
   handleChange,
-  handleOpenForm,
-  openForm,
   currentItemId,
   handleItemChange,
+  addBullets,
 }) {
+  const [openForm, setOpenForm] = useState(false);
   const [currentBulletId, setCurrentBulletId] = useState(null); //for updating
+
+  function handleOpenForm(open) {
+    setOpenForm(open);
+  }
 
   function changeIsUpdating(isUpdating, bulletId) {
     //if is updating
@@ -42,18 +46,21 @@ function SectionItem({
             value={data.title}
             name="title"
             handleChange={handleChange}
+            itemId={data.id}
           ></FormItem>
           <FormItem
             labelText="Position Title"
             value={data.subtitle}
             name="subtitle"
             handleChange={handleChange}
+            itemId={data.id}
           ></FormItem>
           <FormItem
             labelText="Date"
             value={data.date}
             name="date"
             handleChange={handleChange}
+            itemId={data.id}
             placeholder="01/2021 - Present"
           ></FormItem>
           <FormItem
@@ -62,6 +69,7 @@ function SectionItem({
             value={data.description}
             name="description"
             handleChange={handleChange}
+            itemId={data.id}
           ></FormItem>
         </form>
         <BulletsList
@@ -73,7 +81,7 @@ function SectionItem({
         <BulletsForm
           allBullets={data.bullets}
           currentBulletId={currentBulletId}
-          // addBullet={addBullet}
+          addBullets={addBullets}
           handleOpenForm={handleOpenForm}
           formIsOpen={openForm}
           changeIsUpdating={changeIsUpdating}

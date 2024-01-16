@@ -120,6 +120,11 @@ function App() {
     "Git",
   ]);
 
+  //Personal Details Form
+  function handlePersonalDetails(property, value) {
+    const newDetails = { ...personalDetails, [property]: value };
+    setPersonalDetails(newDetails);
+  }
   function addSocialMedia(newSocialMedia) {
     setSocialMedia([...socialMedia, newSocialMedia]);
   }
@@ -139,10 +144,7 @@ function App() {
     setSocialMedia(newSocialMedia);
   }
 
-  function handlePersonalDetails(property, value) {
-    const newDetails = { ...personalDetails, [property]: value };
-    setPersonalDetails(newDetails);
-  }
+  //Professional Form
   function handleProfessionalDetails(property, value, id) {
     const newExperience = experience.map((experienceItem) => {
       if (experienceItem.id === id) {
@@ -153,7 +155,31 @@ function App() {
     });
     setExperience(newExperience);
   }
+  function addBullets(bullet, objectId, stateName) {
+    let state =
+      stateName === "experience"
+        ? experience
+        : stateName === "education"
+          ? education
+          : others;
 
+    const newState = state.map((stateItem) => {
+      if (stateItem.id === objectId) {
+        const newBullets = [...stateItem.bullets, bullet];
+        const newStateItem = { ...stateItem, bullets: newBullets };
+        return newStateItem;
+      }
+      return stateItem;
+    });
+
+    stateName === "experience"
+      ? setExperience(newState)
+      : stateName === "education"
+        ? setEducation(newState)
+        : setOthers(newState);
+  }
+
+  //Sections collapse
   const [currentSection, setCurrentSection] = useState(1);
   function handleSectionChange(section) {
     if (section === currentSection) return;
@@ -178,6 +204,7 @@ function App() {
           handleSectionChange={handleSectionChange}
           data={experience}
           handleChange={handleProfessionalDetails}
+          addBullets={addBullets}
         ></ProfessionalDetails>
       </Forms>
       <CVPreview
