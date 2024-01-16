@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import FormItem from "./FormItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { icons } from "../helpers";
+import { getCollapsableClass, icons } from "../helpers";
 
 function SocialMediaForm({
   allSocialMedia,
@@ -49,9 +49,11 @@ function SocialMediaForm({
     setSocialMedia(newSocialMedia);
   }
 
-  let hiddenDivClass = "flex flex-wrap gap-3 translate";
-  if (formIsOpen) hiddenDivClass += "h-auto";
-  else hiddenDivClass += "h-0 hidden";
+
+  let hiddenDivClass = getCollapsableClass(
+    formIsOpen,
+    "flex flex-wrap gap-3 translate",
+  );
 
   function resetSocialMediaForm() {
     const newId = isUpdating ? crypto.randomUUID() : socialMedia.id;
@@ -86,7 +88,6 @@ function SocialMediaForm({
     <div className="flex flex-col border-2 border-red-100">
       <button
         type="button"
-        htmlFor="dd"
         className="text-lg font-semibold"
         onClick={() => handleOpenForm(!formIsOpen)}
       >
@@ -97,7 +98,7 @@ function SocialMediaForm({
           // labelText="Name..."
           value={socialMedia.name}
           name="name"
-          placeHolder="Social Media Name..."
+          placeholder="Social Media Name..."
           handleChange={handleChange}
           required
         ></FormItem>
@@ -106,7 +107,7 @@ function SocialMediaForm({
           value={socialMedia.link}
           type="url"
           name="link"
-          placeHolder="Social Media Link..."
+          placeholder="Social Media Link..."
           handleChange={handleChange}
         ></FormItem>
         <fieldset className="grid w-full grid-cols-2  gap-2 border-2 border-slate-500 pb-2 md:grid-cols-1">

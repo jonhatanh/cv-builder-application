@@ -2,8 +2,10 @@ import { useState } from "react";
 import FormItem from "./FormItem";
 import SocialMediaForm from "./SocialMediaForm";
 import SocialMediaList from "./SocialMediaList";
-
+import { forms, getCollapsableClass } from "../helpers";
 function PersonalDetails({
+  currentSection,
+  handleSectionChange,
   data,
   socialMedia,
   handleChange,
@@ -16,7 +18,7 @@ function PersonalDetails({
 
   function changeIsUpdating(isUpdating, socialMediaId) {
     //if is updating
-    if(isUpdating) {
+    if (isUpdating) {
       setCurrentSocialMediaId(socialMediaId);
     } else {
       setCurrentSocialMediaId(null);
@@ -27,9 +29,20 @@ function PersonalDetails({
     setOpenForm(open);
   }
 
+  const sectionClass = getCollapsableClass(
+    currentSection === forms.personalDetails,
+    ""
+  );
+
   return (
-    <div className="rounded-md border-2 border-sky-300 p-2 ">
-      <h3 className="mb-2 text-xl font-bold">Personal Details</h3>
+    <div className="flex flex-col gap-4 rounded-md border-2 border-sky-300 p-2">
+      <button
+        className="text-xl font-bold"
+        onClick={() => handleSectionChange(forms.personalDetails)}
+      >
+        Personal Details
+      </button>
+      <div className={sectionClass}>
       <form className="flex flex-col gap-3">
         <FormItem
           labelText="Full Name"
@@ -67,6 +80,7 @@ function PersonalDetails({
         changeIsUpdating={changeIsUpdating}
         updateSocialMedia={updateSocialMedia}
       ></SocialMediaForm>
+      </div>
     </div>
   );
 }

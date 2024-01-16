@@ -51,3 +51,15 @@ export function getIcon(iconName) {
   const { icon } = icons.find((icon) => icon.name === iconName);
   return icon;
 }
+
+export const forms = {
+  personalDetails: 1,
+  professionalExperience: 2,
+  educationalExperience: 3,
+};
+
+export function getCollapsableClass(isOpen, baseClass) {
+    if (isOpen) baseClass += " h-auto";
+    else baseClass += " h-0 hidden";
+    return baseClass;
+}

@@ -4,6 +4,7 @@ import viteLogo from "/vite.svg";
 import PersonalDetails from "./components/PersonalDetails";
 import CVPreview from "./components/CVPreview";
 import Forms from "./components/Forms";
+import ProfessionalDetails from "./components/ProfessionalDetails";
 
 function App() {
   const [personalDetails, setPersonalDetails] = useState({
@@ -32,7 +33,16 @@ function App() {
       subtitle: "Degree in Computer Science (Ingeniería Informática)",
       date: "02/2021 - Present",
       description: "",
-      bullets: ["GPA: 98 / 100", "Exp. Graduation Date: 06/2024"],
+      bullets: [
+        {
+          id: crypto.randomUUID(),
+          text: "GPA: 98 / 100",
+        },
+        {
+          id: crypto.randomUUID(),
+          text: "Exp. Graduation Date: 06/2024",
+        },
+      ],
     },
     {
       id: crypto.randomUUID(),
@@ -40,7 +50,12 @@ function App() {
       subtitle: "Degree in Software Development",
       date: "08/2016 - 06/2020",
       description: "",
-      bullets: ["GPA: 92 / 100"],
+      bullets: [
+        {
+          id: crypto.randomUUID(),
+          text: "GPA: 92 / 100",
+        },
+      ],
     },
   ]);
 
@@ -53,10 +68,22 @@ function App() {
       description:
         "Acquired valuable teamwork skills through SCRUM methodology, successfully contributed to largescale projects, and demonstrated effective collaboration using Git.",
       bullets: [
-        `Performed maintenance and developed new features for existing projects using the TALL stack (Tailwind, Alpine, Laravel, Livewire).`,
-        `Created a landing page for an internal project and the [Eventos CUCEI](https://eventos.cucei.udg.mx/) website.`,
-        `Extensively utilized the Laravel framework, gaining knowledge of MVC, routing, middlewares, sessions, authentication, authorization, email sending, file storage,migrations, seeders, Eloquent ORM, factories, and testing.`,
-        `Implemented feature tests in existing projects to ensure the proper functionality of routes and components.`,
+        {
+          id: crypto.randomUUID(),
+          text: `Performed maintenance and developed new features for existing projects using the TALL stack (Tailwind, Alpine, Laravel, Livewire).`,
+        },
+        {
+          id: crypto.randomUUID(),
+          text: `Created a landing page for an internal project and the [Eventos CUCEI](https://eventos.cucei.udg.mx/) website.`,
+        },
+        {
+          id: crypto.randomUUID(),
+          text: `Extensively utilized the Laravel framework, gaining knowledge of MVC, routing, middlewares, sessions, authentication, authorization, email sending, file storage,migrations, seeders, Eloquent ORM, factories, and testing.`,
+        },
+        {
+          id: crypto.randomUUID(),
+          text: `Implemented feature tests in existing projects to ensure the proper functionality of routes and components.`,
+        },
       ],
     },
   ]);
@@ -68,7 +95,10 @@ function App() {
       date: "05/2023 - 12/2023",
       description: "",
       bullets: [
-        `Acquired a solid understanding of backend concepts and successfully applied them, creating a RESTful API using Node.js and the Express framework.`,
+        {
+          id: crypto.randomUUID(),
+          text: `Acquired a solid understanding of backend concepts and successfully applied them, creating a RESTful API using Node.js and the Express framework.`,
+        },
       ],
     },
   ]);
@@ -100,24 +130,42 @@ function App() {
     setSocialMedia(newSocialMedia);
   }
   function updateSocialMedia(socialMediaId, updatedSocialMedia) {
-    const newSocialMedia = socialMedia.map(social => {
-      if(social.id === socialMediaId) {
+    const newSocialMedia = socialMedia.map((social) => {
+      if (social.id === socialMediaId) {
         return updatedSocialMedia;
       }
       return social;
-    })
-    setSocialMedia(newSocialMedia)
+    });
+    setSocialMedia(newSocialMedia);
   }
 
   function handlePersonalDetails(property, value) {
     const newDetails = { ...personalDetails, [property]: value };
     setPersonalDetails(newDetails);
   }
+  function handleProfessionalDetails(property, value, id) {
+    const newExperience = experience.map((experienceItem) => {
+      if (experienceItem.id === id) {
+        const newExperienceItem = { ...experienceItem, [property]: value };
+        return newExperienceItem;
+      }
+      return experienceItem;
+    });
+    setExperience(newExperience);
+  }
+
+  const [currentSection, setCurrentSection] = useState(1);
+  function handleSectionChange(section) {
+    if (section === currentSection) return;
+    setCurrentSection(section);
+  }
 
   return (
     <div className="flex flex-col gap-5 p-3 md:flex-row">
       <Forms>
         <PersonalDetails
+          currentSection={currentSection}
+          handleSectionChange={handleSectionChange}
           data={personalDetails}
           socialMedia={socialMedia}
           handleChange={handlePersonalDetails}
@@ -125,6 +173,12 @@ function App() {
           updateSocialMedia={updateSocialMedia}
           deleteSocialMedia={deleteSocialMedia}
         ></PersonalDetails>
+        <ProfessionalDetails
+          currentSection={currentSection}
+          handleSectionChange={handleSectionChange}
+          data={experience}
+          handleChange={handleProfessionalDetails}
+        ></ProfessionalDetails>
       </Forms>
       <CVPreview
         personalDetails={personalDetails}

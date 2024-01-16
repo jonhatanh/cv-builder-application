@@ -1,8 +1,8 @@
 function CVSection({ title, sectionData }) {
-  function getListElement(text, key) {
-    const content = getLiContent(text);
+  function getListElement(bullet) {
+    const content = getLiContent(bullet.text);
     return (
-      <li className="marker:text-xs" key={key}>
+      <li className="marker:text-xs" key={bullet.id}>
         {content}
       </li>
     );
@@ -40,7 +40,7 @@ function CVSection({ title, sectionData }) {
         <h6 className="text-sm font-bold">{section.subtitle}</h6>
         <p className="my-1 text-sm">{section.description}</p>
         <ul className="ml-7 list-disc text-sm">
-          {section.bullets.map((bullet, index) => getListElement(bullet, index))}
+          {section.bullets.map((bullet) => getListElement(bullet))}
         </ul>
       </div>
     );
