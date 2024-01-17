@@ -4,7 +4,7 @@ import {
   faEnvelope,
   faMobileScreenButton,
 } from "@fortawesome/free-solid-svg-icons";
-import SocialMediaItem from './SocialMediaItem'
+import SocialMediaItem from "./SocialMediaItem";
 import { getIcon } from "../helpers";
 
 function CVPreview({
@@ -15,14 +15,16 @@ function CVPreview({
   skills,
   others,
 }) {
-  const skillsList = skills.map((skill, index) => {
-    if (index === skills.length - 1) {
-      return <li>{skill}</li>;
+  const skillsList = personalDetails.skills.split(",").map((skill, index) => {
+    skill = skill.trim();
+    if(!skill) return null;
+    if (index === 0) {
+      return <li key={index}>{skill}</li>;
     }
     return (
-      <li className="flex items-center gap-2">
-        {skill}
+      <li key={index} className="flex items-center gap-2">
         <span className="text-xs">|</span>
+        {skill}
       </li>
     );
   });

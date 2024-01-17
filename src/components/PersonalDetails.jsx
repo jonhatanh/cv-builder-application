@@ -64,6 +64,12 @@ function PersonalDetails({
           name="phone"
           handleChange={handleChange}
         ></FormItem>
+        <FormItem
+          labelText="Skills (separated by comma)"
+          value={data.skills}
+          name="skills"
+          handleChange={handleChange}
+        ></FormItem>
       </form>
       <SocialMediaList
         socialMedia={socialMedia}

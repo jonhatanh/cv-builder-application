@@ -13,6 +13,7 @@ function App() {
     name: "JONHATAN HIGUERA",
     email: "jonhatan.higuera@gmail.com",
     phone: "33-1707-9174",
+    skills: `HTML, CSS,JavaScript, React, AlpineJS, Livewire,SASS ,Tailwind, NodeJS, PHP, Laravel, MySQL, Pest, OOP, Git,`,
   });
   const [socialMedia, setSocialMedia] = useState([
     {
@@ -104,23 +105,23 @@ function App() {
       ],
     },
   ]);
-  const [skills, setSkills] = useState([
-    "HTML ",
-    "CSS ",
-    "JavaScript ",
-    "React ",
-    "AlpineJS ",
-    "Livewire ",
-    "SASS ",
-    "Tailwind ",
-    "NodeJS ",
-    "PHP ",
-    "Laravel ",
-    "MySQL ",
-    "Pest ",
-    "OOP ",
-    "Git",
-  ]);
+  // const [skills, setSkills] = useState([
+  //   "HTML ",
+  //   "CSS ",
+  //   "JavaScript ",
+  //   "React ",
+  //   "AlpineJS ",
+  //   "Livewire ",
+  //   "SASS ",
+  //   "Tailwind ",
+  //   "NodeJS ",
+  //   "PHP ",
+  //   "Laravel ",
+  //   "MySQL ",
+  //   "Pest ",
+  //   "OOP ",
+  //   "Git",
+  // ]);
 
   //Personal Details Form
   function handlePersonalDetails(property, value) {
@@ -257,10 +258,7 @@ function App() {
       description: "",
       bullets: [],
     };
-    setState([
-      ...state,
-      newItem,
-    ]);
+    setState([...state, newItem]);
     return newItem.id;
   }
   function addNewSectionItemExperience() {
@@ -273,7 +271,7 @@ function App() {
     return addNewSectionItem(others, setOthers);
   }
   function deleteSectionItem(itemId, state, setState) {
-    const newState = state.filter(stateItem => stateItem.id !== itemId);
+    const newState = state.filter((stateItem) => stateItem.id !== itemId);
     setState(newState);
   }
   function deleteSectionItemExperience(itemId) {
@@ -285,7 +283,6 @@ function App() {
   function deleteSectionItemOthers(itemId) {
     deleteSectionItem(itemId, others, setOthers);
   }
-
 
   //Sections collapse
   const [currentSection, setCurrentSection] = useState(1);
@@ -321,18 +318,6 @@ function App() {
           deleteSectionItem={deleteSectionItemExperience}
           CustomForm={ExperienceForm}
         />
-        {/* <ProfessionalDetails
-          currentSection={currentSection}
-          handleSectionChange={handleSectionChange}
-          data={experience}
-          handleChange={handleProfessionalDetails}
-          addBullet={addBulletExperience}
-          updateBullet={updateBulletExperience}
-          deleteBullet={deleteBulletExperience}
-          addNewSectionItem={addNewSectionItemExperience}
-          deleteSectionItem={deleteSectionItemExperience}
-          CustomForm={ExperienceForm}
-        ></ProfessionalDetails> */}
         <CustomDetails
           detailsName="Education Details"
           detailsCollapseValue={forms.educationDetails}
@@ -347,18 +332,6 @@ function App() {
           deleteSectionItem={deleteSectionItemEducation}
           CustomForm={EducationForm}
         />
-        {/* <EducationDetails
-          currentSection={currentSection}
-          handleSectionChange={handleSectionChange}
-          data={education}
-          handleChange={handleEducationDetails}
-          addBullet={addBulletEducation}
-          updateBullet={updateBulletEducation}
-          deleteBullet={deleteBulletEducation}
-          addNewSectionItem={addNewSectionItemEducation}
-          deleteSectionItem={deleteSectionItemEducation}
-          CustomForm={EducationForm}
-        ></EducationDetails> */}
         <CustomDetails
           detailsName="Others"
           detailsCollapseValue={forms.othersDetails}
@@ -379,7 +352,7 @@ function App() {
         socialMedia={socialMedia}
         education={education}
         experience={experience}
-        skills={skills}
+        // skills={skills}
         others={others}
       ></CVPreview>
     </div>
