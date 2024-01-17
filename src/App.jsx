@@ -1,13 +1,11 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import PersonalDetails from "./components/PersonalDetails";
 import CVPreview from "./components/CVPreview";
 import Forms from "./components/Forms";
-import ProfessionalDetails from "./components/ProfessionalDetails";
-import EducationDetails from "./components/EducationDetails";
 import ExperienceForm from "./components/ExperienceForm";
 import EducationForm from "./components/EducationForm";
+import CustomDetails from "./components/CustomDetails";
+import { forms } from "./helpers";
 
 function App() {
   const [personalDetails, setPersonalDetails] = useState({
@@ -238,23 +236,25 @@ function App() {
 
   //Sections Items
   function addNewSectionItem(state, setState) {
+    const newItem = {
+      id: crypto.randomUUID(),
+      title: "New Item",
+      subtitle: "",
+      date: "",
+      description: "",
+      bullets: [],
+    };
     setState([
       ...state,
-      {
-        id: crypto.randomUUID(),
-        title: "New Item",
-        subtitle: "",
-        date: "",
-        description: "",
-        bullets: [],
-      },
+      newItem,
     ]);
+    return newItem.id;
   }
   function addNewSectionItemExperience() {
-    addNewSectionItem(experience, setExperience);
+    return addNewSectionItem(experience, setExperience);
   }
   function addNewSectionItemEducation() {
-    addNewSectionItem(education, setEducation);
+    return addNewSectionItem(education, setEducation);
   }
   function deleteSectionItem(itemId, state, setState) {
     const newState = state.filter(stateItem => stateItem.id !== itemId);
@@ -288,7 +288,9 @@ function App() {
           updateSocialMedia={updateSocialMedia}
           deleteSocialMedia={deleteSocialMedia}
         ></PersonalDetails>
-        <ProfessionalDetails
+        <CustomDetails
+          detailsName="Professional Experience"
+          detailsCollapseValue={forms.professionalDetails}
           currentSection={currentSection}
           handleSectionChange={handleSectionChange}
           data={experience}
@@ -299,8 +301,22 @@ function App() {
           addNewSectionItem={addNewSectionItemExperience}
           deleteSectionItem={deleteSectionItemExperience}
           CustomForm={ExperienceForm}
-        ></ProfessionalDetails>
-        <EducationDetails
+        />
+        {/* <ProfessionalDetails
+          currentSection={currentSection}
+          handleSectionChange={handleSectionChange}
+          data={experience}
+          handleChange={handleProfessionalDetails}
+          addBullet={addBulletExperience}
+          updateBullet={updateBulletExperience}
+          deleteBullet={deleteBulletExperience}
+          addNewSectionItem={addNewSectionItemExperience}
+          deleteSectionItem={deleteSectionItemExperience}
+          CustomForm={ExperienceForm}
+        ></ProfessionalDetails> */}
+        <CustomDetails
+          detailsName="Education Details"
+          detailsCollapseValue={forms.educationDetails}
           currentSection={currentSection}
           handleSectionChange={handleSectionChange}
           data={education}
@@ -311,7 +327,19 @@ function App() {
           addNewSectionItem={addNewSectionItemEducation}
           deleteSectionItem={deleteSectionItemEducation}
           CustomForm={EducationForm}
-        ></EducationDetails>
+        />
+        {/* <EducationDetails
+          currentSection={currentSection}
+          handleSectionChange={handleSectionChange}
+          data={education}
+          handleChange={handleEducationDetails}
+          addBullet={addBulletEducation}
+          updateBullet={updateBulletEducation}
+          deleteBullet={deleteBulletEducation}
+          addNewSectionItem={addNewSectionItemEducation}
+          deleteSectionItem={deleteSectionItemEducation}
+          CustomForm={EducationForm}
+        ></EducationDetails> */}
       </Forms>
       <CVPreview
         personalDetails={personalDetails}
