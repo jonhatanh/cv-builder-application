@@ -56,6 +56,7 @@ export const forms = {
   personalDetails: 1,
   professionalDetails: 2,
   educationDetails: 3,
+  othersDetails: 4,
 };
 
 export function getCollapsableClass(isOpen, baseClass) {

@@ -6,6 +6,7 @@ import ExperienceForm from "./components/ExperienceForm";
 import EducationForm from "./components/EducationForm";
 import CustomDetails from "./components/CustomDetails";
 import { forms } from "./helpers";
+import OthersForm from "./components/OthersForm";
 
 function App() {
   const [personalDetails, setPersonalDetails] = useState({
@@ -169,6 +170,9 @@ function App() {
   function handleEducationDetails(property, value, id) {
     handleCustomFormDetails(property, value, id, education, setEducation);
   }
+  function handleOthersDetails(property, value, id) {
+    handleCustomFormDetails(property, value, id, others, setOthers);
+  }
 
   //Handle Add Bullet
   function addBullet(bullet, objectId, state, setState) {
@@ -187,6 +191,9 @@ function App() {
   }
   function addBulletEducation(bullet, objectId) {
     addBullet(bullet, objectId, education, setEducation);
+  }
+  function addBulletOthers(bullet, objectId) {
+    addBullet(bullet, objectId, others, setOthers);
   }
 
   //Handle Delete Bullet
@@ -208,6 +215,9 @@ function App() {
   }
   function deleteBulletEducation(bulletId, objectId) {
     deleteBullet(bulletId, objectId, education, setEducation);
+  }
+  function deleteBulletOthers(bulletId, objectId) {
+    deleteBullet(bulletId, objectId, others, setOthers);
   }
 
   //Handle update bullet
@@ -233,6 +243,9 @@ function App() {
   function updateBulletEducation(bulletId, newBulletValue, objectId) {
     updateBullet(bulletId, newBulletValue, objectId, education, setEducation);
   }
+  function updateBulletOthers(bulletId, newBulletValue, objectId) {
+    updateBullet(bulletId, newBulletValue, objectId, others, setOthers);
+  }
 
   //Sections Items
   function addNewSectionItem(state, setState) {
@@ -256,6 +269,9 @@ function App() {
   function addNewSectionItemEducation() {
     return addNewSectionItem(education, setEducation);
   }
+  function addNewSectionItemOthers() {
+    return addNewSectionItem(others, setOthers);
+  }
   function deleteSectionItem(itemId, state, setState) {
     const newState = state.filter(stateItem => stateItem.id !== itemId);
     setState(newState);
@@ -265,6 +281,9 @@ function App() {
   }
   function deleteSectionItemEducation(itemId) {
     deleteSectionItem(itemId, education, setEducation);
+  }
+  function deleteSectionItemOthers(itemId) {
+    deleteSectionItem(itemId, others, setOthers);
   }
 
 
@@ -340,6 +359,20 @@ function App() {
           deleteSectionItem={deleteSectionItemEducation}
           CustomForm={EducationForm}
         ></EducationDetails> */}
+        <CustomDetails
+          detailsName="Others"
+          detailsCollapseValue={forms.othersDetails}
+          currentSection={currentSection}
+          handleSectionChange={handleSectionChange}
+          data={others}
+          handleChange={handleOthersDetails}
+          addBullet={addBulletOthers}
+          updateBullet={updateBulletOthers}
+          deleteBullet={deleteBulletOthers}
+          addNewSectionItem={addNewSectionItemOthers}
+          deleteSectionItem={deleteSectionItemOthers}
+          CustomForm={OthersForm}
+        />
       </Forms>
       <CVPreview
         personalDetails={personalDetails}
