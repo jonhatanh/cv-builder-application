@@ -12,7 +12,9 @@ function ProfessionalDetails({
   handleSectionChange,
   data,
   handleChange,
-  addBullets,
+  addBullet,
+  updateBullet,
+  deleteBullet,
 }) {
   const [currentItemId, setCurrentItemId] = useState("");
 
@@ -41,7 +43,9 @@ function ProfessionalDetails({
             currentItemId={currentItemId}
             handleItemChange={handleItemChange}
             handleChange={handleChange}
-            addBullets={addBullets}
+            addBullet={addBullet}
+            updateBullet={updateBullet}
+            deleteBullet={deleteBullet}
           ></SectionItem>
         ))}
       </div>

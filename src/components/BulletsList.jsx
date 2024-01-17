@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function BulletsList({
   items,
-  deleteItem,
+  sectionItemId,
+  deleteBullet,
   changeIsUpdating,
   handleOpenForm,
 }) {
@@ -15,7 +16,7 @@ function BulletsList({
   }
 
   function handleDelete(itemId) {
-    deleteItem(itemId);
+    deleteBullet(itemId, sectionItemId);
     changeIsUpdating(false);
     handleOpenForm(false);
   }

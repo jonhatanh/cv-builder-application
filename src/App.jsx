@@ -155,13 +155,13 @@ function App() {
     });
     setExperience(newExperience);
   }
-  function addBullets(bullet, objectId, stateName) {
-    let state =
-      stateName === "experience"
-        ? experience
-        : stateName === "education"
-          ? education
-          : others;
+  function addBullet(bullet, objectId, state, setState) {
+    // let state =
+    //   stateName === "experience"
+    //     ? experience
+    //     : stateName === "education"
+    //       ? education
+    //       : others;
 
     const newState = state.map((stateItem) => {
       if (stateItem.id === objectId) {
@@ -172,11 +172,51 @@ function App() {
       return stateItem;
     });
 
-    stateName === "experience"
-      ? setExperience(newState)
-      : stateName === "education"
-        ? setEducation(newState)
-        : setOthers(newState);
+    setState(newState);
+    // stateName === "experience"
+    //   ? setExperience(newState)
+    //   : stateName === "education"
+    //     ? setEducation(newState)
+    //     : setOthers(newState);
+  }
+  function addBulletExperience(bullet, objectId) {
+    addBullet(bullet, objectId, experience, setExperience);
+  }
+  function deleteBullet(bulletId, objectId, state, setState) {
+    const newState = state.map((stateItem) => {
+      if (stateItem.id === objectId) {
+        const newBullets = stateItem.bullets.filter(
+          (bullet) => bullet.id !== bulletId,
+        );
+        const newStateItem = { ...stateItem, bullets: newBullets };
+        return newStateItem;
+      }
+      return stateItem;
+    });
+    setState(newState);
+  }
+  function deleteBulletExperience(bulletId, objectId) {
+    deleteBullet(bulletId, objectId, experience, setExperience);
+  }
+
+  function updateBullet(bulletId, newBulletValue, objectId, state, setState) {
+    const newState = state.map((stateItem) => {
+      if (stateItem.id === objectId) {
+        const newBullets = stateItem.bullets.map((bullet) => {
+          if (bullet.id === bulletId) {
+            return newBulletValue;
+          }
+          return bullet;
+        });
+        const newStateItem = { ...stateItem, bullets: newBullets };
+        return newStateItem;
+      }
+      return stateItem;
+    });
+    setState(newState);
+  }
+  function updateBulletExperience(bulletId, newBulletValue, objectId) {
+    updateBullet(bulletId, newBulletValue, objectId, experience, setExperience);
   }
 
   //Sections collapse
@@ -204,7 +244,9 @@ function App() {
           handleSectionChange={handleSectionChange}
           data={experience}
           handleChange={handleProfessionalDetails}
-          addBullets={addBullets}
+          addBullet={addBulletExperience}
+          updateBullet={updateBulletExperience}
+          deleteBullet={deleteBulletExperience}
         ></ProfessionalDetails>
       </Forms>
       <CVPreview

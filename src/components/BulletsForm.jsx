@@ -6,10 +6,11 @@ import { icons } from "../helpers";
 function BulletsForm({
   allBullets,
   currentBulletId,
-  addBullets,
   handleOpenForm,
   formIsOpen,
   changeIsUpdating,
+  sectionItemId,
+  addBullet,
   updateBullet,
 }) {
   const [bullet, setBullet] = useState({
@@ -22,9 +23,11 @@ function BulletsForm({
 
   useEffect(() => {
     if (currentBulletId) {
-      const bulletToEdit = allBullets.find(bullet => bullet.id === currentBulletId);
+      const bulletToEdit = allBullets.find(
+        (bullet) => bullet.id === currentBulletId,
+      );
       if (bulletToEdit) {
-        setBullet({...bulletToEdit});
+        setBullet({ ...bulletToEdit });
       }
     } else {
       setBullet({
@@ -35,7 +38,6 @@ function BulletsForm({
   }, [currentBulletId, allBullets]);
 
   function handleChange(property, value) {
-    setBullet(value);
     const newBullet = { ...bullet, [property]: value };
     setBullet(newBullet);
   }
@@ -57,10 +59,10 @@ function BulletsForm({
   function handleFormSubmit(e) {
     e.preventDefault();
     if (isUpdating) {
-      updateBullet(currentBulletId, {...bullet});
+      updateBullet(currentBulletId, { ...bullet }, sectionItemId);
       changeIsUpdating(false);
     } else {
-      addBullets(bullet);
+      addBullet(bullet, sectionItemId);
     }
     handleOpenForm(false);
     setBullet({

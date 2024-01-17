@@ -11,7 +11,9 @@ function SectionItem({
   handleChange,
   currentItemId,
   handleItemChange,
-  addBullets,
+  addBullet,
+  updateBullet,
+  deleteBullet,
 }) {
   const [openForm, setOpenForm] = useState(false);
   const [currentBulletId, setCurrentBulletId] = useState(null); //for updating
@@ -29,9 +31,9 @@ function SectionItem({
     }
   }
 
-  const itemClass = getCollapsableClass(currentItemId === data.id, "");
+  const itemClass = getCollapsableClass(currentItemId === data.id, "w-full");
   return (
-    <div className="flex flex-col items-start justify-center border-2 border-sky-300">
+    <div className="flex flex-col items-start justify-center border-2 border-sky-300 w-full">
       <button
         className="flex w-full justify-between text-xl font-bold"
         onClick={() => handleItemChange(data.id)}
@@ -74,18 +76,20 @@ function SectionItem({
         </form>
         <BulletsList
           items={data.bullets}
-          // deleteItem={deleteSocialMedia}
+          sectionItemId={data.id}
+          deleteBullet={deleteBullet}
           changeIsUpdating={changeIsUpdating}
           handleOpenForm={handleOpenForm}
         />
         <BulletsForm
           allBullets={data.bullets}
           currentBulletId={currentBulletId}
-          addBullets={addBullets}
           handleOpenForm={handleOpenForm}
           formIsOpen={openForm}
           changeIsUpdating={changeIsUpdating}
-          // updateBullet={updateBullet}
+          sectionItemId={data.id}
+          addBullet={addBullet}
+          updateBullet={updateBullet}
         ></BulletsForm>
       </div>
     </div>
