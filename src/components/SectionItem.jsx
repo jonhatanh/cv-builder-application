@@ -3,7 +3,7 @@ import BulletsForm from "./BulletsForm";
 import BulletsList from "./BulletsList";
 import FormItem from "./FormItem";
 import { getCollapsableClass } from "../helpers";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function SectionItem({
@@ -14,6 +14,7 @@ function SectionItem({
   addBullet,
   updateBullet,
   deleteBullet,
+  deleteSectionItem,
 }) {
   const [openForm, setOpenForm] = useState(false);
   const [currentBulletId, setCurrentBulletId] = useState(null); //for updating
@@ -33,14 +34,22 @@ function SectionItem({
 
   const itemClass = getCollapsableClass(currentItemId === data.id, "w-full");
   return (
-    <div className="flex flex-col items-start justify-center border-2 border-sky-300 w-full">
-      <button
-        className="flex w-full justify-between text-xl font-bold"
-        onClick={() => handleItemChange(data.id)}
-      >
-        <span>{data.title}</span>
-        <FontAwesomeIcon className="pt-1" icon={faCaretDown}></FontAwesomeIcon>
-      </button>
+    <div className="flex w-full flex-col items-start justify-center border-2 border-sky-300">
+      <div className="flex w-full items-center justify-between text-xl font-bold">
+        <button
+          className="flex w-full justify-between text-xl font-bold"
+          onClick={() => handleItemChange(data.id)}
+        >
+          <span>{data.title}</span>
+          <FontAwesomeIcon className="pt-1" icon={faCaretDown} />
+        </button>
+        <button className="flex items-center" onClick={() => deleteSectionItem(data.id)}>
+          <FontAwesomeIcon
+            className="mx-3 rounded-full px-1 px-2 py-1 text-base hover:bg-slate-300"
+            icon={faTrash}
+          />
+        </button>
+      </div>
       <div className={itemClass}>
         <form className="flex flex-col gap-3">
           <FormItem

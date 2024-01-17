@@ -219,11 +219,37 @@ function App() {
     updateBullet(bulletId, newBulletValue, objectId, experience, setExperience);
   }
 
+  //Sections Items
+  function addNewSectionItem(state, setState) {
+    setState([
+      ...state,
+      {
+        id: crypto.randomUUID(),
+        title: "New Item",
+        subtitle: "",
+        date: "",
+        description: "",
+        bullets: [],
+      },
+    ]);
+  }
+  function addNewSectionItemExperience() {
+    addNewSectionItem(experience, setExperience);
+  }
+  function deleteSectionItem(itemId, state, setState) {
+    const newState = state.filter(stateItem => stateItem.id !== itemId);
+    setState(newState);
+  }
+  function deleteSectionItemExperience(itemId) {
+    deleteSectionItem(itemId, experience, setExperience);
+  }
+
+
   //Sections collapse
   const [currentSection, setCurrentSection] = useState(1);
   function handleSectionChange(section) {
-    if (section === currentSection) return;
-    setCurrentSection(section);
+    if (section === currentSection) setCurrentSection(0);
+    else setCurrentSection(section);
   }
 
   return (
@@ -247,6 +273,8 @@ function App() {
           addBullet={addBulletExperience}
           updateBullet={updateBulletExperience}
           deleteBullet={deleteBulletExperience}
+          addNewSectionItem={addNewSectionItemExperience}
+          deleteSectionItem={deleteSectionItemExperience}
         ></ProfessionalDetails>
       </Forms>
       <CVPreview

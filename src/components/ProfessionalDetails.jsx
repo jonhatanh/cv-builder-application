@@ -6,6 +6,8 @@ import BulletsList from "./BulletsList";
 import BulletsForm from "./BulletsForm";
 import { forms, getCollapsableClass } from "../helpers";
 import SectionItem from "./SectionItem";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 function ProfessionalDetails({
   currentSection,
@@ -15,6 +17,8 @@ function ProfessionalDetails({
   addBullet,
   updateBullet,
   deleteBullet,
+  addNewSectionItem,
+  deleteSectionItem,
 }) {
   const [currentItemId, setCurrentItemId] = useState("");
 
@@ -25,7 +29,7 @@ function ProfessionalDetails({
 
   const sectionClass = getCollapsableClass(
     currentSection === forms.professionalExperience,
-    "",
+    "flex flex-col gap-3",
   );
   return (
     <div className="flex flex-col gap-4 rounded-md border-2 border-sky-300 p-2">
@@ -46,8 +50,16 @@ function ProfessionalDetails({
             addBullet={addBullet}
             updateBullet={updateBullet}
             deleteBullet={deleteBullet}
+            deleteSectionItem={deleteSectionItem}
           ></SectionItem>
         ))}
+        <button
+          className="flex items-center justify-center gap-1 border-2 border-sky-500"
+          onClick={addNewSectionItem}
+        >
+          <FontAwesomeIcon icon={faPlus} />
+          Add Item
+        </button>
       </div>
     </div>
   );
