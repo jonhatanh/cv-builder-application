@@ -9,7 +9,7 @@ import SectionItem from "./SectionItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-function ProfessionalDetails({
+function EducationDetails({
   currentSection,
   handleSectionChange,
   data,
@@ -29,16 +29,16 @@ function ProfessionalDetails({
   }
 
   const sectionClass = getCollapsableClass(
-    currentSection === forms.professionalDetails,
+    currentSection === forms.educationDetails,
     "flex flex-col gap-3",
   );
   return (
     <div className="flex flex-col gap-4 rounded-md border-2 border-sky-300 p-2">
       <button
         className="mb-2 text-xl font-bold"
-        onClick={() => handleSectionChange(forms.professionalDetails)}
+        onClick={() => handleSectionChange(forms.educationDetails)}
       >
-        Professional Experience
+        Education Experience
       </button>
       <div className={sectionClass}>
         {data.map((item) => (
@@ -67,8 +67,8 @@ function ProfessionalDetails({
   );
 }
 
-// ProfessionalDetails.defaultProps = {
+// EducationDetails.defaultProps = {
 //     data:
 // }
 
-export default ProfessionalDetails;
+export default EducationDetails;

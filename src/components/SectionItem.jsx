@@ -15,6 +15,7 @@ function SectionItem({
   updateBullet,
   deleteBullet,
   deleteSectionItem,
+  CustomForm,
 }) {
   const [openForm, setOpenForm] = useState(false);
   const [currentBulletId, setCurrentBulletId] = useState(null); //for updating
@@ -51,38 +52,7 @@ function SectionItem({
         </button>
       </div>
       <div className={itemClass}>
-        <form className="flex flex-col gap-3">
-          <FormItem
-            labelText="Company Name"
-            value={data.title}
-            name="title"
-            handleChange={handleChange}
-            itemId={data.id}
-          ></FormItem>
-          <FormItem
-            labelText="Position Title"
-            value={data.subtitle}
-            name="subtitle"
-            handleChange={handleChange}
-            itemId={data.id}
-          ></FormItem>
-          <FormItem
-            labelText="Date"
-            value={data.date}
-            name="date"
-            handleChange={handleChange}
-            itemId={data.id}
-            placeholder="01/2021 - Present"
-          ></FormItem>
-          <FormItem
-            textArea
-            labelText="Job Description"
-            value={data.description}
-            name="description"
-            handleChange={handleChange}
-            itemId={data.id}
-          ></FormItem>
-        </form>
+        <CustomForm data={data} handleChange={handleChange} />
         <BulletsList
           items={data.bullets}
           sectionItemId={data.id}

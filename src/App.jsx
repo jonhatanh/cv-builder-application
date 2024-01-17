@@ -5,6 +5,9 @@ import PersonalDetails from "./components/PersonalDetails";
 import CVPreview from "./components/CVPreview";
 import Forms from "./components/Forms";
 import ProfessionalDetails from "./components/ProfessionalDetails";
+import EducationDetails from "./components/EducationDetails";
+import ExperienceForm from "./components/ExperienceForm";
+import EducationForm from "./components/EducationForm";
 
 function App() {
   const [personalDetails, setPersonalDetails] = useState({
@@ -144,25 +147,33 @@ function App() {
     setSocialMedia(newSocialMedia);
   }
 
-  //Professional Form
-  function handleProfessionalDetails(property, value, id) {
-    const newExperience = experience.map((experienceItem) => {
-      if (experienceItem.id === id) {
-        const newExperienceItem = { ...experienceItem, [property]: value };
-        return newExperienceItem;
+  //Handle Custom Forms
+  function handleCustomFormDetails(property, value, id, state, setState) {
+    const newState = state.map((stateItem) => {
+      if (stateItem.id === id) {
+        return { ...stateItem, [property]: value };
       }
-      return experienceItem;
+      return stateItem;
     });
-    setExperience(newExperience);
+    setState(newState);
   }
-  function addBullet(bullet, objectId, state, setState) {
-    // let state =
-    //   stateName === "experience"
-    //     ? experience
-    //     : stateName === "education"
-    //       ? education
-    //       : others;
+  function handleProfessionalDetails(property, value, id) {
+    handleCustomFormDetails(property, value, id, experience, setExperience);
+    // const newExperience = experience.map((experienceItem) => {
+    //   if (experienceItem.id === id) {
+    //     const newExperienceItem = { ...experienceItem, [property]: value };
+    //     return newExperienceItem;
+    //   }
+    //   return experienceItem;
+    // });
+    // setExperience(newExperience);
+  }
+  function handleEducationDetails(property, value, id) {
+    handleCustomFormDetails(property, value, id, education, setEducation);
+  }
 
+  //Handle Add Bullet
+  function addBullet(bullet, objectId, state, setState) {
     const newState = state.map((stateItem) => {
       if (stateItem.id === objectId) {
         const newBullets = [...stateItem.bullets, bullet];
@@ -171,17 +182,16 @@ function App() {
       }
       return stateItem;
     });
-
     setState(newState);
-    // stateName === "experience"
-    //   ? setExperience(newState)
-    //   : stateName === "education"
-    //     ? setEducation(newState)
-    //     : setOthers(newState);
   }
   function addBulletExperience(bullet, objectId) {
     addBullet(bullet, objectId, experience, setExperience);
   }
+  function addBulletEducation(bullet, objectId) {
+    addBullet(bullet, objectId, education, setEducation);
+  }
+
+  //Handle Delete Bullet
   function deleteBullet(bulletId, objectId, state, setState) {
     const newState = state.map((stateItem) => {
       if (stateItem.id === objectId) {
@@ -198,7 +208,11 @@ function App() {
   function deleteBulletExperience(bulletId, objectId) {
     deleteBullet(bulletId, objectId, experience, setExperience);
   }
+  function deleteBulletEducation(bulletId, objectId) {
+    deleteBullet(bulletId, objectId, education, setEducation);
+  }
 
+  //Handle update bullet
   function updateBullet(bulletId, newBulletValue, objectId, state, setState) {
     const newState = state.map((stateItem) => {
       if (stateItem.id === objectId) {
@@ -218,6 +232,9 @@ function App() {
   function updateBulletExperience(bulletId, newBulletValue, objectId) {
     updateBullet(bulletId, newBulletValue, objectId, experience, setExperience);
   }
+  function updateBulletEducation(bulletId, newBulletValue, objectId) {
+    updateBullet(bulletId, newBulletValue, objectId, education, setEducation);
+  }
 
   //Sections Items
   function addNewSectionItem(state, setState) {
@@ -236,12 +253,18 @@ function App() {
   function addNewSectionItemExperience() {
     addNewSectionItem(experience, setExperience);
   }
+  function addNewSectionItemEducation() {
+    addNewSectionItem(education, setEducation);
+  }
   function deleteSectionItem(itemId, state, setState) {
     const newState = state.filter(stateItem => stateItem.id !== itemId);
     setState(newState);
   }
   function deleteSectionItemExperience(itemId) {
     deleteSectionItem(itemId, experience, setExperience);
+  }
+  function deleteSectionItemEducation(itemId) {
+    deleteSectionItem(itemId, education, setEducation);
   }
 
 
@@ -275,7 +298,20 @@ function App() {
           deleteBullet={deleteBulletExperience}
           addNewSectionItem={addNewSectionItemExperience}
           deleteSectionItem={deleteSectionItemExperience}
+          CustomForm={ExperienceForm}
         ></ProfessionalDetails>
+        <EducationDetails
+          currentSection={currentSection}
+          handleSectionChange={handleSectionChange}
+          data={education}
+          handleChange={handleEducationDetails}
+          addBullet={addBulletEducation}
+          updateBullet={updateBulletEducation}
+          deleteBullet={deleteBulletEducation}
+          addNewSectionItem={addNewSectionItemEducation}
+          deleteSectionItem={deleteSectionItemEducation}
+          CustomForm={EducationForm}
+        ></EducationDetails>
       </Forms>
       <CVPreview
         personalDetails={personalDetails}

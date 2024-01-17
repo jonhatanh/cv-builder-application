@@ -54,8 +54,8 @@ export function getIcon(iconName) {
 
 export const forms = {
   personalDetails: 1,
-  professionalExperience: 2,
-  educationalExperience: 3,
+  professionalDetails: 2,
+  educationDetails: 3,
 };
 
 export function getCollapsableClass(isOpen, baseClass) {
