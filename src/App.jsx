@@ -291,8 +291,8 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col gap-5 p-3 md:flex-row">
-      <div className="min-w-[400px] md:min-w-60 flex flex-col gap-4">
+    <div className="flex flex-col gap-5 p-3 md:flex-row md:justify-center">
+      <div className="flex min-w-[400px] flex-1 flex-col gap-4 md:min-w-60 md:max-w-[550px]">
         <PersonalDetails
           currentSection={currentSection}
           handleSectionChange={handleSectionChange}
@@ -337,8 +337,7 @@ function App() {
           currentSection={currentSection}
           handleSectionChange={handleSectionChange}
           data={others}
-          handleChange=
-          {handleOthersDetails}
+          handleChange={handleOthersDetails}
           addBullet={addBulletOthers}
           updateBullet={updateBulletOthers}
           deleteBullet={deleteBulletOthers}

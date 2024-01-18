@@ -26,31 +26,33 @@ function SocialMediaList({
     handleOpenForm(true);
   }
   return (
-    <ul>
+    <div>
       <span className="text-lg font-semibold">Social Media</span>
-      {socialMedia.map((social) => (
-        <li
-          className="flex items-center justify-between rounded-md p-3 shadow-md"
-          key={social.name}
-        >
-          <SocialMediaItem socialMedia={social} />
-          <div className="flex gap-2">
-            <button
-              className="rounded-full px-2 py-1 hover:bg-slate-300"
-              onClick={() => handleDeleteSocialMedia(social.id)}
-            >
-              <FontAwesomeIcon icon={faTrash} />
-            </button>
-            <button
-              className="rounded-full px-2 py-1 hover:bg-slate-300"
-              onClick={() => handleUpdateSocialMedia(social.id)}
-            >
-              <FontAwesomeIcon icon={faPenToSquare} />
-            </button>
-          </div>
-        </li>
-      ))}
-    </ul>
+      <ul className="flex flex-wrap gap-5">
+        {socialMedia.map((social) => (
+          <li
+            className="flex flex-1 items-center justify-between rounded-md p-3 shadow-md transition-all hover:-translate-y-1 hover:shadow-lg"
+            key={social.name}
+          >
+            <SocialMediaItem socialMedia={social} />
+            <div className="flex gap-1">
+              <button
+                className="rounded-full px-2 py-1 hover:bg-slate-300"
+                onClick={() => handleDeleteSocialMedia(social.id)}
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </button>
+              <button
+                className="rounded-full px-2 py-1 hover:bg-slate-300"
+                onClick={() => handleUpdateSocialMedia(social.id)}
+              >
+                <FontAwesomeIcon icon={faPenToSquare} />
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

@@ -20,7 +20,7 @@ function FormItem({
           name={name}
           value={value}
           onChange={(e) => handleChange(name, e.target.value, itemId)}
-          className="border-black-100 rounded-md border-2 p-1 focus:bg-sky-100"
+          className="border-black-100 rounded-md border-2 p-1 focus:bg-sky-100 min-h-16"
           {...restProps}
           cols="30"
           rows="2"

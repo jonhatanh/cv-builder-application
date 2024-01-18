@@ -30,7 +30,7 @@ function CVPreview({
   });
 
   return (
-    <div className="mx-auto flex min-w-[400px] max-w-[700px] flex-col gap-3 border-2 border-slate-400">
+    <div className="mx-auto flex min-w-[430px] max-w-[720px] flex-col gap-3 border-2 border-black border-opacity-10 px-10 py-5 shadow-xl md:m-0">
       <div>
         <h3 className="mb-1 text-center text-3xl font-bold">
           {personalDetails.name}
@@ -57,7 +57,7 @@ function CVPreview({
       {personalDetails.skills.trim() && (
         <div>
           <h4 className="mb-2 text-center text-lg font-bold">SKILLS</h4>
-          <ul className="columnred mx-auto flex max-w-sm flex-wrap justify-center gap-2 align-middle">
+          <ul className="mx-auto flex max-w-sm flex-wrap justify-center gap-2 align-middle lg:max-w-md">
             {skillsList}
           </ul>
         </div>
