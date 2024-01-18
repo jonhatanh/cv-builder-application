@@ -3,6 +3,9 @@ import FormItem from "./FormItem";
 import SocialMediaForm from "./SocialMediaForm";
 import SocialMediaList from "./SocialMediaList";
 import { forms, getCollapsableClass } from "../helpers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPerson, faUser } from "@fortawesome/free-solid-svg-icons";
+import SectionButton from "./SectionButton";
 function PersonalDetails({
   currentSection,
   handleSectionChange,
@@ -29,19 +32,20 @@ function PersonalDetails({
     setOpenForm(open);
   }
 
+  const sectionIsOpen = currentSection === forms.personalDetails;
   const sectionClass = getCollapsableClass(
     currentSection === forms.personalDetails,
-    "flex flex-col gap-3",
+    "flex flex-col gap-3 pb-3 px-4",
   );
 
   return (
-    <div className="flex flex-col gap-4 rounded-md border-2 border-black  border-opacity-30 p-2 px-4 pb-5 shadow-md">
-      <button
-        className="text-xl font-bold"
+    <div className="flex flex-col rounded-md border-2 border-sky-700 border-opacity-50 bg-white shadow-md">
+      <SectionButton
         onClick={() => handleSectionChange(forms.personalDetails)}
+        sectionIsOpen={sectionIsOpen}
       >
-        Personal Details
-      </button>
+        <FontAwesomeIcon className="text-sm" icon={faUser} /> Personal Details
+      </SectionButton>
       <div className={sectionClass}>
         <form className="flex flex-col gap-3">
           <FormItem

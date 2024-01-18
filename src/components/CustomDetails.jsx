@@ -3,9 +3,11 @@ import { getCollapsableClass } from "../helpers";
 import SectionItem from "./SectionItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import SectionButton from "./SectionButton";
 
 function CustomDetails({
   detailsName,
+  detailsIcon,
   detailsCollapseValue,
   currentSection,
   handleSectionChange,
@@ -35,13 +37,11 @@ function CustomDetails({
     "flex flex-col gap-3",
   );
   return (
-    <div className="flex flex-col gap-4 rounded-md border-2 border-sky-300 p-2">
-      <button
-        className="mb-2 text-xl font-bold"
-        onClick={() => handleSectionChange(detailsCollapseValue)}
-      >
+    <div className="flex flex-col gap-4 rounded-md border-2 border-sky-700 border-opacity-50 bg-white shadow-md ">
+      <SectionButton onClick={() => handleSectionChange(detailsCollapseValue)}>
+        {detailsIcon}
         {detailsName}
-      </button>
+      </SectionButton>
       <div className={sectionClass}>
         {data.map((item) => (
           <SectionItem

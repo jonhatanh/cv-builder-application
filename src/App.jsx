@@ -6,6 +6,8 @@ import EducationForm from "./components/EducationForm";
 import CustomDetails from "./components/CustomDetails";
 import { forms } from "./helpers";
 import OthersForm from "./components/OthersForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBuilding, faGraduationCap, faMedal } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [personalDetails, setPersonalDetails] = useState({
@@ -291,8 +293,8 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col gap-5 p-3 md:flex-row md:justify-center">
-      <div className="flex min-w-[400px] flex-1 flex-col gap-4 md:min-w-60 md:max-w-[550px]">
+    <div className="flex flex-col gap-5 bg-slate-100 p-3 md:flex-row md:justify-center">
+      <div className="flex min-w-[400px] flex-1 flex-col gap-4 md:min-w-60 md:max-w-[550px] ">
         <PersonalDetails
           currentSection={currentSection}
           handleSectionChange={handleSectionChange}
@@ -305,6 +307,7 @@ function App() {
         ></PersonalDetails>
         <CustomDetails
           detailsName="Professional Experience"
+          detailsIcon={<FontAwesomeIcon icon={faBuilding} />}
           detailsCollapseValue={forms.professionalDetails}
           currentSection={currentSection}
           handleSectionChange={handleSectionChange}
@@ -319,6 +322,7 @@ function App() {
         />
         <CustomDetails
           detailsName="Education Details"
+          detailsIcon={<FontAwesomeIcon icon={faGraduationCap} />}
           detailsCollapseValue={forms.educationDetails}
           currentSection={currentSection}
           handleSectionChange={handleSectionChange}
@@ -333,6 +337,7 @@ function App() {
         />
         <CustomDetails
           detailsName="Others"
+          detailsIcon={<FontAwesomeIcon icon={faMedal} />}
           detailsCollapseValue={forms.othersDetails}
           currentSection={currentSection}
           handleSectionChange={handleSectionChange}
