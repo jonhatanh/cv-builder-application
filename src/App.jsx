@@ -1,7 +1,6 @@
 import { useState } from "react";
 import PersonalDetails from "./components/PersonalDetails";
 import CVPreview from "./components/CVPreview";
-import Forms from "./components/Forms";
 import ExperienceForm from "./components/ExperienceForm";
 import EducationForm from "./components/EducationForm";
 import CustomDetails from "./components/CustomDetails";
@@ -293,7 +292,7 @@ function App() {
 
   return (
     <div className="flex flex-col gap-5 p-3 md:flex-row">
-      <Forms>
+      <div className="min-w-[400px] md:min-w-60 flex flex-col gap-4">
         <PersonalDetails
           currentSection={currentSection}
           handleSectionChange={handleSectionChange}
@@ -338,7 +337,8 @@ function App() {
           currentSection={currentSection}
           handleSectionChange={handleSectionChange}
           data={others}
-          handleChange={handleOthersDetails}
+          handleChange=
+          {handleOthersDetails}
           addBullet={addBulletOthers}
           updateBullet={updateBulletOthers}
           deleteBullet={deleteBulletOthers}
@@ -346,7 +346,7 @@ function App() {
           deleteSectionItem={deleteSectionItemOthers}
           CustomForm={OthersForm}
         />
-      </Forms>
+      </div>
       <CVPreview
         personalDetails={personalDetails}
         socialMedia={socialMedia}

@@ -1,4 +1,5 @@
 function CVSection({ title, sectionData }) {
+  if(sectionData.length === 0) return null;
   function getListElement(bullet) {
     const content = getLiContent(bullet.text);
     return (

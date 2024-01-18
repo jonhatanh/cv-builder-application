@@ -17,7 +17,7 @@ function CVPreview({
 }) {
   const skillsList = personalDetails.skills.split(",").map((skill, index) => {
     skill = skill.trim();
-    if(!skill) return null;
+    if (!skill) return null;
     if (index === 0) {
       return <li key={index}>{skill}</li>;
     }
@@ -36,26 +36,32 @@ function CVPreview({
           {personalDetails.name}
         </h3>
         <div className="mb-3 flex flex-wrap justify-center gap-x-3 gap-y-0">
-          <p>
-            <FontAwesomeIcon className="mr-1" icon={faEnvelope} />
-            {personalDetails.email}
-          </p>
-          <p>
-            <FontAwesomeIcon className="mr-1" icon={faMobileScreenButton} />
-            {personalDetails.phone}
-          </p>
+          {personalDetails.email && (
+            <p>
+              <FontAwesomeIcon className="mr-1" icon={faEnvelope} />
+              {personalDetails.email}
+            </p>
+          )}
+          {personalDetails.phone && (
+            <p>
+              <FontAwesomeIcon className="mr-1" icon={faMobileScreenButton} />
+              {personalDetails.phone}
+            </p>
+          )}
           {socialMedia.map((socialItem) => (
             <SocialMediaItem key={socialItem.id} socialMedia={socialItem} />
           ))}
         </div>
         <div className="h-1 w-full bg-black"></div>
       </div>
-      <div>
-        <h4 className="mb-2 text-center text-lg font-bold">SKILLS</h4>
-        <ul className="columnred mx-auto flex max-w-sm flex-wrap justify-center gap-2 align-middle">
-          {skillsList}
-        </ul>
-      </div>
+      {personalDetails.skills.trim() && (
+        <div>
+          <h4 className="mb-2 text-center text-lg font-bold">SKILLS</h4>
+          <ul className="columnred mx-auto flex max-w-sm flex-wrap justify-center gap-2 align-middle">
+            {skillsList}
+          </ul>
+        </div>
+      )}
       <CVSection
         title="PROFESSIONAL EXPERIENCE"
         sectionData={experience}

@@ -1,5 +1,10 @@
-import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleInfo,
+  faPenToSquare,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 
 function BulletsList({
   items,
@@ -8,6 +13,7 @@ function BulletsList({
   changeIsUpdating,
   handleOpenForm,
 }) {
+  const [tooltipOpen, setTooltipOpen] = useState(false);
   // function handleDeleteClick(mediaId) {
   //   deleteSocialMedia(mediaId);
   // }
@@ -24,9 +30,28 @@ function BulletsList({
     changeIsUpdating(true, itemId);
     handleOpenForm(true);
   }
+
+  let tooltipClass = "absolute bottom-full left-full w-60 rounded-md p-2  border-2 bg-sky-500 text-sm font-medium text-white";
+  tooltipClass += tooltipOpen ? " block" : " hidden";
   return (
     <ul>
-      <span className="text-lg font-semibold">Bullet List</span>
+      <span className="flex items-center gap-2 text-lg font-semibold">
+        Bullet List{" "}
+        <div className="relative block">
+          <FontAwesomeIcon
+            onMouseEnter={() => setTooltipOpen(true)}
+            onMouseLeave={() => setTooltipOpen(false)}
+            icon={faCircleInfo}
+          />
+          <div className={tooltipClass}>
+            <p>
+              You can add a link in any part of your bullet using the following
+              pattern: [word](URL).
+            </p>
+            <p>I.E: "See my [GitHub](https://github.com/) account here!"</p>
+          </div>
+        </div>
+      </span>
       {items.map((item) => (
         <li
           className="flex items-center justify-between rounded-md p-3 shadow-md"
