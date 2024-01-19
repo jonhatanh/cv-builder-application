@@ -34,10 +34,12 @@ function CustomDetails({
 
   const sectionClass = getCollapsableClass(
     currentSection === detailsCollapseValue,
-    "flex flex-col gap-3",
+    "flex flex-col gap-4 mb-6",
   );
+
+  const noItemOpen = currentItemId === "" || data.length === 0;
   return (
-    <div className="flex flex-col gap-4 rounded-md border-2 border-sky-700 border-opacity-50 bg-white shadow-md ">
+    <div className="flex flex-col gap-4 rounded-md border-2 border-sky-700 border-opacity-50 bg-white shadow-md">
       <SectionButton onClick={() => handleSectionChange(detailsCollapseValue)}>
         {detailsIcon}
         {detailsName}
@@ -57,13 +59,15 @@ function CustomDetails({
             CustomForm={CustomForm}
           ></SectionItem>
         ))}
-        <button
-          className="flex items-center justify-center gap-1 border-2 border-sky-500"
-          onClick={handleAddNewItem}
-        >
-          <FontAwesomeIcon icon={faPlus} />
-          Add Item
-        </button>
+        {noItemOpen && (
+          <button
+            className="mx-3 mt-2 flex max-w-60 items-center justify-center gap-1 self-center rounded-md border-2 border-sky-500 px-2 py-1 transition-colors hover:bg-sky-500 hover:text-white"
+            onClick={handleAddNewItem}
+          >
+            <FontAwesomeIcon icon={faPlus} />
+            Add Item
+          </button>
+        )}
       </div>
     </div>
   );

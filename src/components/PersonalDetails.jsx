@@ -4,7 +4,7 @@ import SocialMediaForm from "./SocialMediaForm";
 import SocialMediaList from "./SocialMediaList";
 import { forms, getCollapsableClass } from "../helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPerson, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import SectionButton from "./SectionButton";
 function PersonalDetails({
   currentSection,

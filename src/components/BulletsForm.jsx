@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import FormItem from "./FormItem";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { icons } from "../helpers";
+import Button from "./Button";
 
 function BulletsForm({
   allBullets,
@@ -19,7 +18,7 @@ function BulletsForm({
   });
 
   const isUpdating = currentBulletId !== null;
-  const actionWord = isUpdating ? "Update" : "Add";
+  const actionWord = isUpdating ? "Update" : "Save";
 
   useEffect(() => {
     if (currentBulletId) {
@@ -42,9 +41,9 @@ function BulletsForm({
     setBullet(newBullet);
   }
 
-  let hiddenDivClass = "flex flex-wrap gap-3 translate";
-  if (formIsOpen) hiddenDivClass += "h-auto flex flex-col";
-  else hiddenDivClass += "h-0 hidden";
+  let hiddenDivClass = "flex flex-col gap-3 translate w-full flex-1";
+  if (formIsOpen) hiddenDivClass += " h-auto";
+  else hiddenDivClass += " h-0 hidden";
 
   function resetBulletsForm() {
     const newId = isUpdating ? crypto.randomUUID() : bullet.id;
@@ -72,42 +71,25 @@ function BulletsForm({
   }
 
   return (
-    <div className="flex flex-col border-2 border-red-100">
-      <button
-        type="button"
-        htmlFor="dd"
-        className="text-lg font-semibold"
-        onClick={() => handleOpenForm(!formIsOpen)}
-      >
-        {actionWord} Bullet
-      </button>
-      <form onSubmit={handleFormSubmit} className={hiddenDivClass}>
-        <FormItem
-          // labelText="Name..."
-          textArea
-          value={bullet.text}
-          name="text"
-          placeholder="Bullet Description"
-          handleChange={handleChange}
-          required
-        ></FormItem>
-        <div className="flex flex-wrap gap-3">
-          <button
-            className="block flex-1 rounded-full border-2 bg-red-500 font-semibold text-white transition-all ease-in-out hover:bg-red-700"
-            type="button"
-            onClick={resetBulletsForm}
-          >
-            Cancel
-          </button>
-          <button
-            className="block flex-1 rounded-full border-2 bg-sky-500 font-semibold text-white transition-all ease-in-out hover:bg-sky-700"
-            type="submit"
-          >
-            {actionWord}
-          </button>
-        </div>
-      </form>
-    </div>
+    <form onSubmit={handleFormSubmit} className={hiddenDivClass}>
+      <FormItem
+        // labelText="Name..."
+        textArea
+        value={bullet.text}
+        name="text"
+        placeholder="Bullet Description"
+        handleChange={handleChange}
+        required
+      ></FormItem>
+      <div className="flex flex-1 justify-between gap-1">
+        <Button color="red" type="button" onClick={resetBulletsForm}>
+          Cancel
+        </Button>
+        <Button color="sky" type="submit">
+          {actionWord}
+        </Button>
+      </div>
+    </form>
   );
 }
 

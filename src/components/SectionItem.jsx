@@ -1,7 +1,6 @@
 import { useState } from "react";
 import BulletsForm from "./BulletsForm";
 import BulletsList from "./BulletsList";
-import FormItem from "./FormItem";
 import { getCollapsableClass } from "../helpers";
 import { faCaretDown, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -33,20 +32,32 @@ function SectionItem({
     }
   }
 
-  const itemClass = getCollapsableClass(currentItemId === data.id, "w-full");
+  const sectionIsOpen = currentItemId === data.id;
+  let caretClass = sectionIsOpen ? "rotate-180 pb-1" : "";
+
+  const itemClass = getCollapsableClass(
+    sectionIsOpen,
+    "w-full p-1 flex flex-col gap-4 pb-3",
+  );
   return (
-    <div className="flex w-full flex-col items-start justify-center border-2 border-sky-300">
-      <div className="flex w-full items-center justify-between text-xl font-bold">
+    <div className="mx-5 flex flex-col items-start justify-center rounded-bl-md rounded-br-md rounded-tl-md rounded-tr-md border-b-2 border-t-2 border-sky-500">
+      <div className="flex w-full items-center justify-between text-xl font-bold ">
         <button
-          className="flex w-full justify-between text-xl font-bold"
+          className="flex w-full justify-between px-1 py-2 text-xl font-semibold"
           onClick={() => handleItemChange(data.id)}
         >
-          <span>{data.title}</span>
-          <FontAwesomeIcon className="pt-1" icon={faCaretDown} />
-        </button>
-        <button className="flex items-center" onClick={() => deleteSectionItem(data.id)}>
+          <span className="text-start">{data.title}</span>
           <FontAwesomeIcon
-            className="mx-3 rounded-full px-1 px-2 py-1 text-base hover:bg-slate-300"
+            className={"pt-1 transition-all " + caretClass}
+            icon={faCaretDown}
+          />
+        </button>
+        <button
+          className="ml-4 mr-2 flex items-center"
+          onClick={() => deleteSectionItem(data.id)}
+        >
+          <FontAwesomeIcon
+            className="rounded-full p-2 text-base hover:bg-slate-300"
             icon={faTrash}
           />
         </button>
@@ -56,6 +67,8 @@ function SectionItem({
         <BulletsList
           items={data.bullets}
           sectionItemId={data.id}
+          currentBulletId={currentBulletId}
+          formIsOpen={openForm}
           deleteBullet={deleteBullet}
           changeIsUpdating={changeIsUpdating}
           handleOpenForm={handleOpenForm}

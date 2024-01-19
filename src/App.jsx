@@ -7,7 +7,11 @@ import CustomDetails from "./components/CustomDetails";
 import { forms } from "./helpers";
 import OthersForm from "./components/OthersForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBuilding, faGraduationCap, faMedal } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBuilding,
+  faGraduationCap,
+  faMedal,
+} from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [personalDetails, setPersonalDetails] = useState({
@@ -106,23 +110,6 @@ function App() {
       ],
     },
   ]);
-  // const [skills, setSkills] = useState([
-  //   "HTML ",
-  //   "CSS ",
-  //   "JavaScript ",
-  //   "React ",
-  //   "AlpineJS ",
-  //   "Livewire ",
-  //   "SASS ",
-  //   "Tailwind ",
-  //   "NodeJS ",
-  //   "PHP ",
-  //   "Laravel ",
-  //   "MySQL ",
-  //   "Pest ",
-  //   "OOP ",
-  //   "Git",
-  // ]);
 
   //Personal Details Form
   function handlePersonalDetails(property, value) {
@@ -160,14 +147,6 @@ function App() {
   }
   function handleProfessionalDetails(property, value, id) {
     handleCustomFormDetails(property, value, id, experience, setExperience);
-    // const newExperience = experience.map((experienceItem) => {
-    //   if (experienceItem.id === id) {
-    //     const newExperienceItem = { ...experienceItem, [property]: value };
-    //     return newExperienceItem;
-    //   }
-    //   return experienceItem;
-    // });
-    // setExperience(newExperience);
   }
   function handleEducationDetails(property, value, id) {
     handleCustomFormDetails(property, value, id, education, setEducation);
@@ -356,7 +335,6 @@ function App() {
         socialMedia={socialMedia}
         education={education}
         experience={experience}
-        // skills={skills}
         others={others}
       ></CVPreview>
     </div>

@@ -1,8 +1,12 @@
-import { faPen, faPenToSquare, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPen,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getIcon } from "../helpers";
 import SocialMediaItem from "./SocialMediaItem";
 import BulletListButton from "./BulletListButton";
+import DeleteButton from "./DeleteButton";
+import UpdateButton from "./UpdateButton";
 
 function SocialMediaList({
   socialMedia,
@@ -10,18 +14,13 @@ function SocialMediaList({
   deleteSocialMedia,
   changeIsUpdating,
   handleOpenForm,
-  formIsOpen
+  formIsOpen,
 }) {
-  // function handleDeleteClick(mediaId) {
-  //   deleteSocialMedia(mediaId);
-  // }
-  // if (socialMedia.length === 0) {
-  //   return null;
-  // }
-const isUpdating = currentSocialMediaId !== null;
-const actionWord = isUpdating ? "Update" : "Add";
-const buttonIcon = isUpdating ? faPen : faPlus;
-let extraIconClass = !isUpdating && formIsOpen ? "rotate-45" : "";
+  
+  const isUpdating = currentSocialMediaId !== null;
+  const actionWord = isUpdating ? "Updating" : "Add";
+  const buttonIcon = isUpdating ? faPen : faPlus;
+  let extraIconClass = !isUpdating && formIsOpen ? "rotate-45" : "";
 
   function handleDeleteSocialMedia(socialMediaId) {
     deleteSocialMedia(socialMediaId);
@@ -43,22 +42,16 @@ let extraIconClass = !isUpdating && formIsOpen ? "rotate-45" : "";
           >
             <SocialMediaItem socialMedia={social} />
             <div className="flex">
-              <button
-                className="rounded-full px-2 py-1 transition-colors hover:bg-slate-300"
+              <DeleteButton
                 onClick={() => handleDeleteSocialMedia(social.id)}
-              >
-                <FontAwesomeIcon icon={faTrash} />
-              </button>
-              <button
-                className="rounded-full px-2 py-1 transition-colors hover:bg-slate-300"
+              />
+              <UpdateButton
                 onClick={() => handleUpdateSocialMedia(social.id)}
-              >
-                <FontAwesomeIcon icon={faPenToSquare} />
-              </button>
+               />
             </div>
           </li>
         ))}
-        <BulletListButton onClick={() => handleOpenForm(!formIsOpen)} >
+        <BulletListButton onClick={() => handleOpenForm(!formIsOpen)}>
           <FontAwesomeIcon
             className={"mr-1 transition-all " + extraIconClass}
             icon={buttonIcon}

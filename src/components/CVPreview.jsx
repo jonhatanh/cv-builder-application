@@ -30,7 +30,7 @@ function CVPreview({
   });
 
   return (
-    <div className="mx-auto flex min-w-[430px] max-w-[720px] flex-col gap-3 border-2 border-violet-700 border-opacity-10 px-10 py-5 shadow-xl md:m-0">
+    <div className="mx-auto flex min-w-[430px] max-w-[720px] flex-col gap-3 border-2 border-violet-700 border-opacity-10 bg-white px-10 py-5 shadow-xl md:m-0">
       <div>
         <h3 className="mb-1 text-center text-3xl font-bold">
           {personalDetails.name}

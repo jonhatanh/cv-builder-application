@@ -10,7 +10,7 @@ function FormItem({
 }) {
   return (
     <div className="flex flex-1 flex-col">
-      <label htmlFor={name} className="text-lg font-semibold">
+      <label className="text-lg font-semibold">
         {labelText}
       </label>
       {textArea ? (
