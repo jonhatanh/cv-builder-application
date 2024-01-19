@@ -35,7 +35,7 @@ function PersonalDetails({
   const sectionIsOpen = currentSection === forms.personalDetails;
   const sectionClass = getCollapsableClass(
     currentSection === forms.personalDetails,
-    "flex flex-col gap-3 pb-3 px-4",
+    "flex flex-col gap-5 pb-3 px-4",
   );
 
   return (
@@ -78,16 +78,18 @@ function PersonalDetails({
         </form>
         <SocialMediaList
           socialMedia={socialMedia}
+          currentSocialMediaId={currentSocialMediaId}
           deleteSocialMedia={deleteSocialMedia}
           changeIsUpdating={changeIsUpdating}
+          formIsOpen={openForm}
           handleOpenForm={handleOpenForm}
         />
         <SocialMediaForm
           allSocialMedia={socialMedia}
           currentSocialMediaId={currentSocialMediaId}
           addSocialMedia={addSocialMedia}
-          handleOpenForm={handleOpenForm}
           formIsOpen={openForm}
+          handleOpenForm={handleOpenForm}
           changeIsUpdating={changeIsUpdating}
           updateSocialMedia={updateSocialMedia}
         ></SocialMediaForm>

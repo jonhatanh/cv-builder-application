@@ -8,8 +8,6 @@ function FormItem({
   itemId = undefined,
   ...restProps
 }) {
-
-  
   return (
     <div className="flex flex-1 flex-col">
       <label htmlFor={name} className="text-lg font-semibold">
@@ -20,7 +18,7 @@ function FormItem({
           name={name}
           value={value}
           onChange={(e) => handleChange(name, e.target.value, itemId)}
-          className="border-black-100 rounded-md border-2 p-1 focus:bg-sky-100 min-h-16"
+          className="min-h-16 rounded-md border-2 border-sky-300 py-1 px-2 py-1 invalid:border-red-300 focus:bg-sky-100 focus:bg-sky-100 focus:outline-sky-500 invalid:focus:bg-red-100 invalid:focus:outline-red-300"
           {...restProps}
           cols="30"
           rows="2"
@@ -31,7 +29,7 @@ function FormItem({
           name={name}
           value={value}
           onChange={(e) => handleChange(name, e.target.value, itemId)}
-          className="border-black-100 rounded-md border-2 p-1 focus:bg-sky-100"
+          className="rounded-md border-2 border-sky-300 px-2 py-1 invalid:border-red-300 focus:bg-sky-100 focus:outline-sky-500 invalid:focus:bg-red-100 invalid:focus:outline-red-300"
           {...restProps}
         />
       )}

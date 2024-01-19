@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import FormItem from "./FormItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getCollapsableClass, icons } from "../helpers";
+import { faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 function SocialMediaForm({
   allSocialMedia,
@@ -21,6 +22,7 @@ function SocialMediaForm({
 
   const isUpdating = currentSocialMediaId !== null;
   const actionWord = isUpdating ? "Update" : "Add";
+  const buttonIcon = isUpdating ? faPen : faPlus;
 
   useEffect(() => {
     if (currentSocialMediaId) {
@@ -48,7 +50,6 @@ function SocialMediaForm({
     const newSocialMedia = { ...socialMedia, [property]: value };
     setSocialMedia(newSocialMedia);
   }
-
 
   let hiddenDivClass = getCollapsableClass(
     formIsOpen,
@@ -85,14 +86,7 @@ function SocialMediaForm({
   }
 
   return (
-    <div className="flex flex-col border-2 border-red-100">
-      <button
-        type="button"
-        className="text-lg font-semibold"
-        onClick={() => handleOpenForm(!formIsOpen)}
-      >
-        {actionWord} Social Media
-      </button>
+    <div>
       <form onSubmit={handleFormSubmit} className={hiddenDivClass}>
         <FormItem
           // labelText="Name..."

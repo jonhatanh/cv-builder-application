@@ -1,20 +1,26 @@
-import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faPenToSquare, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getIcon } from "../helpers";
 import SocialMediaItem from "./SocialMediaItem";
 
 function SocialMediaList({
   socialMedia,
+  currentSocialMediaId,
   deleteSocialMedia,
   changeIsUpdating,
   handleOpenForm,
+  formIsOpen
 }) {
   // function handleDeleteClick(mediaId) {
   //   deleteSocialMedia(mediaId);
   // }
-  if (socialMedia.length === 0) {
-    return null;
-  }
+  // if (socialMedia.length === 0) {
+  //   return null;
+  // }
+const isUpdating = currentSocialMediaId !== null;
+const actionWord = isUpdating ? "Update" : "Add";
+const buttonIcon = isUpdating ? faPen : faPlus;
+let extraIconClass = !isUpdating && formIsOpen ? "rotate-45" : "";
 
   function handleDeleteSocialMedia(socialMediaId) {
     deleteSocialMedia(socialMediaId);
@@ -35,15 +41,15 @@ function SocialMediaList({
             key={social.name}
           >
             <SocialMediaItem socialMedia={social} />
-            <div className="flex gap-1">
+            <div className="flex">
               <button
-                className="rounded-full px-2 py-1 hover:bg-slate-300"
+                className="rounded-full px-2 py-1 transition-colors hover:bg-slate-300"
                 onClick={() => handleDeleteSocialMedia(social.id)}
               >
                 <FontAwesomeIcon icon={faTrash} />
               </button>
               <button
-                className="rounded-full px-2 py-1 hover:bg-slate-300"
+                className="rounded-full px-2 py-1 transition-colors hover:bg-slate-300"
                 onClick={() => handleUpdateSocialMedia(social.id)}
               >
                 <FontAwesomeIcon icon={faPenToSquare} />
@@ -51,6 +57,16 @@ function SocialMediaList({
             </div>
           </li>
         ))}
+        <button
+          className="flex flex-1 items-center rounded-md p-3  shadow-md shadow-sky-100 transition-all hover:-translate-y-1 hover:text-sky-700 hover:shadow-lg hover:shadow-sky-200"
+          onClick={() => handleOpenForm(!formIsOpen)}
+        >
+          <FontAwesomeIcon
+            className={"mr-1 transition-all " + extraIconClass}
+            icon={buttonIcon}
+          />
+          {actionWord}
+        </button>
       </ul>
     </div>
   );
