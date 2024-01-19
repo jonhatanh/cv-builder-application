@@ -2,6 +2,7 @@ import { faPen, faPenToSquare, faPlus, faTrash } from "@fortawesome/free-solid-s
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getIcon } from "../helpers";
 import SocialMediaItem from "./SocialMediaItem";
+import BulletListButton from "./BulletListButton";
 
 function SocialMediaList({
   socialMedia,
@@ -57,16 +58,13 @@ let extraIconClass = !isUpdating && formIsOpen ? "rotate-45" : "";
             </div>
           </li>
         ))}
-        <button
-          className="flex flex-1 items-center rounded-md p-3  shadow-md shadow-sky-100 transition-all hover:-translate-y-1 hover:text-sky-700 hover:shadow-lg hover:shadow-sky-200"
-          onClick={() => handleOpenForm(!formIsOpen)}
-        >
+        <BulletListButton onClick={() => handleOpenForm(!formIsOpen)} >
           <FontAwesomeIcon
             className={"mr-1 transition-all " + extraIconClass}
             icon={buttonIcon}
           />
           {actionWord}
-        </button>
+        </BulletListButton>
       </ul>
     </div>
   );
