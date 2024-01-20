@@ -37,7 +37,7 @@ function SocialMediaList({
       <ul className="flex flex-wrap gap-5">
         {socialMedia.map((social) => (
           <li
-            className="flex flex-1 items-center justify-between rounded-md p-3 shadow-md transition-all hover:-translate-y-1 hover:shadow-lg"
+            className="flex flex-1 max-w-[350px] items-center justify-between rounded-md p-3 shadow-md transition-all hover:-translate-y-1 hover:shadow-lg"
             key={social.name}
           >
             <SocialMediaItem socialMedia={social} />

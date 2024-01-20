@@ -62,7 +62,7 @@ function BulletsList({
             className="flex items-center justify-between rounded-md p-3 shadow-md"
             key={item.id}
           >
-            <p>{item.text}</p>
+            <p className="overflow-hidden break-words">{item.text}</p>
             <div className="flex gap-2">
               <DeleteButton onClick={() => handleDelete(item.id)} />
               <UpdateButton onClick={() => handleUpdate(item.id)} />

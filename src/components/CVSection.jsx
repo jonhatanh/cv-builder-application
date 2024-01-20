@@ -3,7 +3,10 @@ function CVSection({ title, sectionData }) {
   function getListElement(bullet) {
     const content = getLiContent(bullet.text);
     return (
-      <li className="marker:text-xs" key={bullet.id}>
+      <li
+        className="break-words marker:text-xs"
+        key={bullet.id}
+      >
         {content}
       </li>
     );
@@ -35,11 +38,11 @@ function CVSection({ title, sectionData }) {
     return (
       <div className="mb-2" key={section.id}>
         <div className="-mb-1 flex justify-between gap-2">
-          <h5 className="text-md font-bold">{section.title}</h5>
-          <p className="text-sm font-bold text-end">{section.date}</p>
+          <h5 className="text-md font-bold break-words w-4/6">{section.title}</h5>
+          <p className="text-sm font-bold text-end ">{section.date}</p>
         </div>
         <h6 className="text-sm font-bold">{section.subtitle}</h6>
-        <p className="my-1 text-sm">{section.description}</p>
+        <p className="my-1 text-sm break-words">{section.description}</p>
         <ul className="ml-7 list-disc text-sm">
           {section.bullets.map((bullet) => getListElement(bullet))}
         </ul>

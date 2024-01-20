@@ -22,7 +22,10 @@ function CVPreview({
       return <li key={index}>{skill}</li>;
     }
     return (
-      <li key={index} className="flex items-center gap-2">
+      <li
+        key={index}
+        className="flex flex items-center items-center gap-2 overflow-hidden break-words"
+      >
         <span className="text-xs">|</span>
         {skill}
       </li>
@@ -32,18 +35,18 @@ function CVPreview({
   return (
     <div className="mx-auto flex min-w-[430px] max-w-[720px] flex-col gap-3 border-2 border-violet-700 border-opacity-10 bg-white px-10 py-5 shadow-xl md:m-0">
       <div>
-        <h3 className="mb-1 text-center text-3xl font-bold">
+        <h3 className="mb-1 break-words text-center text-3xl font-bold">
           {personalDetails.name}
         </h3>
         <div className="mb-3 flex flex-wrap justify-center gap-x-3 gap-y-0">
           {personalDetails.email && (
-            <p>
+            <p className="flex items-center overflow-hidden break-words">
               <FontAwesomeIcon className="mr-1" icon={faEnvelope} />
               {personalDetails.email}
             </p>
           )}
           {personalDetails.phone && (
-            <p>
+            <p className="flex items-center overflow-hidden break-words">
               <FontAwesomeIcon className="mr-1" icon={faMobileScreenButton} />
               {personalDetails.phone}
             </p>

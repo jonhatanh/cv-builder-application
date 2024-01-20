@@ -43,10 +43,12 @@ function SectionItem({
     <div className="mx-5 flex flex-col items-start justify-center rounded-bl-md rounded-br-md rounded-tl-md rounded-tr-md border-b-2 border-t-2 border-sky-500">
       <div className="flex w-full items-center justify-between text-xl font-bold ">
         <button
-          className="flex w-full justify-between px-1 py-2 text-xl font-semibold"
+          className="flex w-11/12 items-center justify-between px-1 py-2 text-xl font-semibold"
           onClick={() => handleItemChange(data.id)}
         >
-          <span className="text-start">{data.title}</span>
+          <span className="inline-block overflow-hidden break-words text-start">
+            {data.title}
+          </span>
           <FontAwesomeIcon
             className={"pt-1 transition-all " + caretClass}
             icon={faCaretDown}

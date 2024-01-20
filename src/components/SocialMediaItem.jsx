@@ -8,14 +8,14 @@ function socialMediaItem({ socialMedia }) {
   );
   return socialMedia.link ? (
     <a
-      className="flex items-center underline underline-offset-2"
+      className="flex items-center underline underline-offset-2 overflow-hidden"
       href={socialMedia.link}
     >
       {socialMediaIcon}
       {socialMedia.name}
     </a>
   ) : (
-    <p className="flex items-center">
+    <p className="flex items-center overflow-hidden">
       {socialMediaIcon}
       {socialMedia.name}
     </p>
