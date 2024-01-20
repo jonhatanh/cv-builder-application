@@ -15,53 +15,54 @@ import {
 
 function App() {
   const [personalDetails, setPersonalDetails] = useState({
-    name: "JONHATAN HIGUERA",
-    email: "jonhatan.higuera@gmail.com",
-    phone: "33-1707-9174",
-    skills: `HTML, CSS,JavaScript, React, AlpineJS, Livewire,SASS ,Tailwind, NodeJS, PHP, Laravel, MySQL, Pest, OOP, Git,`,
+    name: "John Doe",
+    email: "john.doe@example.com",
+    phone: "123-456-7890",
+    skills:
+      "HTML, CSS, JavaScript, React, SASS, Tailwind, Node.js, PHP, Laravel, MySQL, Git",
   });
   const [socialMedia, setSocialMedia] = useState([
     {
       id: crypto.randomUUID(),
       name: "LinkedIn",
-      link: "https://www.linkedin.com/in/jonhatan-higuera/",
+      link: "https://www.linkedin.com/in/john-doe/",
       iconName: "LinkedIn",
     },
     {
       id: crypto.randomUUID(),
       name: "GitHub",
-      link: "https://github.com/jonhatanh",
+      link: "https://github.com/johndoe",
       iconName: "GitHub",
     },
   ]);
   const [education, setEducation] = useState([
     {
       id: crypto.randomUUID(),
-      title: "UNIVERSITY OF GUADALAJARA (CUCEI)",
-      subtitle: "Degree in Computer Science (Ingeniería Informática)",
-      date: "02/2021 - Present",
-      description: "",
+      title: "UNIVERSITY OF EXAMPLE",
+      subtitle: "Degree in Computer Science",
+      date: "09/2018 - 06/2022",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       bullets: [
         {
           id: crypto.randomUUID(),
-          text: "GPA: 98 / 100",
+          text: "GPA: 3.8 / 4.0",
         },
         {
           id: crypto.randomUUID(),
-          text: "Exp. Graduation Date: 06/2024",
+          text: "Graduation Date: 06/2022",
         },
       ],
     },
     {
       id: crypto.randomUUID(),
-      title: "CENTRO DE ENSEÑANZA TÉCNICA INDUSTRIAL",
+      title: "EXAMPLE TECHNICAL INSTITUTE",
       subtitle: "Degree in Software Development",
-      date: "08/2016 - 06/2020",
-      description: "",
+      date: "09/2014 - 06/2018",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       bullets: [
         {
           id: crypto.randomUUID(),
-          text: "GPA: 92 / 100",
+          text: "GPA: 3.6 / 4.0",
         },
       ],
     },
@@ -70,27 +71,22 @@ function App() {
   const [experience, setExperience] = useState([
     {
       id: crypto.randomUUID(),
-      title: "CUCEI",
-      subtitle: "Full Stack Developer Intern",
-      date: "02/2023 - Present",
-      description:
-        "Acquired valuable teamwork skills through SCRUM methodology, successfully contributed to largescale projects, and demonstrated effective collaboration using Git.",
+      title: "EXAMPLE COMPANY",
+      subtitle: "Software Engineer",
+      date: "07/2022 - Present",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       bullets: [
         {
           id: crypto.randomUUID(),
-          text: `Performed maintenance and developed new features for existing projects using the TALL stack (Tailwind, Alpine, Laravel, Livewire).`,
+          text: "Developed and maintained web applications using React and Node.js.",
         },
         {
           id: crypto.randomUUID(),
-          text: `Created a landing page for an internal project and the [Eventos CUCEI](https://eventos.cucei.udg.mx/) website.`,
+          text: "Collaborated with cross-functional teams to deliver high-quality software solutions.",
         },
         {
           id: crypto.randomUUID(),
-          text: `Extensively utilized the Laravel framework, gaining knowledge of MVC, routing, middlewares, sessions, authentication, authorization, email sending, file storage,migrations, seeders, Eloquent ORM, factories, and testing.`,
-        },
-        {
-          id: crypto.randomUUID(),
-          text: `Implemented feature tests in existing projects to ensure the proper functionality of routes and components.`,
+          text: "Utilized Git for version control and participated in code reviews.",
         },
       ],
     },
@@ -98,14 +94,14 @@ function App() {
   const [others, setOthers] = useState([
     {
       id: crypto.randomUUID(),
-      title: "FULL STACK WEB DEVELOPMENT BOOTCAMP (BEDU)",
-      subtitle: "",
-      date: "05/2023 - 12/2023",
-      description: "",
+      title: "EXAMPLE BOOTCAMP",
+      subtitle: "Full Stack Web Development Bootcamp",
+      date: "01/2023 - 06/2023",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       bullets: [
         {
           id: crypto.randomUUID(),
-          text: `Acquired a solid understanding of backend concepts and successfully applied them, creating a RESTful API using Node.js and the Express framework.`,
+          text: "Completed an intensive bootcamp covering both frontend and backend technologies.",
         },
       ],
     },
@@ -272,7 +268,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col gap-5 bg-slate-100 p-3 md:flex-row md:justify-center">
+    <div className="flex flex-col gap-5 bg-slate-100 p-3 md:flex-row md:justify-center min-h-dvh">
       <div className="flex min-w-[400px] flex-1 flex-col gap-4 md:min-w-60 md:max-w-[550px] ">
         <PersonalDetails
           currentSection={currentSection}
