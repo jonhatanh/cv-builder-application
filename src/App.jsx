@@ -4,7 +4,6 @@ import CVPreview from "./components/CVPreview";
 import ExperienceForm from "./components/ExperienceForm";
 import EducationForm from "./components/EducationForm";
 import CustomDetails from "./components/CustomDetails";
-import { forms } from "./helpers";
 import OthersForm from "./components/OthersForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,39 +11,40 @@ import {
   faGraduationCap,
   faMedal,
 } from "@fortawesome/free-solid-svg-icons";
-import { EDUCATION_EXAMPLE, EXPERIENCE_EXAMPLE, OTHERS_EXAMPLE, PERSONAL_DETAILS_EXAMPLE, SOCIAL_MEDIA_EXAMPLE } from "./constans";
+import { EDUCATION_EXAMPLE, EXPERIENCE_EXAMPLE, OTHERS_EXAMPLE, FORMS_ID } from "./constans";
+import { PersonalDetailsProvider } from "./contexts/PersonalDetailsProvider";
 
 function App() {
-  const [personalDetails, setPersonalDetails] = useState(PERSONAL_DETAILS_EXAMPLE);
-  const [socialMedia, setSocialMedia] = useState(SOCIAL_MEDIA_EXAMPLE);
+  // const [personalDetails, setPersonalDetails] = useState(PERSONAL_DETAILS_EXAMPLE);
+  // const [socialMedia, setSocialMedia] = useState(SOCIAL_MEDIA_EXAMPLE);
   const [education, setEducation] = useState(EDUCATION_EXAMPLE);
 
   const [experience, setExperience] = useState(EXPERIENCE_EXAMPLE);
   const [others, setOthers] = useState(OTHERS_EXAMPLE);
 
   //Personal Details Form
-  function handlePersonalDetails(property, value) {
-    const newDetails = { ...personalDetails, [property]: value };
-    setPersonalDetails(newDetails);
-  }
-  function addSocialMedia(newSocialMedia) {
-    setSocialMedia([...socialMedia, newSocialMedia]);
-  }
-  function deleteSocialMedia(socialMediaId) {
-    const newSocialMedia = socialMedia.filter(
-      (social) => social.id !== socialMediaId,
-    );
-    setSocialMedia(newSocialMedia);
-  }
-  function updateSocialMedia(socialMediaId, updatedSocialMedia) {
-    const newSocialMedia = socialMedia.map((social) => {
-      if (social.id === socialMediaId) {
-        return updatedSocialMedia;
-      }
-      return social;
-    });
-    setSocialMedia(newSocialMedia);
-  }
+  // function handlePersonalDetails(property, value) {
+  //   const newDetails = { ...personalDetails, [property]: value };
+  //   setPersonalDetails(newDetails);
+  // }
+  // function addSocialMedia(newSocialMedia) {
+  //   setSocialMedia([...socialMedia, newSocialMedia]);
+  // }
+  // function deleteSocialMedia(socialMediaId) {
+  //   const newSocialMedia = socialMedia.filter(
+  //     (social) => social.id !== socialMediaId,
+  //   );
+  //   setSocialMedia(newSocialMedia);
+  // }
+  // function updateSocialMedia(socialMediaId, updatedSocialMedia) {
+  //   const newSocialMedia = socialMedia.map((social) => {
+  //     if (social.id === socialMediaId) {
+  //       return updatedSocialMedia;
+  //     }
+  //     return social;
+  //   });
+  //   setSocialMedia(newSocialMedia);
+  // }
 
   //Handle Custom Forms
   function handleCustomFormDetails(property, value, id, state, setState) {
@@ -184,21 +184,16 @@ function App() {
 
   return (
     <div className="flex flex-col gap-5 bg-slate-100 p-3 md:flex-row md:justify-center min-h-dvh">
+      <PersonalDetailsProvider >
       <div className="flex min-w-[400px] flex-1 flex-col gap-4 md:min-w-60 md:max-w-[550px] ">
         <PersonalDetails
           currentSection={currentSection}
           handleSectionChange={handleSectionChange}
-          data={personalDetails}
-          socialMedia={socialMedia}
-          handleChange={handlePersonalDetails}
-          addSocialMedia={addSocialMedia}
-          updateSocialMedia={updateSocialMedia}
-          deleteSocialMedia={deleteSocialMedia}
         ></PersonalDetails>
         <CustomDetails
           detailsName="Professional Experience"
           detailsIcon={<FontAwesomeIcon icon={faBuilding} />}
-          detailsCollapseValue={forms.professionalDetails}
+          detailsCollapseValue={FORMS_ID.professionalDetails}
           currentSection={currentSection}
           handleSectionChange={handleSectionChange}
           data={experience}
@@ -213,7 +208,7 @@ function App() {
         <CustomDetails
           detailsName="Education Details"
           detailsIcon={<FontAwesomeIcon icon={faGraduationCap} />}
-          detailsCollapseValue={forms.educationDetails}
+          detailsCollapseValue={FORMS_ID.educationDetails}
           currentSection={currentSection}
           handleSectionChange={handleSectionChange}
           data={education}
@@ -228,7 +223,7 @@ function App() {
         <CustomDetails
           detailsName="Others"
           detailsIcon={<FontAwesomeIcon icon={faMedal} />}
-          detailsCollapseValue={forms.othersDetails}
+          detailsCollapseValue={FORMS_ID.othersDetails}
           currentSection={currentSection}
           handleSectionChange={handleSectionChange}
           data={others}
@@ -241,13 +236,12 @@ function App() {
           CustomForm={OthersForm}
         />
       </div>
-      <CVPreview
-        personalDetails={personalDetails}
-        socialMedia={socialMedia}
-        education={education}
-        experience={experience}
-        others={others}
-      ></CVPreview>
+        <CVPreview
+          education={education}
+          experience={experience}
+          others={others}
+        ></CVPreview>
+      </PersonalDetailsProvider>
     </div>
   );
 }

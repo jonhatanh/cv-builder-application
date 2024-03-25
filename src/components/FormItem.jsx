@@ -10,15 +10,13 @@ function FormItem({
 }) {
   return (
     <div className="flex flex-1 flex-col">
-      <label className="text-lg font-semibold">
-        {labelText}
-      </label>
+      <label className="text-lg font-semibold">{labelText}</label>
       {textArea ? (
         <textarea
           name={name}
           value={value}
           onChange={(e) => handleChange(name, e.target.value, itemId)}
-          className="min-h-16 rounded-md border-2 border-sky-300 py-1 px-2 py-1 invalid:border-red-300 focus:bg-sky-100 focus:bg-sky-100 focus:outline-sky-500 invalid:focus:bg-red-100 invalid:focus:outline-red-300"
+          className="min-h-16 rounded-md border-2 border-sky-300 px-2 py-1 py-1 invalid:border-red-300 focus:bg-sky-100 focus:bg-sky-100 focus:outline-sky-500 invalid:focus:bg-red-100 invalid:focus:outline-red-300"
           {...restProps}
           cols="30"
           rows="2"

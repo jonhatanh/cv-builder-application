@@ -1,3 +1,59 @@
+import {
+  faLinkedin,
+  faGithub,
+  faYoutube,
+  faXTwitter,
+} from "@fortawesome/free-brands-svg-icons";
+import {
+  faBan,
+  faBriefcase,
+  faCode,
+  faGlobe,
+} from "@fortawesome/free-solid-svg-icons";
+
+export const ICONS = [
+  {
+    name: "Empty",
+    icon: faBan,
+  },
+  {
+    name: "LinkedIn",
+    icon: faLinkedin,
+  },
+  {
+    name: "GitHub",
+    icon: faGithub,
+  },
+  {
+    name: "YouTube",
+    icon: faYoutube,
+  },
+  {
+    name: "X",
+    icon: faXTwitter,
+  },
+  {
+    name: "Internet",
+    icon: faGlobe,
+  },
+  {
+    name: "Code",
+    icon: faCode,
+  },
+  {
+    name: "Briefcase",
+    icon: faBriefcase,
+  },
+];
+
+
+export const FORMS_ID = {
+  personalDetails: 1,
+  professionalDetails: 2,
+  educationDetails: 3,
+  othersDetails: 4,
+};
+
 export const PERSONAL_DETAILS_EXAMPLE = {
   name: "John Doe",
   email: "john.doe@example.com",

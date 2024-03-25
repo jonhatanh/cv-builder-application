@@ -1,24 +1,27 @@
 import { useEffect, useState } from "react";
 import FormItem from "./FormItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getCollapsableClass, icons } from "../helpers";
+import { getCollapsableClass } from "../helpers";
 import Button from "./Button";
+import { ICONS } from "../constans";
+import { useSocialMedia, useSocialMediaDispatch } from "./hooks/PersonalDetails";
+
+const EMPTY_SOCIAL_MEDIA = {
+  id: crypto.randomUUID(),
+  name: "",
+  link: "",
+  iconName: "Empty",
+};
 
 function SocialMediaForm({
-  allSocialMedia,
   currentSocialMediaId,
-  addSocialMedia,
   handleOpenForm,
   formIsOpen,
   changeIsUpdating,
-  updateSocialMedia,
 }) {
-  const [socialMedia, setSocialMedia] = useState({
-    id: crypto.randomUUID(),
-    name: "",
-    link: "",
-    iconName: "Empty",
-  });
+  const allSocialMedia = useSocialMedia();
+  const dispatch = useSocialMediaDispatch();
+  const [socialMedia, setSocialMedia] = useState(EMPTY_SOCIAL_MEDIA);
 
   const isUpdating = currentSocialMediaId !== null;
   const actionWord = isUpdating ? "Update" : "Save";
@@ -30,30 +33,16 @@ function SocialMediaForm({
       );
 
       if (socialMediaToEdit) {
-        // Si socialMediaToEdit existe, actualiza el estado socialMedia con sus valores
-        // setSocialMedia(socialMediaToEdit);
         setSocialMedia({ ...socialMediaToEdit });
       }
     } else {
-      // Si currentSocialMediaId es null, significa que no estás editando, restablece a los valores por defecto
-      setSocialMedia({
-        id: crypto.randomUUID(),
-        name: "",
-        link: "",
-        iconName: "Empty",
-      });
+      setSocialMedia(EMPTY_SOCIAL_MEDIA);
     }
-  }, [currentSocialMediaId, allSocialMedia]);
+  }, [currentSocialMediaId]);
 
   function handleChange(property, value) {
-    const newSocialMedia = { ...socialMedia, [property]: value };
-    setSocialMedia(newSocialMedia);
+    setSocialMedia({ ...socialMedia, [property]: value });
   }
-
-  let hiddenDivClass = getCollapsableClass(
-    formIsOpen,
-    "flex flex-wrap gap-3 translate",
-  );
 
   function resetSocialMediaForm() {
     const newId = isUpdating ? crypto.randomUUID() : socialMedia.id;
@@ -70,19 +59,25 @@ function SocialMediaForm({
   function handleFormSubmit(e) {
     e.preventDefault();
     if (isUpdating) {
-      updateSocialMedia(currentSocialMediaId, { ...socialMedia });
+      dispatch({
+        type: "updated",
+        socialMedia: { ...socialMedia }
+      });
+      // updateSocialMedia(currentSocialMediaId, { ...socialMedia });
       changeIsUpdating(false);
     } else {
-      addSocialMedia(socialMedia);
+      dispatch({
+        type: 'added',
+        socialMedia
+      })
     }
     handleOpenForm(false);
-    setSocialMedia({
-      id: crypto.randomUUID(),
-      name: "",
-      link: "",
-      iconName: "Empty",
-    });
+    setSocialMedia(EMPTY_SOCIAL_MEDIA);
   }
+  let hiddenDivClass = getCollapsableClass(
+    formIsOpen,
+    "flex flex-wrap gap-3 translate",
+  );
 
   return (
     <form onSubmit={handleFormSubmit} className={hiddenDivClass}>
@@ -104,7 +99,7 @@ function SocialMediaForm({
       ></FormItem>
       <fieldset className="border- grid w-full grid-cols-2 gap-2 rounded-md border-2 border-sky-300 p-2 md:grid-cols-1 xl:grid-cols-2">
         <legend className="mx-2 px-2 font-semibold">Social Media Icon</legend>
-        {icons.map(({ name, icon }) => (
+        {ICONS.map(({ name, icon }) => (
           <div key={name} className="group flex gap-2">
             <input
               checked={socialMedia.iconName === name}

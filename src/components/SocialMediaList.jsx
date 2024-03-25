@@ -7,23 +7,26 @@ import SocialMediaItem from "./SocialMediaItem";
 import BulletListButton from "./BulletListButton";
 import DeleteButton from "./DeleteButton";
 import UpdateButton from "./UpdateButton";
+import { useSocialMedia, useSocialMediaDispatch } from "./hooks/PersonalDetails";
 
 function SocialMediaList({
-  socialMedia,
   currentSocialMediaId,
-  deleteSocialMedia,
   changeIsUpdating,
   handleOpenForm,
   formIsOpen,
 }) {
-  
+  const socialMedia = useSocialMedia()
+  const dispatch = useSocialMediaDispatch()
   const isUpdating = currentSocialMediaId !== null;
   const actionWord = isUpdating ? "Updating" : "Add";
   const buttonIcon = isUpdating ? faPen : faPlus;
   let extraIconClass = !isUpdating && formIsOpen ? "rotate-45" : "";
 
   function handleDeleteSocialMedia(socialMediaId) {
-    deleteSocialMedia(socialMediaId);
+    dispatch({
+      type: 'deleted',
+      id: socialMediaId
+    })
     changeIsUpdating(false);
     handleOpenForm(false);
   }

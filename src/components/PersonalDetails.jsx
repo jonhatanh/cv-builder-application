@@ -2,25 +2,22 @@ import { useState } from "react";
 import FormItem from "./FormItem";
 import SocialMediaForm from "./SocialMediaForm";
 import SocialMediaList from "./SocialMediaList";
-import { forms, getCollapsableClass } from "../helpers";
+import { getCollapsableClass } from "../helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import SectionButton from "./SectionButton";
+import { FORMS_ID } from "../constans";
+import { usePersonalDetails, usePersonalDetailsDispatch } from "./hooks/PersonalDetails";
 function PersonalDetails({
   currentSection,
   handleSectionChange,
-  data,
-  socialMedia,
-  handleChange,
-  addSocialMedia,
-  updateSocialMedia,
-  deleteSocialMedia,
 }) {
+  const personalDetails = usePersonalDetails()
+  const dispatch = usePersonalDetailsDispatch()
   const [currentSocialMediaId, setCurrentSocialMediaId] = useState(null); //for updating
   const [openForm, setOpenForm] = useState(false);
 
   function changeIsUpdating(isUpdating, socialMediaId) {
-    //if is updating
     if (isUpdating) {
       setCurrentSocialMediaId(socialMediaId);
     } else {
@@ -32,16 +29,25 @@ function PersonalDetails({
     setOpenForm(open);
   }
 
-  const sectionIsOpen = currentSection === forms.personalDetails;
+  const sectionIsOpen = currentSection === FORMS_ID.personalDetails;
   const sectionClass = getCollapsableClass(
-    currentSection === forms.personalDetails,
+    currentSection === FORMS_ID.personalDetails,
     "flex flex-col gap-5 pb-3 px-4",
   );
 
+  function handleChange(property, value) {
+    console.log('Update');
+    console.log({ property, value });
+    dispatch({
+      type: "changed_input",
+      property,
+      value
+    });
+  }
   return (
     <div className="flex flex-col rounded-md border-2 border-sky-700 border-opacity-50 bg-white shadow-md">
       <SectionButton
-        onClick={() => handleSectionChange(forms.personalDetails)}
+        onClick={() => handleSectionChange(FORMS_ID.personalDetails)}
         sectionIsOpen={sectionIsOpen}
       >
         <FontAwesomeIcon className="text-sm" icon={faUser} /> Personal Details
@@ -50,48 +56,43 @@ function PersonalDetails({
         <form className="flex flex-col gap-3">
           <FormItem
             labelText="Full Name"
-            value={data.name}
+            value={personalDetails.name}
             name="name"
             handleChange={handleChange}
           ></FormItem>
           <FormItem
             labelText="Email"
             type="email"
-            value={data.email}
+            value={personalDetails.email}
             name="email"
             handleChange={handleChange}
           ></FormItem>
           <FormItem
             labelText="Phone number"
             type="tel"
-            value={data.phone}
+            value={personalDetails.phone}
             name="phone"
             handleChange={handleChange}
           ></FormItem>
           <FormItem
             textArea
             labelText="Skills (separated by comma)"
-            value={data.skills}
+            value={personalDetails.skills}
             name="skills"
             handleChange={handleChange}
           ></FormItem>
         </form>
         <SocialMediaList
-          socialMedia={socialMedia}
           currentSocialMediaId={currentSocialMediaId}
-          deleteSocialMedia={deleteSocialMedia}
           changeIsUpdating={changeIsUpdating}
           formIsOpen={openForm}
           handleOpenForm={handleOpenForm}
         />
         <SocialMediaForm
-          allSocialMedia={socialMedia}
           currentSocialMediaId={currentSocialMediaId}
-          addSocialMedia={addSocialMedia}
           formIsOpen={openForm}
           handleOpenForm={handleOpenForm}
           changeIsUpdating={changeIsUpdating}
-          updateSocialMedia={updateSocialMedia}
         ></SocialMediaForm>
       </div>
     </div>
@@ -99,7 +100,7 @@ function PersonalDetails({
 }
 
 // PersonalDetails.defaultProps = {
-//     data:
+//     personalDetails:
 // }
 
 export default PersonalDetails;
