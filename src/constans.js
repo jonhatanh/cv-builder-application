@@ -71,7 +71,7 @@ export const SOCIAL_MEDIA_EXAMPLE = [
   {
     id: crypto.randomUUID(),
     name: "GitHub",
-    link: "https://github.com/johndoe",
+    link: "https://github.com/jonhatanh",
     iconName: "GitHub",
   },
 ];

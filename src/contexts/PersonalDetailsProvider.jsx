@@ -39,6 +39,9 @@ function personalDetailsReducer(personalDetails, action) {
         [action.property]: action.value,
       };
     }
+    case "load": {
+      return action.personalDetails;
+    }
     default: {
       throw Error("Unknown action: " + action.type);
     }
@@ -60,6 +63,9 @@ function socialMediaReducer(socialMedia, action) {
     }
     case "deleted": {
       return socialMedia.filter((s) => s.id !== action.id);
+    }
+    case "load": {
+      return action.socialMedia;
     }
     default: {
       throw Error("Unknown action: " + action.type);

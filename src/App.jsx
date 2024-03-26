@@ -23,6 +23,7 @@ import {
   OthersDispatchContext,
 } from "./contexts/CustomDetailsProvider";
 import { MainProvider } from "./contexts/MainProvider";
+import Settings from "./components/Settings";
 
 function App() {
   //Sections collapse
@@ -70,9 +71,9 @@ function App() {
             dispatcher={OthersDispatchContext}
             CustomForm={OthersForm}
           />
-          <div>
-            Settings
-          </div>
+          <Settings>
+            
+          </Settings>
         </div>
         <CVPreview></CVPreview>
       </MainProvider>

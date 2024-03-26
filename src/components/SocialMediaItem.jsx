@@ -9,7 +9,8 @@ function socialMediaItem({ socialMedia }) {
   return socialMedia.link ? (
     <a
       className="flex items-center underline underline-offset-2 overflow-hidden"
-      href={socialMedia.link}
+      target="_blank"
+      href={socialMedia.link} rel="noreferrer"
     >
       {socialMediaIcon}
       {socialMedia.name}

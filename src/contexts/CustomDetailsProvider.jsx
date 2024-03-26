@@ -110,7 +110,9 @@ function customDetailsReducer(customDetails, action) {
     case "deleted_section": {
       return customDetails.filter((section) => section.id !== action.id);
     }
-
+    case "load": {
+      return action.customDetails;
+    }
     default: {
       throw Error("Unknown action: " + action.type);
     }
