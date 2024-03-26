@@ -46,8 +46,8 @@ function App() {
             detailsCollapseValue={FORMS_ID.professionalDetails}
             currentSection={currentSection}
             handleSectionChange={handleSectionChange}
-            context={EducationContext}
-            dispatcher={EducationDispatchContext}
+            context={ExperienceContext}
+            dispatcher={ExperienceDispatchContext}
             CustomForm={ExperienceForm}
           />
           <CustomDetails
@@ -56,8 +56,8 @@ function App() {
             detailsCollapseValue={FORMS_ID.educationDetails}
             currentSection={currentSection}
             handleSectionChange={handleSectionChange}
-            context={ExperienceContext}
-            dispatcher={ExperienceDispatchContext}
+            context={EducationContext}
+            dispatcher={EducationDispatchContext}
             CustomForm={EducationForm}
           />
           <CustomDetails
@@ -70,6 +70,9 @@ function App() {
             dispatcher={OthersDispatchContext}
             CustomForm={OthersForm}
           />
+          <div>
+            Settings
+          </div>
         </div>
         <CVPreview></CVPreview>
       </MainProvider>
