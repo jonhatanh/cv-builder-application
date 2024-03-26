@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import BulletsForm from "./BulletsForm";
 import BulletsList from "./BulletsList";
 import { getCollapsableClass } from "../helpers";
@@ -7,24 +7,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function SectionItem({
   data,
-  handleChange,
   currentItemId,
   handleItemChange,
-  addBullet,
-  updateBullet,
-  deleteBullet,
-  deleteSectionItem,
+  dispatcher,
   CustomForm,
 }) {
   const [openForm, setOpenForm] = useState(false);
   const [currentBulletId, setCurrentBulletId] = useState(null); //for updating
+  const dispatch = useContext(dispatcher);
 
   function handleOpenForm(open) {
     setOpenForm(open);
   }
 
   function changeIsUpdating(isUpdating, bulletId) {
-    //if is updating
     if (isUpdating) {
       setCurrentBulletId(bulletId);
     } else {
@@ -56,7 +52,12 @@ function SectionItem({
         </button>
         <button
           className="ml-4 mr-2 flex items-center"
-          onClick={() => deleteSectionItem(data.id)}
+          onClick={() =>
+            dispatch({
+              type: "deleted_section",
+              id: data.id,
+            })
+          }
         >
           <FontAwesomeIcon
             className="rounded-full p-2 text-base hover:bg-slate-300"
@@ -65,13 +66,13 @@ function SectionItem({
         </button>
       </div>
       <div className={itemClass}>
-        <CustomForm data={data} handleChange={handleChange} />
+        <CustomForm data={data} dispatcher={dispatcher} />
         <BulletsList
           items={data.bullets}
           sectionItemId={data.id}
           currentBulletId={currentBulletId}
           formIsOpen={openForm}
-          deleteBullet={deleteBullet}
+          dispatcher={dispatcher}
           changeIsUpdating={changeIsUpdating}
           handleOpenForm={handleOpenForm}
         />
@@ -82,8 +83,7 @@ function SectionItem({
           formIsOpen={openForm}
           changeIsUpdating={changeIsUpdating}
           sectionItemId={data.id}
-          addBullet={addBullet}
-          updateBullet={updateBullet}
+          dispatcher={dispatcher}
         ></BulletsForm>
       </div>
     </div>

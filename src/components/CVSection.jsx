@@ -18,14 +18,14 @@ function CVSection({ title, sectionData }) {
 
     return parts.map((part, index) => {
       if (index % 3 === 1) {
-        // This is the link text
+        // link text
         return (
           <a className="underline" key={index} href={parts[index + 1]}>
             {part}
           </a>
         );
       } else if (index % 3 === 0) {
-        // This is the normal text
+        // normal text
         return <span key={index}>{part}</span>;
       } else {
         // This is the link URL, skip it

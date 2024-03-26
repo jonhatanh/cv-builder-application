@@ -6,15 +6,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import SocialMediaItem from "./SocialMediaItem";
 import { getIcon } from "../helpers";
+import { usePersonalDetails, useSocialMedia } from "../hooks/PersonalDetails";
+import { useEducation, useExperience, useOthers } from "../hooks/CustomDetails";
 
-function CVPreview({
-  personalDetails,
-  socialMedia,
-  education,
-  experience,
-  skills,
-  others,
-}) {
+function CVPreview() {
+  const personalDetails = usePersonalDetails();
+  const socialMedia = useSocialMedia();
+  const education = useEducation();
+  const experience = useExperience();
+  const others = useOthers();
   const skillsList = personalDetails.skills.split(",").map((skill, index) => {
     skill = skill.trim();
     if (!skill) return null;
