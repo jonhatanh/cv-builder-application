@@ -7,7 +7,7 @@ import SocialMediaItem from "./SocialMediaItem";
 import BulletListButton from "./BulletListButton";
 import DeleteButton from "./DeleteButton";
 import UpdateButton from "./UpdateButton";
-import { useSocialMedia, useSocialMediaDispatch } from "./hooks/PersonalDetails";
+import { useSocialMedia, useSocialMediaDispatch } from "../hooks/PersonalDetails";
 
 function SocialMediaList({
   currentSocialMediaId,

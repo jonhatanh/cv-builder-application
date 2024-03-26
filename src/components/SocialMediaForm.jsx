@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getCollapsableClass } from "../helpers";
 import Button from "./Button";
 import { ICONS } from "../constans";
-import { useSocialMedia, useSocialMediaDispatch } from "./hooks/PersonalDetails";
+import { useSocialMedia, useSocialMediaDispatch } from "../hooks/PersonalDetails";
 
 const EMPTY_SOCIAL_MEDIA = {
   id: crypto.randomUUID(),

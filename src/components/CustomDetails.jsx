@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { getCollapsableClass } from "../helpers";
 import SectionItem from "./SectionItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,15 +11,12 @@ function CustomDetails({
   detailsCollapseValue,
   currentSection,
   handleSectionChange,
-  data,
-  handleChange,
-  addBullet,
-  updateBullet,
-  deleteBullet,
-  addNewSectionItem,
-  deleteSectionItem,
+  context,
+  dispatcher,
   CustomForm,
 }) {
+  const customDetails = useContext(context);
+  const dispatch = useContext(dispatcher);
   const [currentItemId, setCurrentItemId] = useState("");
 
   function handleItemChange(itemId) {
@@ -28,8 +25,12 @@ function CustomDetails({
   }
 
   function handleAddNewItem() {
-    const newItemId = addNewSectionItem();
-    handleItemChange(newItemId);
+    const itemId = crypto.randomUUID();
+    dispatch({
+      type: "added_section",
+      id: itemId,
+    });
+    handleItemChange(itemId);
   }
 
   const sectionClass = getCollapsableClass(
@@ -37,7 +38,7 @@ function CustomDetails({
     "flex flex-col gap-4 mb-6",
   );
 
-  const noItemOpen = currentItemId === "" || data.length === 0;
+  const noItemOpen = currentItemId === "" || customDetails.length === 0;
   return (
     <div className="flex flex-col gap-4 rounded-md border-2 border-sky-700 border-opacity-50 bg-white shadow-md">
       <SectionButton onClick={() => handleSectionChange(detailsCollapseValue)}>
@@ -45,17 +46,14 @@ function CustomDetails({
         {detailsName}
       </SectionButton>
       <div className={sectionClass}>
-        {data.map((item) => (
+        {customDetails.map((item) => (
           <SectionItem
             key={item.id}
             data={item}
             currentItemId={currentItemId}
             handleItemChange={handleItemChange}
-            handleChange={handleChange}
-            addBullet={addBullet}
-            updateBullet={updateBullet}
-            deleteBullet={deleteBullet}
-            deleteSectionItem={deleteSectionItem}
+            context={context}
+            dispatcher={dispatcher}
             CustomForm={CustomForm}
           ></SectionItem>
         ))}

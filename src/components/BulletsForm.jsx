@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import FormItem from "./FormItem";
 import Button from "./Button";
 
 function BulletsForm({
-  allBullets,
   currentBulletId,
   handleOpenForm,
   formIsOpen,
   changeIsUpdating,
   sectionItemId,
-  addBullet,
-  updateBullet,
+  allBullets,
+  dispatcher,
 }) {
+  const dispatch = useContext(dispatcher);
   const [bullet, setBullet] = useState({
     id: crypto.randomUUID(),
     text: "",
@@ -58,10 +58,20 @@ function BulletsForm({
   function handleFormSubmit(e) {
     e.preventDefault();
     if (isUpdating) {
-      updateBullet(currentBulletId, { ...bullet }, sectionItemId);
+      dispatch({
+        type: 'updated_bullet',
+        sectionId: sectionItemId,
+        bullet: {...bullet}
+      })
+      // updateBullet(currentBulletId, { ...bullet }, sectionItemId);
       changeIsUpdating(false);
     } else {
-      addBullet(bullet, sectionItemId);
+      dispatch({
+        type: 'added_bullet',
+        sectionId: sectionItemId,
+        bullet
+      })
+      // addBullet(bullet, sectionItemId);
     }
     handleOpenForm(false);
     setBullet({

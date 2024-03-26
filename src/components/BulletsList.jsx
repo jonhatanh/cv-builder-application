@@ -4,7 +4,7 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import BulletListButton from "./BulletListButton";
 import DeleteButton from "./DeleteButton";
 import UpdateButton from "./UpdateButton";
@@ -14,14 +14,19 @@ function BulletsList({
   sectionItemId,
   currentBulletId,
   formIsOpen,
-  deleteBullet,
+  dispatcher,
   changeIsUpdating,
   handleOpenForm,
 }) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
-  
+  const dispatch = useContext(dispatcher)
   function handleDelete(itemId) {
-    deleteBullet(itemId, sectionItemId);
+    dispatch({
+      type: 'deleted_bullet',
+      sectionId: sectionItemId,
+      bulletId: itemId
+    })
+    // deleteBullet(itemId, sectionItemId);
     changeIsUpdating(false);
     handleOpenForm(false);
   }

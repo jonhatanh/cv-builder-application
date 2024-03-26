@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import SectionButton from "./SectionButton";
 import { FORMS_ID } from "../constans";
-import { usePersonalDetails, usePersonalDetailsDispatch } from "./hooks/PersonalDetails";
+import { usePersonalDetails, usePersonalDetailsDispatch } from "../hooks/PersonalDetails";
 function PersonalDetails({
   currentSection,
   handleSectionChange,
@@ -36,8 +36,6 @@ function PersonalDetails({
   );
 
   function handleChange(property, value) {
-    console.log('Update');
-    console.log({ property, value });
     dispatch({
       type: "changed_input",
       property,

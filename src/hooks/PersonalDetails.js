@@ -1,5 +1,10 @@
 import { useContext } from "react";
-import { PersonalDetailsContext, PersonalDetailsDispatchContext, SocialMediaContext, SocialMediaContextDispatchContext } from "../../contexts/PersonalDetailsProvider";
+import {
+  PersonalDetailsContext,
+  PersonalDetailsDispatchContext,
+  SocialMediaContext,
+  SocialMediaContextDispatchContext,
+} from "../contexts/PersonalDetailsProvider";
 
 export function usePersonalDetails() {
   return useContext(PersonalDetailsContext);
