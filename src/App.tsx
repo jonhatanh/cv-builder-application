@@ -13,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {
   FORMS_ID,
-} from "./constans";
+} from "./constans.ts";
 import {
   EducationContext,
   EducationDispatchContext,
