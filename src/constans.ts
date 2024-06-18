@@ -152,3 +152,19 @@ export const OTHERS_EXAMPLE = [
     ],
   },
 ];
+
+export const CUSTOM_DETAILS_EMPTY = [
+  {
+    id: crypto.randomUUID(),
+    title: "",
+    subtitle: "",
+    date: "",
+    description: "",
+    bullets: [
+      {
+        id: crypto.randomUUID(),
+        text: "",
+      },
+    ],
+  },
+]

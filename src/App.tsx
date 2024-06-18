@@ -21,8 +21,8 @@ import {
   ExperienceDispatchContext,
   OthersContext,
   OthersDispatchContext,
-} from "./contexts/CustomDetailsProvider";
-import { MainProvider } from "./contexts/MainProvider";
+} from "./contexts/CustomDetailsProvider.tsx";
+import { MainProvider } from "./contexts/MainProvider.tsx";
 import Settings from "./components/Settings";
 
 function App() {
