@@ -65,6 +65,7 @@ export const PERSONAL_DETAILS_EXAMPLE = {
   skills:
     "HTML, CSS, JavaScript, React, SASS, Tailwind, Node.js, PHP, Laravel, MySQL, Git",
 };
+
 export const SOCIAL_MEDIA_EXAMPLE = [
   {
     id: crypto.randomUUID(),
