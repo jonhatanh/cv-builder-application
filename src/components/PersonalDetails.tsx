@@ -2,22 +2,31 @@ import { useState } from "react";
 import FormItem from "./FormItem";
 import SocialMediaForm from "./SocialMediaForm";
 import SocialMediaList from "./SocialMediaList";
-import { getCollapsableClass } from "../helpers";
+import { getCollapsableClass } from "../helpers.ts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import SectionButton from "./SectionButton";
 import { FORMS_ID } from "../constans";
-import { usePersonalDetails, usePersonalDetailsDispatch } from "../hooks/PersonalDetails";
+import { usePersonalDetails, usePersonalDetailsDispatch } from "../hooks/PersonalDetails.ts";
+import { AvailableSections } from "../types";
+
+type PersonalDetailsProps = {
+  currentSection: AvailableSections;
+  handleSectionChange: (section: AvailableSections) => void;
+};
+
+type EditSocialMediaType = UUID | null;
+
 function PersonalDetails({
   currentSection,
   handleSectionChange,
-}) {
+}: PersonalDetailsProps) {
   const personalDetails = usePersonalDetails()
   const dispatch = usePersonalDetailsDispatch()
-  const [currentSocialMediaId, setCurrentSocialMediaId] = useState(null); //for updating
+  const [currentSocialMediaId, setCurrentSocialMediaId] = useState<EditSocialMediaType>(null); //for updating
   const [openForm, setOpenForm] = useState(false);
 
-  function changeIsUpdating(isUpdating, socialMediaId) {
+  function changeIsUpdating(isUpdating: boolean, socialMediaId: UUID) {
     if (isUpdating) {
       setCurrentSocialMediaId(socialMediaId);
     } else {
@@ -25,7 +34,7 @@ function PersonalDetails({
     }
   }
 
-  function handleOpenForm(open) {
+  function handleOpenForm(open: boolean) {
     setOpenForm(open);
   }
 
@@ -35,11 +44,13 @@ function PersonalDetails({
     "flex flex-col gap-5 pb-3 px-4",
   );
 
-  function handleChange(property, value) {
+  function handleChange(property: string, value: string) {
     dispatch({
       type: "changed_input",
-      property,
-      value
+      payload: {
+        property,
+        value
+      }
     });
   }
   return (

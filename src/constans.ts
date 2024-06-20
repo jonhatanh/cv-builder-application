@@ -48,7 +48,9 @@ export const ICONS = [
     name: "Briefcase",
     icon: faBriefcase,
   },
-];
+] as const;
+
+
 
 
 export const FORMS_ID = {
@@ -56,7 +58,7 @@ export const FORMS_ID = {
   professionalDetails: 2,
   educationDetails: 3,
   othersDetails: 4,
-};
+} as const;
 
 
 export const PERSONAL_DETAILS_EXAMPLE = {

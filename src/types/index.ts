@@ -1,3 +1,5 @@
+import { ICONS } from "../constans";
+
 export type PersonalDetailsType = {
   name: string;
   email: string;
@@ -6,7 +8,7 @@ export type PersonalDetailsType = {
 };
 
 export type SocialMediaItem = {
-  id: `${string}-${string}-${string}-${string}-${string}`;
+  id: UUID;
   name: string;
   link: string;
   iconName: string;
@@ -15,14 +17,14 @@ export type SocialMediaItem = {
 export type SocialMediaType = SocialMediaItem[];
 
 export type BulletItem = {
-  id: `${string}-${string}-${string}-${string}-${string}`;
+  id: UUID;
   text: string;
 };
 
 export type BulletItemType = BulletItem[];
 
 export type CustomDetailsItem = {
-  id: `${string}-${string}-${string}-${string}-${string}`;
+  id: UUID;
   title: string;
   subtitle: string;
   date: string;
@@ -32,6 +34,10 @@ export type CustomDetailsItem = {
 
 export type CustomDetailsType = CustomDetailsItem[];
 
+export type AvailableSections = 0 | 1 | 2 | 3 | 4;
+
+type IconTuple = typeof ICONS[number];
+export type IconName = IconTuple["name"];
 // export type SocialMediaType = typeof SOCIAL_MEDIA_EXAMPLE;
 // export type SocialMediaItem = typeof SOCIAL_MEDIA_EXAMPLE[number];
 

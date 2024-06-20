@@ -68,7 +68,7 @@ type CustomDetailsActions = {
 } | {
   type: "added_section";
   payload: {
-    id: `${string}-${string}-${string}-${string}-${string}`;
+    id: UUID;
   };
 } | {
   type: "deleted_section";

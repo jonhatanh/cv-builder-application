@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PersonalDetails from "./components/PersonalDetails";
+import PersonalDetails from "./components/PersonalDetails.tsx";
 import CVPreview from "./components/CVPreview";
 import ExperienceForm from "./components/ExperienceForm";
 import EducationForm from "./components/EducationForm";
@@ -24,11 +24,14 @@ import {
 } from "./contexts/CustomDetailsProvider.tsx";
 import { MainProvider } from "./contexts/MainProvider.tsx";
 import Settings from "./components/Settings";
+import { AvailableSections } from "./types/index.ts";
+
+
 
 function App() {
   //Sections collapse
-  const [currentSection, setCurrentSection] = useState(1);
-  function handleSectionChange(section) {
+  const [currentSection, setCurrentSection] = useState<AvailableSections>(1);
+  function handleSectionChange(section: AvailableSections) {
     if (section === currentSection) setCurrentSection(0);
     else setCurrentSection(section);
   }
