@@ -1,6 +1,6 @@
 import { Dispatch, createContext, useReducer } from "react";
 import { CUSTOM_DETAILS_EMPTY } from "../constans";
-import { BulletItem, CustomDetailsType } from "../types";
+import { BulletItem, type CustomDetailsType } from "../types";
 
 
 export const EducationContext = createContext(CUSTOM_DETAILS_EMPTY);
@@ -68,7 +68,7 @@ type CustomDetailsActions = {
 } | {
   type: "added_section";
   payload: {
-    id: string;
+    id: `${string}-${string}-${string}-${string}-${string}`;
   };
 } | {
   type: "deleted_section";
@@ -80,7 +80,7 @@ type CustomDetailsActions = {
   customDetails: CustomDetailsType;
 };
 
-function customDetailsReducer(customDetails: CustomDetailsType, action: CustomDetailsActions) {
+function customDetailsReducer(customDetails: CustomDetailsType, action: CustomDetailsActions): CustomDetailsType {
   switch (action.type) {
     case "changed_input": {
       return customDetails.map((detail) => {

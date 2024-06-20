@@ -58,6 +58,7 @@ export const FORMS_ID = {
   othersDetails: 4,
 };
 
+
 export const PERSONAL_DETAILS_EXAMPLE = {
   name: "John Doe",
   email: "john.doe@example.com",
@@ -65,6 +66,7 @@ export const PERSONAL_DETAILS_EXAMPLE = {
   skills:
     "HTML, CSS, JavaScript, React, SASS, Tailwind, Node.js, PHP, Laravel, MySQL, Git",
 };
+
 
 export const SOCIAL_MEDIA_EXAMPLE = [
   {
@@ -80,6 +82,7 @@ export const SOCIAL_MEDIA_EXAMPLE = [
     iconName: "GitHub",
   },
 ];
+
 export const EDUCATION_EXAMPLE = [
   {
     id: crypto.randomUUID(),

@@ -46,7 +46,7 @@ type ActionWithPayload = {
 }
 export type PersonalDetailsActions = ActionWithPayload;
 
-function personalDetailsReducer(personalDetails: PersonalDetailsType, action: PersonalDetailsActions) {
+function personalDetailsReducer(personalDetails: PersonalDetailsType, action: PersonalDetailsActions): PersonalDetailsType {
   switch (action.type) {
     case "changed_input": {
       return {

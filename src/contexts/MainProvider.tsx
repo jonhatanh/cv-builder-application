@@ -10,7 +10,7 @@ import {
 } from "./CustomDetailsProvider";
 import { PersonalDetailsProvider } from "./PersonalDetailsProvider";
 
-export function MainProvider({ children }) {
+export function MainProvider({ children } : { children: React.ReactNode }) {
   return (
     <PersonalDetailsProvider>
       <CustomDetailsProvider
