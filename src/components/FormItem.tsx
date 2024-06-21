@@ -1,11 +1,12 @@
 type FormItemProps = {
-  type?: "text" | "email" | "password" | "tel";
+  type?: "text" | "email" | "password" | "tel" | "url";
   value: string;
   handleChange: (name: string, value: string, itemId?: string) => void;
   name: string;
   labelText?: string;
   textArea?: boolean;
   itemId?: string;
+  [key: string]: any;
 };
 
 function FormItem({

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FormItem from "./FormItem.tsx";
-import SocialMediaForm from "./SocialMediaForm";
+import SocialMediaForm from "./SocialMediaForm.tsx";
 import SocialMediaList from "./SocialMediaList.tsx";
 import { getCollapsableClass } from "../helpers.ts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
