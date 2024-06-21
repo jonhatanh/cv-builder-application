@@ -5,7 +5,6 @@ import {
   faMobileScreenButton,
 } from "@fortawesome/free-solid-svg-icons";
 import SocialMediaItem from "./SocialMediaItem";
-import { getIcon } from "../helpers";
 import { usePersonalDetails, useSocialMedia } from "../hooks/PersonalDetails";
 import { useEducation, useExperience, useOthers } from "../hooks/CustomDetails";
 

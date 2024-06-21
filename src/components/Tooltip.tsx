@@ -1,7 +1,8 @@
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { PropsWithChildren } from "react";
 
-export default function Tooltip({children}) {
+export default function Tooltip({children}: PropsWithChildren<{}>) {
   return (
     <div className="relative block">
       <FontAwesomeIcon

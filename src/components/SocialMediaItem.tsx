@@ -1,10 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getIcon } from "../helpers";
+import { SocialMediaItem } from "../types";
 
-function socialMediaItem({ socialMedia }) {
-
-  const socialMediaIcon = socialMedia.iconName !== "Empty" && (
-    <FontAwesomeIcon className="mr-1" icon={getIcon(socialMedia.iconName)} />
+function socialMediaItem({ socialMedia }: { socialMedia: SocialMediaItem}) {
+  const haveIcon = getIcon(socialMedia.iconName);
+  
+  const socialMediaIcon = socialMedia.iconName !== "Empty" && haveIcon && (
+    <FontAwesomeIcon className="mr-1" icon={haveIcon} />
   );
   return socialMedia.link ? (
     <a

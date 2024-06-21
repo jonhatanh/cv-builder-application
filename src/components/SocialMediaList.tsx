@@ -3,18 +3,25 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SocialMediaItem from "./SocialMediaItem";
-import BulletListButton from "./BulletListButton";
-import DeleteButton from "./DeleteButton";
-import UpdateButton from "./UpdateButton";
+import SocialMediaItem from "./SocialMediaItem.tsx";
+import BulletListButton from "./BulletListButton.tsx";
+import DeleteButton from "./DeleteButton.tsx";
+import UpdateButton from "./UpdateButton.tsx";
 import { useSocialMedia, useSocialMediaDispatch } from "../hooks/PersonalDetails";
+
+type SocialMediaListProps = {
+  currentSocialMediaId: UUID | null;
+  changeIsUpdating: (isUpdating: boolean, socialMediaId?: UUID) => void;
+  handleOpenForm: (open: boolean) => void;
+  formIsOpen: boolean;
+};
 
 function SocialMediaList({
   currentSocialMediaId,
   changeIsUpdating,
   handleOpenForm,
   formIsOpen,
-}) {
+}: SocialMediaListProps) {
   const socialMedia = useSocialMedia()
   const dispatch = useSocialMediaDispatch()
   const isUpdating = currentSocialMediaId !== null;
@@ -22,15 +29,17 @@ function SocialMediaList({
   const buttonIcon = isUpdating ? faPen : faPlus;
   let extraIconClass = !isUpdating && formIsOpen ? "rotate-45" : "";
 
-  function handleDeleteSocialMedia(socialMediaId) {
+  function handleDeleteSocialMedia(socialMediaId: UUID) {
     dispatch({
       type: 'deleted',
-      id: socialMediaId
+      payload: {
+        id: socialMediaId
+      }
     })
     changeIsUpdating(false);
     handleOpenForm(false);
   }
-  function handleUpdateSocialMedia(socialMediaId) {
+  function handleUpdateSocialMedia(socialMediaId: UUID) {
     changeIsUpdating(true, socialMediaId);
     handleOpenForm(true);
   }

@@ -10,6 +10,7 @@ import {
   faCode,
   faGlobe,
 } from "@fortawesome/free-solid-svg-icons";
+import { SocialMediaType } from "./types";
 
 export const ICONS = [
   {
@@ -44,7 +45,9 @@ export const ICONS = [
     name: "Briefcase",
     icon: faBriefcase,
   },
-];
+] as const;
+
+
 
 
 export const FORMS_ID = {
@@ -52,7 +55,8 @@ export const FORMS_ID = {
   professionalDetails: 2,
   educationDetails: 3,
   othersDetails: 4,
-};
+} as const;
+
 
 export const PERSONAL_DETAILS_EXAMPLE = {
   name: "John Doe",
@@ -61,7 +65,9 @@ export const PERSONAL_DETAILS_EXAMPLE = {
   skills:
     "HTML, CSS, JavaScript, React, SASS, Tailwind, Node.js, PHP, Laravel, MySQL, Git",
 };
-export const SOCIAL_MEDIA_EXAMPLE = [
+
+
+export const SOCIAL_MEDIA_EXAMPLE: SocialMediaType = [
   {
     id: crypto.randomUUID(),
     name: "LinkedIn",
@@ -75,6 +81,7 @@ export const SOCIAL_MEDIA_EXAMPLE = [
     iconName: "GitHub",
   },
 ];
+
 export const EDUCATION_EXAMPLE = [
   {
     id: crypto.randomUUID(),
@@ -147,3 +154,19 @@ export const OTHERS_EXAMPLE = [
     ],
   },
 ];
+
+export const CUSTOM_DETAILS_EMPTY = [
+  {
+    id: crypto.randomUUID(),
+    title: "",
+    subtitle: "",
+    date: "",
+    description: "",
+    bullets: [
+      {
+        id: crypto.randomUUID(),
+        text: "",
+      },
+    ],
+  },
+]

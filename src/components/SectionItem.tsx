@@ -1,9 +1,19 @@
 import { useContext, useState } from "react";
-import BulletsForm from "./BulletsForm";
-import BulletsList from "./BulletsList";
+import BulletsForm from "./BulletsForm.tsx";
+import BulletsList from "./BulletsList.tsx";
 import { getCollapsableClass } from "../helpers";
 import { faCaretDown, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CustomDetailsItem } from "../types";
+import { CustomDispatcherType } from "../App";
+
+type SectionItemProps = {
+  data: CustomDetailsItem;
+  currentItemId: UUID | "";
+  handleItemChange: (itemId: UUID) => void;
+  dispatcher: CustomDispatcherType;
+  CustomForm: React.FC<{ data: CustomDetailsItem; dispatcher: CustomDispatcherType }>;
+}
 
 function SectionItem({
   data,
@@ -11,17 +21,17 @@ function SectionItem({
   handleItemChange,
   dispatcher,
   CustomForm,
-}) {
+}: SectionItemProps) {
   const [openForm, setOpenForm] = useState(false);
-  const [currentBulletId, setCurrentBulletId] = useState(null); //for updating
+  const [currentBulletId, setCurrentBulletId] = useState<UUID | null>(null); //for updating
   const dispatch = useContext(dispatcher);
 
-  function handleOpenForm(open) {
+  function handleOpenForm(open: boolean) {
     setOpenForm(open);
   }
 
-  function changeIsUpdating(isUpdating, bulletId) {
-    if (isUpdating) {
+  function changeIsUpdating(isUpdating: boolean, bulletId?: UUID) {
+    if (isUpdating && bulletId) {
       setCurrentBulletId(bulletId);
     } else {
       setCurrentBulletId(null);
@@ -55,7 +65,9 @@ function SectionItem({
           onClick={() =>
             dispatch({
               type: "deleted_section",
-              id: data.id,
+              payload: {
+                id: data.id,
+              },
             })
           }
         >

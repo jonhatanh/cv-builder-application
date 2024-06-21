@@ -1,16 +1,12 @@
 import { useContext } from "react";
 import FormItem from "./FormItem";
+import { CustomDetailsItem } from "../types";
+import { CustomDispatcherType } from "../App";
+import { useHandleChange } from "../hooks/useHandleChange";
 
-function ExperienceForm({ data, dispatcher }) {
+function ExperienceForm({ data, dispatcher }: { data: CustomDetailsItem; dispatcher: CustomDispatcherType}) {
   const dispatch = useContext(dispatcher);
-  function handleChange(property, value, itemId) {
-    dispatch({
-      type: "changed_input",
-      itemId,
-      property,
-      value,
-    });
-  }
+  const handleChange = useHandleChange(dispatch);
   return (
     <form className="flex flex-col gap-3">
       <FormItem

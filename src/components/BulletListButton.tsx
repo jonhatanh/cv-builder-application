@@ -1,4 +1,4 @@
-export default function BulletListButton({children, onClick}) {
+export default function BulletListButton({children, onClick}: {children: React.ReactNode, onClick: () => void}) {
 
   return (
   <button

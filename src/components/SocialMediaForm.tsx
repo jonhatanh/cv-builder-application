@@ -2,15 +2,23 @@ import { useEffect, useState } from "react";
 import FormItem from "./FormItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getCollapsableClass } from "../helpers";
-import Button from "./Button";
+import Button from "./Button.tsx";
 import { ICONS } from "../constans";
 import { useSocialMedia, useSocialMediaDispatch } from "../hooks/PersonalDetails";
+import { SocialMediaItem } from "../types";
 
-const EMPTY_SOCIAL_MEDIA = {
+const EMPTY_SOCIAL_MEDIA: SocialMediaItem = {
   id: crypto.randomUUID(),
   name: "",
   link: "",
   iconName: "Empty",
+};
+
+type SocialMediaFormProps = {
+  currentSocialMediaId: UUID | null;
+  handleOpenForm: (value: boolean) => void;
+  formIsOpen: boolean;
+  changeIsUpdating: (value: boolean) => void;
 };
 
 function SocialMediaForm({
@@ -18,7 +26,7 @@ function SocialMediaForm({
   handleOpenForm,
   formIsOpen,
   changeIsUpdating,
-}) {
+}: SocialMediaFormProps) {
   const allSocialMedia = useSocialMedia();
   const dispatch = useSocialMediaDispatch();
   const [socialMedia, setSocialMedia] = useState(EMPTY_SOCIAL_MEDIA);
@@ -40,7 +48,7 @@ function SocialMediaForm({
     }
   }, [currentSocialMediaId]);
 
-  function handleChange(property, value) {
+  function handleChange(property: string, value: string) {
     setSocialMedia({ ...socialMedia, [property]: value });
   }
 
@@ -56,19 +64,23 @@ function SocialMediaForm({
     changeIsUpdating(false);
   }
 
-  function handleFormSubmit(e) {
+  function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (isUpdating) {
       dispatch({
         type: "updated",
-        socialMedia: { ...socialMedia }
+        payload: {
+          socialMedia: { ...socialMedia },
+        },
       });
       // updateSocialMedia(currentSocialMediaId, { ...socialMedia });
       changeIsUpdating(false);
     } else {
       dispatch({
         type: 'added',
-        socialMedia
+        payload: {
+          socialMedia
+        }
       })
     }
     handleOpenForm(false);

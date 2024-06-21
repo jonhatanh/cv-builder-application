@@ -1,6 +1,8 @@
-function CVSection({ title, sectionData }) {
+import { BulletItem, CustomDetailsType } from "../types";
+
+function CVSection({ title, sectionData }: { title: string; sectionData: CustomDetailsType }) {
   if(sectionData.length === 0) return null;
-  function getListElement(bullet) {
+  function getListElement(bullet: BulletItem) {
     const content = getLiContent(bullet.text);
     return (
       <li
@@ -12,7 +14,7 @@ function CVSection({ title, sectionData }) {
     );
   }
 
-  function getLiContent(text) {
+  function getLiContent(text: string) {
     const linkRegex = /\[(.*?)\]\((.*?)\)/g;
     const parts = text.split(linkRegex);
 

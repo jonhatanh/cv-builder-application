@@ -1,28 +1,23 @@
 import { useContext } from "react";
 import FormItem from "./FormItem";
+import { CustomDispatcherType } from "../App";
+import { CustomDetailsItem } from "../types";
+import { useHandleChange } from "../hooks/useHandleChange";
 
-function OthersForm({ data, dispatcher }) {
+function EducationForm({ data, dispatcher }: { data: CustomDetailsItem; dispatcher: CustomDispatcherType }) {
   const dispatch = useContext(dispatcher);
-  function handleChange(property, value, itemId) {
-    dispatch({
-      type: "changed_input",
-      itemId,
-      property,
-      value,
-    });
-  }
+  const handleChange = useHandleChange(dispatch);
   return (
     <form className="flex flex-col gap-3">
       <FormItem
-        labelText="Title"
+        labelText="School"
         value={data.title}
         name="title"
         handleChange={handleChange}
         itemId={data.id}
-        placeholder="Can be a bootcamp name, course, project, etc."
       ></FormItem>
       <FormItem
-        labelText="Subtitle"
+        labelText="Degree"
         value={data.subtitle}
         name="subtitle"
         handleChange={handleChange}
@@ -35,7 +30,7 @@ function OthersForm({ data, dispatcher }) {
         name="date"
         handleChange={handleChange}
         itemId={data.id}
-        placeholder="01/2020 - 12/2020"
+        placeholder="01/2020 - 06/2023"
       ></FormItem>
       <FormItem
         textArea
@@ -49,4 +44,4 @@ function OthersForm({ data, dispatcher }) {
   );
 }
 
-export default OthersForm;
+export default EducationForm;

@@ -5,7 +5,6 @@ import {
   faFileLines,
   faFloppyDisk,
   faGear,
-  faPlus,
   faTrash,
   faUpload,
 } from "@fortawesome/free-solid-svg-icons";
@@ -27,11 +26,11 @@ import {
   useOthersDispatch,
 } from "../hooks/CustomDetails";
 import { BulletsListItem } from "./BulletsList";
-import IconButton from "./IconButton";
+import IconButton from "./IconButton.tsx";
 import Tooltip from "./Tooltip";
 import { EDUCATION_EXAMPLE, EXPERIENCE_EXAMPLE, OTHERS_EXAMPLE, PERSONAL_DETAILS_EXAMPLE, SOCIAL_MEDIA_EXAMPLE } from "../constans";
 
-function createDateString(date) {
+function createDateString(date: Date) {
   return `${String(date.getHours()).padStart(2, "0")}:${String(
     date.getMinutes(),
   ).padStart(2, "0")} - ${String(date.getMonth() + 1).padStart(
@@ -40,7 +39,20 @@ function createDateString(date) {
   )}/${date.getDate()}/${date.getFullYear()}`;
 }
 
-export default function Settings(params) {
+type SavedCVItem = {
+  id: UUID;
+  name: string;
+  updatedAt: string;
+  personalDetails: ReturnType<typeof usePersonalDetails>;
+  socialMedia: ReturnType<typeof useSocialMedia>;
+  education: ReturnType<typeof useEducation>;
+  experience: ReturnType<typeof useExperience>;
+  others: ReturnType<typeof useOthers>;
+};
+type CVDataType = Pick<SavedCVItem, "personalDetails" | "socialMedia" | "education" | "experience" | "others">;
+type SavedCVType = SavedCVItem[];
+
+export default function Settings() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentCVId, setCurrentCVId] = useState(crypto.randomUUID());
   const [currentCVName, setCurrentCVName] = useState("Example CV");
@@ -55,7 +67,7 @@ export default function Settings(params) {
   const dispatchExperience = useExperienceDispatch();
   const dispatchOthers = useOthersDispatch();
 
-  const [savedCV, setSavedCV] = useState(() => {
+  const [savedCV, setSavedCV] = useState<SavedCVType>(() => {
     const cvs = localStorage.getItem("cvs");
     return cvs ? JSON.parse(cvs) : [];
   });
@@ -68,7 +80,7 @@ export default function Settings(params) {
     "flex flex-col gap-5 pb-3 px-4",
   );
 
-  function handleChange(name, value) {
+  function handleChange(_:string, value: string) {
     setCurrentCVName(value);
   }
 
@@ -99,8 +111,9 @@ export default function Settings(params) {
     }
   }
 
-  function handleLoad(cvId) {
+  function handleLoad(cvId: UUID) {
     const currentCV = savedCV.find((cv) => cv.id === cvId);
+    if (!currentCV) return;
     loadDataInState({
       personalDetails: currentCV.personalDetails,
       socialMedia: currentCV.socialMedia,
@@ -111,7 +124,7 @@ export default function Settings(params) {
     setCurrentCVId(currentCV.id);
     setCurrentCVName(currentCV.name);
   }
-  function handleDelete(cvId) {
+  function handleDelete(cvId: UUID) {
     setSavedCV(savedCV.filter((cv) => cv.id !== cvId));
   }
 
@@ -147,14 +160,18 @@ export default function Settings(params) {
     education,
     experience,
     others,
-  }) {
+  }: CVDataType) {
     dispatchPersonalDetails({
       type: "load",
-      personalDetails
+      payload: {
+        personalDetails
+      }
     });
     dispatchSocialMedia({
       type: "load",
-      socialMedia,
+      payload: {
+        socialMedia
+      }
     });
     dispatchEducation({
       type: "load",
