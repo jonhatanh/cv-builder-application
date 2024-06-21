@@ -21,7 +21,7 @@ export type BulletItem = {
   text: string;
 };
 
-export type BulletItemType = BulletItem[];
+export type BulletItemsType = BulletItem[];
 
 export type CustomDetailsItem = {
   id: UUID;
@@ -29,7 +29,7 @@ export type CustomDetailsItem = {
   subtitle: string;
   date: string;
   description: string;
-  bullets: BulletItemType;
+  bullets: BulletItemsType;
 };
 
 export type CustomDetailsType = CustomDetailsItem[];

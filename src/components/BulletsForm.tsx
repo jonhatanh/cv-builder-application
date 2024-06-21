@@ -1,6 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import FormItem from "./FormItem";
 import Button from "./Button";
+import { BulletItem, BulletItemsType } from "../types";
+import { CustomDispatcherType } from "../App";
+
+type BulletsFormProps = {
+  currentBulletId: UUID | null;
+  handleOpenForm: (value: boolean) => void;
+  formIsOpen: boolean;
+  changeIsUpdating: (value: boolean) => void;
+  sectionItemId: UUID;
+  allBullets: BulletItemsType;
+  dispatcher: CustomDispatcherType;
+};
 
 function BulletsForm({
   currentBulletId,
@@ -10,9 +22,9 @@ function BulletsForm({
   sectionItemId,
   allBullets,
   dispatcher,
-}) {
+}: BulletsFormProps) {
   const dispatch = useContext(dispatcher);
-  const [bullet, setBullet] = useState({
+  const [bullet, setBullet] = useState<BulletItem>({
     id: crypto.randomUUID(),
     text: "",
   });
@@ -36,7 +48,7 @@ function BulletsForm({
     }
   }, [currentBulletId, allBullets]);
 
-  function handleChange(property, value) {
+  function handleChange(property: string, value: string) {
     const newBullet = { ...bullet, [property]: value };
     setBullet(newBullet);
   }
@@ -55,21 +67,25 @@ function BulletsForm({
     changeIsUpdating(false);
   }
 
-  function handleFormSubmit(e) {
+  function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (isUpdating) {
       dispatch({
         type: 'updated_bullet',
-        sectionId: sectionItemId,
-        bullet: {...bullet}
+        payload: {
+          sectionId: sectionItemId,
+          bullet: { ...bullet }
+        }
       })
       // updateBullet(currentBulletId, { ...bullet }, sectionItemId);
       changeIsUpdating(false);
     } else {
       dispatch({
         type: 'added_bullet',
-        sectionId: sectionItemId,
-        bullet
+        payload: {
+          sectionId: sectionItemId,
+          bullet
+        }
       })
       // addBullet(bullet, sectionItemId);
     }

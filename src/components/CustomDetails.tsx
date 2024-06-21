@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { getCollapsableClass } from "../helpers";
-import SectionItem from "./SectionItem";
+import SectionItem from "./SectionItem.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import SectionButton from "./SectionButton";
@@ -15,7 +15,7 @@ type CustomDetailsProps = {
   handleSectionChange: (section: AvailableSections) => void;
   context: CustomContextType;
   dispatcher: CustomDispatcherType;
-  CustomForm: React.FC<CustomFormType>;
+  CustomForm: CustomFormType;
 };
 
 
@@ -68,7 +68,7 @@ function CustomDetails({
             data={item}
             currentItemId={currentItemId}
             handleItemChange={handleItemChange}
-            context={context}
+            // context={context}
             dispatcher={dispatcher}
             CustomForm={CustomForm}
           ></SectionItem>

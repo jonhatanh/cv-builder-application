@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PersonalDetails from "./components/PersonalDetails.tsx";
-import CVPreview from "./components/CVPreview";
+import CVPreview from "./components/CVPreview.tsx";
 import ExperienceForm from "./components/ExperienceForm.tsx";
 import EducationForm from "./components/EducationForm.tsx";
 import CustomDetails from "./components/CustomDetails.tsx";
@@ -23,7 +23,7 @@ import {
   OthersDispatchContext,
 } from "./contexts/CustomDetailsProvider.tsx";
 import { MainProvider } from "./contexts/MainProvider.tsx";
-import Settings from "./components/Settings";
+import Settings from "./components/Settings.tsx";
 import { AvailableSections } from "./types/index.ts";
 
 export const CUSTOM_SECTIONS = [
@@ -119,9 +119,7 @@ function App() {
             dispatcher={OthersDispatchContext}
             CustomForm={OthersForm}
           /> */}
-          <Settings>
-            
-          </Settings>
+          <Settings />
         </div>
         <CVPreview></CVPreview>
       </MainProvider>

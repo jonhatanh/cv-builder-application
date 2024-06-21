@@ -1,12 +1,17 @@
-import { faCircleInfo, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useState } from "react";
+import { PropsWithChildren, useContext } from "react";
 import BulletListButton from "./BulletListButton";
 import DeleteButton from "./DeleteButton";
 import UpdateButton from "./UpdateButton";
-import Tooltip from "./Tooltip";
+import Tooltip from "./Tooltip.tsx";
+import { BulletItemsType } from "../types";
+import { CustomDispatcherType } from "../App";
 
-export function BulletsListItem({ text, children, isSelected }) {
+type BulletListItemProps = { text: string; isSelected: boolean };
+
+
+export function BulletsListItem({ text, children, isSelected }: PropsWithChildren<BulletListItemProps>) {
   return (
     <li className={`flex items-center justify-between rounded-md p-3 shadow-md ${isSelected ? 'bg-sky-100' : ''}`}>
       <p className="overflow-hidden break-words">{text}</p>
@@ -14,6 +19,16 @@ export function BulletsListItem({ text, children, isSelected }) {
     </li>
   );
 }
+
+type BulletsListProps = {
+  items: BulletItemsType;
+  sectionItemId: UUID;
+  currentBulletId: UUID | null;
+  formIsOpen: boolean;
+  dispatcher: CustomDispatcherType;
+  changeIsUpdating: (isUpdating: boolean, bulletId?: UUID) => void;
+  handleOpenForm: (open: boolean) => void;
+};
 
 function BulletsList({
   items,
@@ -23,19 +38,21 @@ function BulletsList({
   dispatcher,
   changeIsUpdating,
   handleOpenForm,
-}) {
+}: BulletsListProps) {
   const dispatch = useContext(dispatcher);
-  function handleDelete(itemId) {
+  function handleDelete(itemId: UUID) {
     dispatch({
       type: "deleted_bullet",
-      sectionId: sectionItemId,
-      bulletId: itemId,
+      payload: {
+        sectionId: sectionItemId,
+        bulletId: itemId,
+      },
     });
     // deleteBullet(itemId, sectionItemId);
     changeIsUpdating(false);
     handleOpenForm(false);
   }
-  function handleUpdate(itemId) {
+  function handleUpdate(itemId: UUID) {
     changeIsUpdating(true, itemId);
     handleOpenForm(true);
   }
@@ -59,7 +76,7 @@ function BulletsList({
       </span>
       <ul className="flex flex-col gap-3">
         {items.map((item) => (
-          <BulletsListItem key={item.id} text={item.text}>
+          <BulletsListItem key={item.id} text={item.text} isSelected={currentBulletId === item.id}>
             <DeleteButton onClick={() => handleDelete(item.id)} />
             <UpdateButton onClick={() => handleUpdate(item.id)} />
           </BulletsListItem>

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
-import BulletsForm from "./BulletsForm";
-import BulletsList from "./BulletsList";
+import BulletsForm from "./BulletsForm.tsx";
+import BulletsList from "./BulletsList.tsx";
 import { getCollapsableClass } from "../helpers";
 import { faCaretDown, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,7 +9,7 @@ import { CustomDispatcherType } from "../App";
 
 type SectionItemProps = {
   data: CustomDetailsItem;
-  currentItemId: UUID;
+  currentItemId: UUID | "";
   handleItemChange: (itemId: UUID) => void;
   dispatcher: CustomDispatcherType;
   CustomForm: React.FC<{ data: CustomDetailsItem; dispatcher: CustomDispatcherType }>;
@@ -30,8 +30,8 @@ function SectionItem({
     setOpenForm(open);
   }
 
-  function changeIsUpdating(isUpdating: boolean, bulletId: UUID) {
-    if (isUpdating) {
+  function changeIsUpdating(isUpdating: boolean, bulletId?: UUID) {
+    if (isUpdating && bulletId) {
       setCurrentBulletId(bulletId);
     } else {
       setCurrentBulletId(null);
