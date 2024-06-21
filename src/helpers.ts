@@ -15,15 +15,3 @@ export function getCollapsableClass(isOpen: boolean, baseClass: string) {
     else baseClass += " h-0 hidden";
     return baseClass;
 }
-
-export function handleChangeInCustomDetails(property: string, value: string, itemId?: UUID) {
-  if (!itemId) return;
-  dispatch({
-    type: "changed_input",
-    payload: {
-      itemId,
-      property,
-      value,
-    }
-  });
-}

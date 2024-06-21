@@ -80,7 +80,7 @@ export default function Settings() {
     "flex flex-col gap-5 pb-3 px-4",
   );
 
-  function handleChange(value: string) {
+  function handleChange(_:string, value: string) {
     setCurrentCVName(value);
   }
 

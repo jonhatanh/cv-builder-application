@@ -45,10 +45,6 @@ export const ICONS = [
     name: "Briefcase",
     icon: faBriefcase,
   },
-  {
-    name: "Briefcase",
-    icon: faBriefcase,
-  },
 ] as const;
 
 

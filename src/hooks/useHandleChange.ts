@@ -8,9 +8,9 @@ export function useHandleChange(dispatch: Dispatch<CustomDetailsActions>) {
     dispatch({
       type: "changed_input",
       payload: {
+        itemId,
         property,
         value,
-        
       }
     });
   }
