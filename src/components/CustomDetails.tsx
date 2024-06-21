@@ -4,6 +4,20 @@ import SectionItem from "./SectionItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import SectionButton from "./SectionButton";
+import { AvailableSections } from "../types";
+import { CustomContextType, CustomDispatcherType, CustomFormType } from "../App";
+
+type CustomDetailsProps = {
+  detailsName: string;
+  detailsIcon: JSX.Element;
+  detailsCollapseValue: AvailableSections;
+  currentSection: AvailableSections;
+  handleSectionChange: (section: AvailableSections) => void;
+  context: CustomContextType;
+  dispatcher: CustomDispatcherType;
+  CustomForm: React.FC<CustomFormType>;
+};
+
 
 function CustomDetails({
   detailsName,
@@ -14,12 +28,12 @@ function CustomDetails({
   context,
   dispatcher,
   CustomForm,
-}) {
+}: CustomDetailsProps) {
   const customDetails = useContext(context);
   const dispatch = useContext(dispatcher);
-  const [currentItemId, setCurrentItemId] = useState("");
+  const [currentItemId, setCurrentItemId] = useState<UUID | "">("");
 
-  function handleItemChange(itemId) {
+  function handleItemChange(itemId: UUID) {
     if (itemId === currentItemId) setCurrentItemId("");
     else setCurrentItemId(itemId);
   }
@@ -28,7 +42,9 @@ function CustomDetails({
     const itemId = crypto.randomUUID();
     dispatch({
       type: "added_section",
-      id: itemId,
+      payload: {
+        id: itemId,
+      }
     });
     handleItemChange(itemId);
   }

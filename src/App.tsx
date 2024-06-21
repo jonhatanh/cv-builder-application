@@ -1,10 +1,10 @@
 import { useState } from "react";
 import PersonalDetails from "./components/PersonalDetails.tsx";
 import CVPreview from "./components/CVPreview";
-import ExperienceForm from "./components/ExperienceForm";
-import EducationForm from "./components/EducationForm";
-import CustomDetails from "./components/CustomDetails";
-import OthersForm from "./components/OthersForm";
+import ExperienceForm from "./components/ExperienceForm.tsx";
+import EducationForm from "./components/EducationForm.tsx";
+import CustomDetails from "./components/CustomDetails.tsx";
+import OthersForm from "./components/OthersForm.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBuilding,
@@ -26,6 +26,36 @@ import { MainProvider } from "./contexts/MainProvider.tsx";
 import Settings from "./components/Settings";
 import { AvailableSections } from "./types/index.ts";
 
+export const CUSTOM_SECTIONS = [
+  {
+    id: FORMS_ID.professionalDetails,
+    title: "Professional Experience",
+    icon: <FontAwesomeIcon icon={faBuilding} />,
+    context: ExperienceContext,
+    dispatcher: ExperienceDispatchContext,
+    form: ExperienceForm,
+  },
+  {
+    id: FORMS_ID.educationDetails,
+    title: "Education Details",
+    icon: <FontAwesomeIcon icon={faGraduationCap} />,
+    context: EducationContext,
+    dispatcher: EducationDispatchContext,
+    form: EducationForm,
+  },
+  {
+    id: FORMS_ID.othersDetails,
+    title: "Others",
+    icon: <FontAwesomeIcon icon={faMedal} />,
+    context: OthersContext,
+    dispatcher: OthersDispatchContext,
+    form: OthersForm,
+  },
+] as const;
+export type CustomContextType = typeof CUSTOM_SECTIONS[number]["context"];
+export type CustomDispatcherType = typeof CUSTOM_SECTIONS[number]["dispatcher"];
+export type CustomFormType = typeof CUSTOM_SECTIONS[number]["form"];
+
 
 
 function App() {
@@ -44,7 +74,22 @@ function App() {
             currentSection={currentSection}
             handleSectionChange={handleSectionChange}
           ></PersonalDetails>
-          <CustomDetails
+          {
+            CUSTOM_SECTIONS.map((section) => (
+              <CustomDetails
+                key={section.id}
+                detailsName={section.title}
+                detailsIcon={section.icon}
+                detailsCollapseValue={section.id}
+                currentSection={currentSection}
+                handleSectionChange={handleSectionChange}
+                context={section.context}
+                dispatcher={section.dispatcher}
+                CustomForm={section.form}
+              />
+            ))
+          }
+          {/* <CustomDetails
             detailsName="Professional Experience"
             detailsIcon={<FontAwesomeIcon icon={faBuilding} />}
             detailsCollapseValue={FORMS_ID.professionalDetails}
@@ -73,7 +118,7 @@ function App() {
             context={OthersContext}
             dispatcher={OthersDispatchContext}
             CustomForm={OthersForm}
-          />
+          /> */}
           <Settings>
             
           </Settings>

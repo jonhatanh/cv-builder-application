@@ -40,10 +40,10 @@ export function CustomDetailsProvider({
   );
 }
 
-type CustomDetailsActions = {
+export type CustomDetailsActions = {
   type: "changed_input";
   payload: {
-    itemId: string;
+    itemId: UUID;
     property: string;
     value: string;
   };

@@ -1,11 +1,11 @@
 type FormItemProps = {
   type?: "text" | "email" | "password" | "tel" | "url";
   value: string;
-  handleChange: (name: string, value: string, itemId?: string) => void;
+  handleChange: (name: string, value: string, itemId?: UUID) => void;
   name: string;
   labelText?: string;
   textArea?: boolean;
-  itemId?: string;
+  itemId?: UUID;
   [key: string]: any;
 };
 
