@@ -11,7 +11,7 @@ export type SocialMediaItem = {
   id: UUID;
   name: string;
   link: string;
-  iconName: string;
+  iconName: IconName;
 };
 
 export type SocialMediaType = SocialMediaItem[];

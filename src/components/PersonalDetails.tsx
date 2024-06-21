@@ -1,11 +1,11 @@
 import { useState } from "react";
-import FormItem from "./FormItem";
+import FormItem from "./FormItem.tsx";
 import SocialMediaForm from "./SocialMediaForm";
-import SocialMediaList from "./SocialMediaList";
+import SocialMediaList from "./SocialMediaList.tsx";
 import { getCollapsableClass } from "../helpers.ts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import SectionButton from "./SectionButton";
+import SectionButton from "./SectionButton.tsx";
 import { FORMS_ID } from "../constans";
 import { usePersonalDetails, usePersonalDetailsDispatch } from "../hooks/PersonalDetails.ts";
 import { AvailableSections } from "../types";
@@ -26,8 +26,9 @@ function PersonalDetails({
   const [currentSocialMediaId, setCurrentSocialMediaId] = useState<EditSocialMediaType>(null); //for updating
   const [openForm, setOpenForm] = useState(false);
 
-  function changeIsUpdating(isUpdating: boolean, socialMediaId: UUID) {
+  function changeIsUpdating(isUpdating: boolean, socialMediaId?: UUID) {
     if (isUpdating) {
+      if (!socialMediaId) throw new Error("Social media id is required");
       setCurrentSocialMediaId(socialMediaId);
     } else {
       setCurrentSocialMediaId(null);

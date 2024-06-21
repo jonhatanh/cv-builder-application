@@ -10,6 +10,7 @@ import {
   faCode,
   faGlobe,
 } from "@fortawesome/free-solid-svg-icons";
+import { SocialMediaType } from "./types";
 
 export const ICONS = [
   {
@@ -70,7 +71,7 @@ export const PERSONAL_DETAILS_EXAMPLE = {
 };
 
 
-export const SOCIAL_MEDIA_EXAMPLE = [
+export const SOCIAL_MEDIA_EXAMPLE: SocialMediaType = [
   {
     id: crypto.randomUUID(),
     name: "LinkedIn",
